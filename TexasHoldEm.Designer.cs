@@ -51,7 +51,8 @@
             this.picPlayer4Card1 = new System.Windows.Forms.PictureBox();
             this.labelRound = new System.Windows.Forms.Label();
             this.textRoundNumber = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelPlayerTurn = new System.Windows.Forms.Label();
+            this.labelPot = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -125,7 +126,6 @@
             this.buttonRaise.TabIndex = 5;
             this.buttonRaise.Text = "Raise";
             this.buttonRaise.UseVisualStyleBackColor = true;
-            this.buttonRaise.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonCall
             // 
@@ -296,23 +296,35 @@
             this.textRoundNumber.Size = new System.Drawing.Size(27, 30);
             this.textRoundNumber.TabIndex = 22;
             // 
-            // label1
+            // labelPlayerTurn
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Red;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label1.Location = new System.Drawing.Point(218, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(227, 29);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "PLAYER 4\'s TURN";
+            this.labelPlayerTurn.AutoSize = true;
+            this.labelPlayerTurn.BackColor = System.Drawing.Color.Red;
+            this.labelPlayerTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelPlayerTurn.Location = new System.Drawing.Point(218, 59);
+            this.labelPlayerTurn.Name = "labelPlayerTurn";
+            this.labelPlayerTurn.Size = new System.Drawing.Size(230, 29);
+            this.labelPlayerTurn.TabIndex = 23;
+            this.labelPlayerTurn.Text = "PLAYER X\'s TURN";
+            // 
+            // labelPot
+            // 
+            this.labelPot.BackColor = System.Drawing.Color.Aqua;
+            this.labelPot.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelPot.Location = new System.Drawing.Point(494, 196);
+            this.labelPot.Name = "labelPot";
+            this.labelPot.Size = new System.Drawing.Size(347, 29);
+            this.labelPot.TabIndex = 24;
+            this.labelPot.Text = "POT: X Chips";
+            this.labelPot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelPot);
+            this.Controls.Add(this.labelPlayerTurn);
             this.Controls.Add(this.textRoundNumber);
             this.Controls.Add(this.labelRound);
             this.Controls.Add(this.picPlayer4Card1);
@@ -342,6 +354,7 @@
             this.Name = "TexasHoldEm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TexasHoldEm";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.TexasHoldEm_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -388,6 +401,7 @@
         private System.Windows.Forms.PictureBox picPlayer4Card1;
         private System.Windows.Forms.Label labelRound;
         private System.Windows.Forms.TextBox textRoundNumber;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPlayerTurn;
+        private System.Windows.Forms.Label labelPot;
     }
 }
