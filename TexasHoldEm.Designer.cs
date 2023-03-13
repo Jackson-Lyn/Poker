@@ -49,6 +49,9 @@
             this.picPlayer2Card2 = new System.Windows.Forms.PictureBox();
             this.picPlayer4Card2 = new System.Windows.Forms.PictureBox();
             this.picPlayer4Card1 = new System.Windows.Forms.PictureBox();
+            this.labelRound = new System.Windows.Forms.Label();
+            this.textRoundNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -273,11 +276,45 @@
             this.picPlayer4Card1.TabIndex = 20;
             this.picPlayer4Card1.TabStop = false;
             // 
+            // labelRound
+            // 
+            this.labelRound.AutoSize = true;
+            this.labelRound.BackColor = System.Drawing.Color.Gold;
+            this.labelRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelRound.Location = new System.Drawing.Point(218, 20);
+            this.labelRound.Name = "labelRound";
+            this.labelRound.Size = new System.Drawing.Size(111, 29);
+            this.labelRound.TabIndex = 21;
+            this.labelRound.Text = "ROUND:";
+            // 
+            // textRoundNumber
+            // 
+            this.textRoundNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textRoundNumber.Location = new System.Drawing.Point(335, 20);
+            this.textRoundNumber.Name = "textRoundNumber";
+            this.textRoundNumber.ReadOnly = true;
+            this.textRoundNumber.Size = new System.Drawing.Size(27, 30);
+            this.textRoundNumber.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Red;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label1.Location = new System.Drawing.Point(218, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(227, 29);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "PLAYER 4\'s TURN";
+            // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textRoundNumber);
+            this.Controls.Add(this.labelRound);
             this.Controls.Add(this.picPlayer4Card1);
             this.Controls.Add(this.picPlayer4Card2);
             this.Controls.Add(this.picPlayer2Card2);
@@ -349,5 +386,8 @@
         private System.Windows.Forms.PictureBox picPlayer2Card2;
         private System.Windows.Forms.PictureBox picPlayer4Card2;
         private System.Windows.Forms.PictureBox picPlayer4Card1;
+        private System.Windows.Forms.Label labelRound;
+        private System.Windows.Forms.TextBox textRoundNumber;
+        private System.Windows.Forms.Label label1;
     }
 }
