@@ -12,9 +12,9 @@ using System.Reflection.Emit;
 
 namespace WindowsFormsApp1
 {
-    public partial class TexasHoldEm : Form
+    public partial class FiveCard : Form
     {
-        public TexasHoldEm()
+        public FiveCard()
         {
             InitializeComponent();
         }
@@ -85,7 +85,7 @@ namespace WindowsFormsApp1
             return path;
         }
 
-        private void TexasHoldEm_Paint(object sender, PaintEventArgs e)
+        private void FiveCard_Paint(object sender, PaintEventArgs e)
         {
             using (Pen pen = new Pen(labelPot.BackColor, 6.0f))
             {
@@ -94,6 +94,16 @@ namespace WindowsFormsApp1
         }
 
         private void picPlayer3Card2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelPot_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picPlayer3Card1_Click(object sender, EventArgs e)
         {
 
         }

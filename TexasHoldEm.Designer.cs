@@ -235,6 +235,7 @@
             this.picPlayer3Card2.Size = new System.Drawing.Size(110, 156);
             this.picPlayer3Card2.TabIndex = 16;
             this.picPlayer3Card2.TabStop = false;
+            this.picPlayer3Card2.Click += new System.EventHandler(this.picPlayer3Card2_Click);
             // 
             // picPlayer2Card1
             // 
