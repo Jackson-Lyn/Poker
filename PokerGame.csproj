@@ -99,6 +99,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\background.jpg" />
     <Content Include="Resources\card_back.png" />
     <Content Include="Resources\card_back_180.png" />
     <Content Include="Resources\card_back_rotated.png" />

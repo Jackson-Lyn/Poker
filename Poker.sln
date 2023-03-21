@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerGame", "PokerGame.csproj", "{41FE7C63-198B-45D9-BFE8-8D74C6ECDB6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardLibrary", "..\CardLibrary\CardLibrary.csproj", "{D42C67BF-00E7-409C-8707-D7F4C54807ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardLibrary", "CardLibrary\CardLibrary.csproj", "{D42C67BF-00E7-409C-8707-D7F4C54807ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

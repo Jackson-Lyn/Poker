@@ -45,7 +45,6 @@
             this.picPlayerCard2 = new System.Windows.Forms.PictureBox();
             this.picPlayer3Card1 = new System.Windows.Forms.PictureBox();
             this.picPlayer3Card2 = new System.Windows.Forms.PictureBox();
-            this.picPlayer2Card1 = new System.Windows.Forms.PictureBox();
             this.picPlayer2Card2 = new System.Windows.Forms.PictureBox();
             this.picPlayer4Card2 = new System.Windows.Forms.PictureBox();
             this.picPlayer4Card1 = new System.Windows.Forms.PictureBox();
@@ -53,6 +52,8 @@
             this.textRoundNumber = new System.Windows.Forms.TextBox();
             this.labelPlayerTurn = new System.Windows.Forms.Label();
             this.labelPot = new System.Windows.Forms.Label();
+            this.buttonCheck = new System.Windows.Forms.Button();
+            this.picPlayer2Card1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -65,10 +66,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -103,7 +104,7 @@
             // 
             // buttonFold
             // 
-            this.buttonFold.Location = new System.Drawing.Point(774, 613);
+            this.buttonFold.Location = new System.Drawing.Point(774, 634);
             this.buttonFold.Name = "buttonFold";
             this.buttonFold.Size = new System.Drawing.Size(67, 27);
             this.buttonFold.TabIndex = 3;
@@ -120,7 +121,7 @@
             // 
             // buttonRaise
             // 
-            this.buttonRaise.Location = new System.Drawing.Point(774, 575);
+            this.buttonRaise.Location = new System.Drawing.Point(774, 598);
             this.buttonRaise.Name = "buttonRaise";
             this.buttonRaise.Size = new System.Drawing.Size(67, 27);
             this.buttonRaise.TabIndex = 5;
@@ -129,7 +130,7 @@
             // 
             // buttonCall
             // 
-            this.buttonCall.Location = new System.Drawing.Point(774, 537);
+            this.buttonCall.Location = new System.Drawing.Point(774, 565);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(67, 27);
             this.buttonCall.TabIndex = 6;
@@ -237,16 +238,6 @@
             this.picPlayer3Card2.TabStop = false;
             this.picPlayer3Card2.Click += new System.EventHandler(this.picPlayer3Card2_Click);
             // 
-            // picPlayer2Card1
-            // 
-            this.picPlayer2Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_rotated.png";
-            this.picPlayer2Card1.Location = new System.Drawing.Point(-36, 213);
-            this.picPlayer2Card1.Name = "picPlayer2Card1";
-            this.picPlayer2Card1.Size = new System.Drawing.Size(158, 112);
-            this.picPlayer2Card1.TabIndex = 17;
-            this.picPlayer2Card1.TabStop = false;
-            // 
             // picPlayer2Card2
             // 
             this.picPlayer2Card2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
@@ -319,11 +310,32 @@
             this.labelPot.Text = "POT: X Chips";
             this.labelPot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // buttonCheck
+            // 
+            this.buttonCheck.Location = new System.Drawing.Point(774, 532);
+            this.buttonCheck.Name = "buttonCheck";
+            this.buttonCheck.Size = new System.Drawing.Size(67, 27);
+            this.buttonCheck.TabIndex = 25;
+            this.buttonCheck.Text = "Check";
+            this.buttonCheck.UseVisualStyleBackColor = true;
+            this.buttonCheck.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // picPlayer2Card1
+            // 
+            this.picPlayer2Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
+    "es\\card_back_rotated.png";
+            this.picPlayer2Card1.Location = new System.Drawing.Point(-36, 213);
+            this.picPlayer2Card1.Name = "picPlayer2Card1";
+            this.picPlayer2Card1.Size = new System.Drawing.Size(158, 112);
+            this.picPlayer2Card1.TabIndex = 17;
+            this.picPlayer2Card1.TabStop = false;
+            // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.buttonCheck);
             this.Controls.Add(this.labelPot);
             this.Controls.Add(this.labelPlayerTurn);
             this.Controls.Add(this.textRoundNumber);
@@ -368,10 +380,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,7 +408,6 @@
         private System.Windows.Forms.PictureBox picPlayerCard2;
         private System.Windows.Forms.PictureBox picPlayer3Card1;
         private System.Windows.Forms.PictureBox picPlayer3Card2;
-        private System.Windows.Forms.PictureBox picPlayer2Card1;
         private System.Windows.Forms.PictureBox picPlayer2Card2;
         private System.Windows.Forms.PictureBox picPlayer4Card2;
         private System.Windows.Forms.PictureBox picPlayer4Card1;
@@ -404,5 +415,7 @@
         private System.Windows.Forms.TextBox textRoundNumber;
         private System.Windows.Forms.Label labelPlayerTurn;
         private System.Windows.Forms.Label labelPot;
+        private System.Windows.Forms.Button buttonCheck;
+        private System.Windows.Forms.PictureBox picPlayer2Card1;
     }
 }

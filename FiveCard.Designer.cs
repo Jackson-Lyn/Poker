@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FiveCard));
             this.button1 = new System.Windows.Forms.Button();
             this.picChips = new System.Windows.Forms.PictureBox();
             this.picDealer = new System.Windows.Forms.PictureBox();
@@ -60,6 +59,7 @@
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.buttonCheck = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard1)).BeginInit();
@@ -96,7 +96,6 @@
             // 
             // picChips
             // 
-            this.picChips.Image = ((System.Drawing.Image)(resources.GetObject("picChips.Image")));
             this.picChips.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\chips.png";
             this.picChips.Location = new System.Drawing.Point(255, 422);
@@ -107,7 +106,6 @@
             // 
             // picDealer
             // 
-            this.picDealer.Image = ((System.Drawing.Image)(resources.GetObject("picDealer.Image")));
             this.picDealer.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\dealer.png";
             this.picDealer.Location = new System.Drawing.Point(961, 496);
@@ -118,7 +116,7 @@
             // 
             // buttonFold
             // 
-            this.buttonFold.Location = new System.Drawing.Point(870, 617);
+            this.buttonFold.Location = new System.Drawing.Point(860, 642);
             this.buttonFold.Name = "buttonFold";
             this.buttonFold.Size = new System.Drawing.Size(67, 27);
             this.buttonFold.TabIndex = 3;
@@ -135,7 +133,7 @@
             // 
             // buttonRaise
             // 
-            this.buttonRaise.Location = new System.Drawing.Point(870, 579);
+            this.buttonRaise.Location = new System.Drawing.Point(860, 604);
             this.buttonRaise.Name = "buttonRaise";
             this.buttonRaise.Size = new System.Drawing.Size(67, 27);
             this.buttonRaise.TabIndex = 5;
@@ -144,7 +142,7 @@
             // 
             // buttonCall
             // 
-            this.buttonCall.Location = new System.Drawing.Point(870, 541);
+            this.buttonCall.Location = new System.Drawing.Point(860, 566);
             this.buttonCall.Name = "buttonCall";
             this.buttonCall.Size = new System.Drawing.Size(67, 27);
             this.buttonCall.TabIndex = 6;
@@ -153,7 +151,6 @@
             // 
             // picPlayerCard1
             // 
-            this.picPlayerCard1.Image = ((System.Drawing.Image)(resources.GetObject("picPlayerCard1.Image")));
             this.picPlayerCard1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\Clubs_Ace.PNG";
             this.picPlayerCard1.Location = new System.Drawing.Point(622, 527);
@@ -164,7 +161,6 @@
             // 
             // picPlayerCard2
             // 
-            this.picPlayerCard2.Image = ((System.Drawing.Image)(resources.GetObject("picPlayerCard2.Image")));
             this.picPlayerCard2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\Diamonds_Nine.PNG";
             this.picPlayerCard2.Location = new System.Drawing.Point(739, 527);
@@ -175,7 +171,6 @@
             // 
             // picPlayer2Card1
             // 
-            this.picPlayer2Card1.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer2Card1.Image")));
             this.picPlayer2Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.picPlayer2Card1.Location = new System.Drawing.Point(-38, 54);
@@ -217,7 +212,6 @@
             // 
             // picPlayer3Card1
             // 
-            this.picPlayer3Card1.Image = ((System.Drawing.Image)(resources.GetObject("picPlayer3Card1.Image")));
             this.picPlayer3Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_180.png";
             this.picPlayer3Card1.Location = new System.Drawing.Point(475, -40);
@@ -241,7 +235,6 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
             this.pictureBox11.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_180.png";
             this.pictureBox11.Location = new System.Drawing.Point(592, -40);
@@ -252,7 +245,6 @@
             // 
             // pictureBox12
             // 
-            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
             this.pictureBox12.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_180.png";
             this.pictureBox12.Location = new System.Drawing.Point(709, -40);
@@ -263,7 +255,6 @@
             // 
             // pictureBox13
             // 
-            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
             this.pictureBox13.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_180.png";
             this.pictureBox13.Location = new System.Drawing.Point(826, -40);
@@ -274,7 +265,6 @@
             // 
             // pictureBox14
             // 
-            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
             this.pictureBox14.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_180.png";
             this.pictureBox14.Location = new System.Drawing.Point(943, -40);
@@ -285,7 +275,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox1.Location = new System.Drawing.Point(-38, 171);
@@ -296,7 +285,6 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox3.Location = new System.Drawing.Point(-38, 288);
@@ -307,7 +295,6 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
             this.pictureBox4.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox4.Location = new System.Drawing.Point(-38, 405);
@@ -318,7 +305,6 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox2.Location = new System.Drawing.Point(-38, 522);
@@ -329,7 +315,6 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox5.Location = new System.Drawing.Point(1212, 527);
@@ -340,7 +325,6 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
             this.pictureBox6.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox6.Location = new System.Drawing.Point(1212, 410);
@@ -351,7 +335,6 @@
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
             this.pictureBox7.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox7.Location = new System.Drawing.Point(1212, 293);
@@ -362,7 +345,6 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
             this.pictureBox8.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox8.Location = new System.Drawing.Point(1212, 176);
@@ -373,7 +355,6 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
             this.pictureBox9.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\card_back_rotated.png";
             this.pictureBox9.Location = new System.Drawing.Point(1212, 59);
@@ -384,7 +365,6 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
             this.pictureBox10.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\Clubs_Ace.PNG";
             this.pictureBox10.Location = new System.Drawing.Point(505, 527);
@@ -395,7 +375,6 @@
             // 
             // pictureBox15
             // 
-            this.pictureBox15.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox15.Image")));
             this.pictureBox15.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\Clubs_Ace.PNG";
             this.pictureBox15.Location = new System.Drawing.Point(388, 527);
@@ -406,7 +385,6 @@
             // 
             // pictureBox16
             // 
-            this.pictureBox16.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox16.Image")));
             this.pictureBox16.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
     "es\\Clubs_Ace.PNG";
             this.pictureBox16.Location = new System.Drawing.Point(273, 527);
@@ -415,11 +393,21 @@
             this.pictureBox16.TabIndex = 58;
             this.pictureBox16.TabStop = false;
             // 
+            // buttonCheck
+            // 
+            this.buttonCheck.Location = new System.Drawing.Point(860, 527);
+            this.buttonCheck.Name = "buttonCheck";
+            this.buttonCheck.Size = new System.Drawing.Size(67, 27);
+            this.buttonCheck.TabIndex = 59;
+            this.buttonCheck.Text = "Check";
+            this.buttonCheck.UseVisualStyleBackColor = true;
+            // 
             // FiveCard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.buttonCheck);
             this.Controls.Add(this.pictureBox16);
             this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox10);
@@ -518,5 +506,6 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.Button buttonCheck;
     }
 }
