@@ -54,9 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\card_back.png" />
-    <Content Include="Resources\Clubs_Ace.PNG" />
-    <Content Include="Resources\Clubs_Eight.PNG" />
-    <Content Include="Resources\Clubs_Jack.PNG" />
+    <Content Include="Resources\Clubs_Ace.png" />
+    <Content Include="Resources\Clubs_Eight.png" />
+    <Content Include="Resources\Clubs_Jack.png" />
     <Content Include="Resources\Clubs_King.PNG" />
     <Content Include="Resources\Clubs_Nine.PNG" />
     <Content Include="Resources\Clubs_Queen.PNG" />
@@ -81,7 +81,7 @@
     <Content Include="Resources\Hearts_Seven.PNG" />
     <Content Include="Resources\Hearts_Six.PNG" />
     <Content Include="Resources\Hearts_Ten.PNG" />
-    <Content Include="Resources\Spades_Ace.PNG" />
+    <Content Include="Resources\Spades_Ace.png" />
     <Content Include="Resources\Spades_Eight.PNG" />
     <Content Include="Resources\Spades_Jack.PNG" />
     <Content Include="Resources\Spades_King.PNG" />
@@ -90,7 +90,6 @@
     <Content Include="Resources\Spades_Seven.PNG" />
     <Content Include="Resources\Spades_Six.PNG" />
     <Content Include="Resources\Spades_Ten.PNG" />
-    <Content Include="Resources\table.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

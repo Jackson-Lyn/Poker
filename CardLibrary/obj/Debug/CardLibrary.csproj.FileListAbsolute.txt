@@ -6,3 +6,11 @@ C:\Users\vense\Documents\Durham College\Semester 4\oop 3\Poker\CardLibrary\obj\D
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\Poker\CardLibrary\obj\Debug\CardLibrary.dll
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\Poker\CardLibrary\obj\Debug\CardLibrary.pdb
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\bin\Debug\CardLibrary.dll
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\bin\Debug\CardLibrary.pdb
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.csproj.AssemblyReference.cache
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.Properties.Resources.resources
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.csproj.GenerateResource.cache
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.dll
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardLibrary\obj\Debug\CardLibrary.pdb

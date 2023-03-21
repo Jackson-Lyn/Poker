@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokerGame", "PokerGame.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardLibrary", "CardLibrary\CardLibrary.csproj", "{D42C67BF-00E7-409C-8707-D7F4C54807ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardBox", "CardBox\CardBox.csproj", "{4306F47B-8244-452C-A30D-52AC33D2C271}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D42C67BF-00E7-409C-8707-D7F4C54807ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42C67BF-00E7-409C-8707-D7F4C54807ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42C67BF-00E7-409C-8707-D7F4C54807ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4306F47B-8244-452C-A30D-52AC33D2C271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4306F47B-8244-452C-A30D-52AC33D2C271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4306F47B-8244-452C-A30D-52AC33D2C271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4306F47B-8244-452C-A30D-52AC33D2C271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
