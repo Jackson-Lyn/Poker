@@ -65,8 +65,19 @@ namespace CardBox
         {
             set
             {
-                myCard.FaceUp = value;
-                UpdateCardImage();
+                // if the value is different than the card's FaceUp property
+                if (myCard.FaceUp != value) // then the card is flipping over
+                {
+                    myCard.FaceUp = value; // change the card's FaceUp property
+
+                    UpdateCardImage(); // update card image
+
+                    // if there is an event handler for CardFlipped in the client program
+                    if (CardFlipped != null)
+                    {
+                        CardFlipped(this, new EventArgs()); // call it
+                    }
+                }
             }
             get { return Card.FaceUp; }
         }
@@ -107,10 +118,50 @@ namespace CardBox
             myCard = new Card();
         }
 
+        public CardBox(Card card, Orientation orientation = Orientation.Vertical)
+        {
+            InitializeComponent();
+            myOrientation = orientation;
+            myCard = card;
+        }
+
+        #endregion
+
+        #region EVENT AND EVENT HANDLERS
+        /// <summary>
+        /// An event handler for initial image for the card
+        /// </summary>
+        private void CardBox_Load(object sender, EventArgs e)
+        {
+            UpdateCardImage();
+        }
+
+        public event EventHandler CardFlipped;
+
+        /// <summary>
+        /// An event the client program can handle when the user clicks the control
+        /// </summary>
+        new public event EventHandler Click;
+
+        /// <summary>
+        /// An event handler for the user clicking the picture box control
+        /// </summary>
+        private void pbMyPictureBox_Click(object sender, EventArgs e)
+        {
+            // if there is a handler for clicking the control in the client program
+            if (Click != null)
+            {
+                Click(this, e);
+            }
+        }
+
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Updates the card Image
+        /// </summary>
         private void UpdateCardImage()
         {
             pbMyPictureBox.Image = myCard.GetCardImage();
@@ -121,6 +172,15 @@ namespace CardBox
             }
         }
 
+        /// <summary>
+        /// Overrides ToString method
+        /// </summary>
+        public override string ToString()
+        {
+            return myCard.ToString();
+        }
+
         #endregion
+
     }
 }
