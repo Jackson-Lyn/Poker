@@ -10,14 +10,25 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Reflection.Emit;
 
-namespace WindowsFormsApp1
+namespace PokerGame
 {
     public partial class TexasHoldEm : Form
     {
+        #region CONSTRUCTORS
         public TexasHoldEm()
         {
             InitializeComponent();
+            Loading();
         }
+
+        public TexasHoldEm(string difficulty, string chips, string players)
+        {
+            InitializeComponent();
+            Loading(chips);
+        }
+        #endregion
+
+        #region CUSTOM DESIGN METHODS
 
         public void RoundLabel(System.Windows.Forms.Label label)
         {
@@ -84,23 +95,36 @@ namespace WindowsFormsApp1
 
             return path;
         }
+        #endregion
 
+        #region ASYNC METHODS
+        private async void Loading()
+        {
+            await Task.Delay(5000);
+            cardBox1Player.FaceUp = true;
+            cardBox2Player.FaceUp = true;
+            textRoundNumber.Text = "1";
+            labelPot.Text = "Pot: 0 Chips";
+            labelPlayerTurn.Text = "Your Turn";
+        }
+
+        private async void Loading(string chips)
+        {
+            Loading();
+            await Task.Delay(1500);
+            textBoxTotalChips.Text = chips;
+        }
+        #endregion
+
+        #region EVENT HANDLERS
         private void TexasHoldEm_Paint(object sender, PaintEventArgs e)
         {
             using (Pen pen = new Pen(labelPot.BackColor, 6.0f))
             {
-                _drawRoundedRectangle(e.Graphics, pen, labelPot.Location.X-1, labelPot.Location.Y-1, labelPot.ClientRectangle.Width+1, labelPot.ClientRectangle.Height+1, 10);
+                _drawRoundedRectangle(e.Graphics, pen, labelPot.Location.X - 1, labelPot.Location.Y - 1, labelPot.ClientRectangle.Width + 1, labelPot.ClientRectangle.Height + 1, 10);
             }
         }
 
-        private void picPlayer3Card2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

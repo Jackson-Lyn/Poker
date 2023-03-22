@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace PokerGame
 {
     partial class TexasHoldEm
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonHelp = new System.Windows.Forms.Button();
             this.picChips = new System.Windows.Forms.PictureBox();
             this.picDealer = new System.Windows.Forms.PictureBox();
             this.buttonFold = new System.Windows.Forms.Button();
@@ -36,51 +36,38 @@
             this.buttonRaise = new System.Windows.Forms.Button();
             this.buttonCall = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.picCenterCard1 = new System.Windows.Forms.PictureBox();
-            this.picCenterCard2 = new System.Windows.Forms.PictureBox();
-            this.picCenterCard3 = new System.Windows.Forms.PictureBox();
-            this.picCenterCard4 = new System.Windows.Forms.PictureBox();
-            this.picCenterCard5 = new System.Windows.Forms.PictureBox();
-            this.picPlayerCard1 = new System.Windows.Forms.PictureBox();
-            this.picPlayerCard2 = new System.Windows.Forms.PictureBox();
-            this.picPlayer3Card1 = new System.Windows.Forms.PictureBox();
-            this.picPlayer3Card2 = new System.Windows.Forms.PictureBox();
-            this.picPlayer2Card2 = new System.Windows.Forms.PictureBox();
-            this.picPlayer4Card2 = new System.Windows.Forms.PictureBox();
-            this.picPlayer4Card1 = new System.Windows.Forms.PictureBox();
             this.labelRound = new System.Windows.Forms.Label();
             this.textRoundNumber = new System.Windows.Forms.TextBox();
             this.labelPlayerTurn = new System.Windows.Forms.Label();
             this.labelPot = new System.Windows.Forms.Label();
             this.buttonCheck = new System.Windows.Forms.Button();
-            this.picPlayer2Card1 = new System.Windows.Forms.PictureBox();
+            this.cardBox2Bot3 = new CardBox.CardBox();
+            this.cardBox1Bot3 = new CardBox.CardBox();
+            this.cardBox2Bot2 = new CardBox.CardBox();
+            this.cardBox1Bot2 = new CardBox.CardBox();
+            this.cardBox2Bot1 = new CardBox.CardBox();
+            this.cardBox1Bot1 = new CardBox.CardBox();
+            this.cardBoxMiddle5 = new CardBox.CardBox();
+            this.cardBoxMiddle4 = new CardBox.CardBox();
+            this.cardBoxMiddle3 = new CardBox.CardBox();
+            this.cardBoxMiddle2 = new CardBox.CardBox();
+            this.cardBoxMiddle1 = new CardBox.CardBox();
+            this.cardBox1Player = new CardBox.CardBox();
+            this.cardBox2Player = new CardBox.CardBox();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonHelp
             // 
-            this.button1.Location = new System.Drawing.Point(1134, 636);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 25);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Help";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonHelp.Location = new System.Drawing.Point(1134, 636);
+            this.buttonHelp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(67, 25);
+            this.buttonHelp.TabIndex = 0;
+            this.buttonHelp.Text = "Help";
+            this.buttonHelp.UseVisualStyleBackColor = true;
             // 
             // picChips
             // 
@@ -113,7 +100,7 @@
             // 
             // textBoxTotalChips
             // 
-            this.textBoxTotalChips.Location = new System.Drawing.Point(334, 615);
+            this.textBoxTotalChips.Location = new System.Drawing.Point(334, 623);
             this.textBoxTotalChips.Name = "textBoxTotalChips";
             this.textBoxTotalChips.ReadOnly = true;
             this.textBoxTotalChips.Size = new System.Drawing.Size(100, 22);
@@ -146,127 +133,6 @@
             this.pictureBox2.Size = new System.Drawing.Size(165, 116);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
-            // 
-            // picCenterCard1
-            // 
-            this.picCenterCard1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back.png";
-            this.picCenterCard1.Location = new System.Drawing.Point(375, 238);
-            this.picCenterCard1.Name = "picCenterCard1";
-            this.picCenterCard1.Size = new System.Drawing.Size(113, 160);
-            this.picCenterCard1.TabIndex = 8;
-            this.picCenterCard1.TabStop = false;
-            // 
-            // picCenterCard2
-            // 
-            this.picCenterCard2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back.png";
-            this.picCenterCard2.Location = new System.Drawing.Point(494, 238);
-            this.picCenterCard2.Name = "picCenterCard2";
-            this.picCenterCard2.Size = new System.Drawing.Size(113, 160);
-            this.picCenterCard2.TabIndex = 9;
-            this.picCenterCard2.TabStop = false;
-            // 
-            // picCenterCard3
-            // 
-            this.picCenterCard3.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back.png";
-            this.picCenterCard3.Location = new System.Drawing.Point(613, 238);
-            this.picCenterCard3.Name = "picCenterCard3";
-            this.picCenterCard3.Size = new System.Drawing.Size(113, 160);
-            this.picCenterCard3.TabIndex = 10;
-            this.picCenterCard3.TabStop = false;
-            // 
-            // picCenterCard4
-            // 
-            this.picCenterCard4.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back.png";
-            this.picCenterCard4.Location = new System.Drawing.Point(732, 238);
-            this.picCenterCard4.Name = "picCenterCard4";
-            this.picCenterCard4.Size = new System.Drawing.Size(113, 160);
-            this.picCenterCard4.TabIndex = 11;
-            this.picCenterCard4.TabStop = false;
-            // 
-            // picCenterCard5
-            // 
-            this.picCenterCard5.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back.png";
-            this.picCenterCard5.Location = new System.Drawing.Point(851, 238);
-            this.picCenterCard5.Name = "picCenterCard5";
-            this.picCenterCard5.Size = new System.Drawing.Size(113, 160);
-            this.picCenterCard5.TabIndex = 12;
-            this.picCenterCard5.TabStop = false;
-            // 
-            // picPlayerCard1
-            // 
-            this.picPlayerCard1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\Clubs_Ace.PNG";
-            this.picPlayerCard1.Location = new System.Drawing.Point(540, 515);
-            this.picPlayerCard1.Name = "picPlayerCard1";
-            this.picPlayerCard1.Size = new System.Drawing.Size(107, 146);
-            this.picPlayerCard1.TabIndex = 13;
-            this.picPlayerCard1.TabStop = false;
-            // 
-            // picPlayerCard2
-            // 
-            this.picPlayerCard2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\Diamonds_Nine.PNG";
-            this.picPlayerCard2.Location = new System.Drawing.Point(653, 515);
-            this.picPlayerCard2.Name = "picPlayerCard2";
-            this.picPlayerCard2.Size = new System.Drawing.Size(115, 146);
-            this.picPlayerCard2.TabIndex = 14;
-            this.picPlayerCard2.TabStop = false;
-            // 
-            // picPlayer3Card1
-            // 
-            this.picPlayer3Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_180.png";
-            this.picPlayer3Card1.Location = new System.Drawing.Point(537, -31);
-            this.picPlayer3Card1.Name = "picPlayer3Card1";
-            this.picPlayer3Card1.Size = new System.Drawing.Size(110, 156);
-            this.picPlayer3Card1.TabIndex = 15;
-            this.picPlayer3Card1.TabStop = false;
-            // 
-            // picPlayer3Card2
-            // 
-            this.picPlayer3Card2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_180.png";
-            this.picPlayer3Card2.Location = new System.Drawing.Point(653, -31);
-            this.picPlayer3Card2.Name = "picPlayer3Card2";
-            this.picPlayer3Card2.Size = new System.Drawing.Size(110, 156);
-            this.picPlayer3Card2.TabIndex = 16;
-            this.picPlayer3Card2.TabStop = false;
-            this.picPlayer3Card2.Click += new System.EventHandler(this.picPlayer3Card2_Click);
-            // 
-            // picPlayer2Card2
-            // 
-            this.picPlayer2Card2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_rotated.png";
-            this.picPlayer2Card2.Location = new System.Drawing.Point(-36, 331);
-            this.picPlayer2Card2.Name = "picPlayer2Card2";
-            this.picPlayer2Card2.Size = new System.Drawing.Size(158, 112);
-            this.picPlayer2Card2.TabIndex = 18;
-            this.picPlayer2Card2.TabStop = false;
-            // 
-            // picPlayer4Card2
-            // 
-            this.picPlayer4Card2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_rotated.png";
-            this.picPlayer4Card2.Location = new System.Drawing.Point(1207, 213);
-            this.picPlayer4Card2.Name = "picPlayer4Card2";
-            this.picPlayer4Card2.Size = new System.Drawing.Size(158, 112);
-            this.picPlayer4Card2.TabIndex = 19;
-            this.picPlayer4Card2.TabStop = false;
-            // 
-            // picPlayer4Card1
-            // 
-            this.picPlayer4Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_rotated.png";
-            this.picPlayer4Card1.Location = new System.Drawing.Point(1207, 331);
-            this.picPlayer4Card1.Name = "picPlayer4Card1";
-            this.picPlayer4Card1.Size = new System.Drawing.Size(158, 112);
-            this.picPlayer4Card1.TabIndex = 20;
-            this.picPlayer4Card1.TabStop = false;
             // 
             // labelRound
             // 
@@ -318,48 +184,180 @@
             this.buttonCheck.TabIndex = 25;
             this.buttonCheck.Text = "Check";
             this.buttonCheck.UseVisualStyleBackColor = true;
-            this.buttonCheck.Click += new System.EventHandler(this.button2_Click);
             // 
-            // picPlayer2Card1
+            // cardBox2Bot3
             // 
-            this.picPlayer2Card1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\card_back_rotated.png";
-            this.picPlayer2Card1.Location = new System.Drawing.Point(-36, 213);
-            this.picPlayer2Card1.Name = "picPlayer2Card1";
-            this.picPlayer2Card1.Size = new System.Drawing.Size(158, 112);
-            this.picPlayer2Card1.TabIndex = 17;
-            this.picPlayer2Card1.TabStop = false;
+            this.cardBox2Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox2Bot3.FaceUp = false;
+            this.cardBox2Bot3.Location = new System.Drawing.Point(1207, 331);
+            this.cardBox2Bot3.Name = "cardBox2Bot3";
+            this.cardBox2Bot3.rank = CardLibrary.Rank.Ace;
+            this.cardBox2Bot3.Size = new System.Drawing.Size(146, 113);
+            this.cardBox2Bot3.Suit = CardLibrary.Suit.Spades;
+            this.cardBox2Bot3.TabIndex = 38;
+            // 
+            // cardBox1Bot3
+            // 
+            this.cardBox1Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox1Bot3.FaceUp = false;
+            this.cardBox1Bot3.Location = new System.Drawing.Point(1207, 212);
+            this.cardBox1Bot3.Name = "cardBox1Bot3";
+            this.cardBox1Bot3.rank = CardLibrary.Rank.Ace;
+            this.cardBox1Bot3.Size = new System.Drawing.Size(146, 113);
+            this.cardBox1Bot3.Suit = CardLibrary.Suit.Spades;
+            this.cardBox1Bot3.TabIndex = 37;
+            // 
+            // cardBox2Bot2
+            // 
+            this.cardBox2Bot2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBox2Bot2.FaceUp = false;
+            this.cardBox2Bot2.Location = new System.Drawing.Point(655, -32);
+            this.cardBox2Bot2.Name = "cardBox2Bot2";
+            this.cardBox2Bot2.rank = CardLibrary.Rank.Ace;
+            this.cardBox2Bot2.Size = new System.Drawing.Size(113, 146);
+            this.cardBox2Bot2.Suit = CardLibrary.Suit.Spades;
+            this.cardBox2Bot2.TabIndex = 36;
+            // 
+            // cardBox1Bot2
+            // 
+            this.cardBox1Bot2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBox1Bot2.FaceUp = false;
+            this.cardBox1Bot2.Location = new System.Drawing.Point(534, -32);
+            this.cardBox1Bot2.Name = "cardBox1Bot2";
+            this.cardBox1Bot2.rank = CardLibrary.Rank.Ace;
+            this.cardBox1Bot2.Size = new System.Drawing.Size(113, 146);
+            this.cardBox1Bot2.Suit = CardLibrary.Suit.Spades;
+            this.cardBox1Bot2.TabIndex = 35;
+            // 
+            // cardBox2Bot1
+            // 
+            this.cardBox2Bot1.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox2Bot1.FaceUp = false;
+            this.cardBox2Bot1.Location = new System.Drawing.Point(-24, 212);
+            this.cardBox2Bot1.Name = "cardBox2Bot1";
+            this.cardBox2Bot1.rank = CardLibrary.Rank.Ace;
+            this.cardBox2Bot1.Size = new System.Drawing.Size(146, 113);
+            this.cardBox2Bot1.Suit = CardLibrary.Suit.Spades;
+            this.cardBox2Bot1.TabIndex = 34;
+            // 
+            // cardBox1Bot1
+            // 
+            this.cardBox1Bot1.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox1Bot1.FaceUp = false;
+            this.cardBox1Bot1.Location = new System.Drawing.Point(-24, 331);
+            this.cardBox1Bot1.Name = "cardBox1Bot1";
+            this.cardBox1Bot1.rank = CardLibrary.Rank.Ace;
+            this.cardBox1Bot1.Size = new System.Drawing.Size(146, 113);
+            this.cardBox1Bot1.Suit = CardLibrary.Suit.Spades;
+            this.cardBox1Bot1.TabIndex = 33;
+            // 
+            // cardBoxMiddle5
+            // 
+            this.cardBoxMiddle5.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBoxMiddle5.FaceUp = false;
+            this.cardBoxMiddle5.Location = new System.Drawing.Point(851, 252);
+            this.cardBoxMiddle5.Name = "cardBoxMiddle5";
+            this.cardBoxMiddle5.rank = CardLibrary.Rank.Ace;
+            this.cardBoxMiddle5.Size = new System.Drawing.Size(113, 146);
+            this.cardBoxMiddle5.Suit = CardLibrary.Suit.Spades;
+            this.cardBoxMiddle5.TabIndex = 32;
+            // 
+            // cardBoxMiddle4
+            // 
+            this.cardBoxMiddle4.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBoxMiddle4.FaceUp = false;
+            this.cardBoxMiddle4.Location = new System.Drawing.Point(732, 252);
+            this.cardBoxMiddle4.Name = "cardBoxMiddle4";
+            this.cardBoxMiddle4.rank = CardLibrary.Rank.Ace;
+            this.cardBoxMiddle4.Size = new System.Drawing.Size(113, 146);
+            this.cardBoxMiddle4.Suit = CardLibrary.Suit.Spades;
+            this.cardBoxMiddle4.TabIndex = 31;
+            // 
+            // cardBoxMiddle3
+            // 
+            this.cardBoxMiddle3.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBoxMiddle3.FaceUp = false;
+            this.cardBoxMiddle3.Location = new System.Drawing.Point(613, 252);
+            this.cardBoxMiddle3.Name = "cardBoxMiddle3";
+            this.cardBoxMiddle3.rank = CardLibrary.Rank.Ace;
+            this.cardBoxMiddle3.Size = new System.Drawing.Size(113, 146);
+            this.cardBoxMiddle3.Suit = CardLibrary.Suit.Spades;
+            this.cardBoxMiddle3.TabIndex = 30;
+            // 
+            // cardBoxMiddle2
+            // 
+            this.cardBoxMiddle2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBoxMiddle2.FaceUp = false;
+            this.cardBoxMiddle2.Location = new System.Drawing.Point(494, 252);
+            this.cardBoxMiddle2.Name = "cardBoxMiddle2";
+            this.cardBoxMiddle2.rank = CardLibrary.Rank.Ace;
+            this.cardBoxMiddle2.Size = new System.Drawing.Size(113, 146);
+            this.cardBoxMiddle2.Suit = CardLibrary.Suit.Spades;
+            this.cardBoxMiddle2.TabIndex = 29;
+            // 
+            // cardBoxMiddle1
+            // 
+            this.cardBoxMiddle1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBoxMiddle1.FaceUp = false;
+            this.cardBoxMiddle1.Location = new System.Drawing.Point(375, 252);
+            this.cardBoxMiddle1.Name = "cardBoxMiddle1";
+            this.cardBoxMiddle1.rank = CardLibrary.Rank.Ace;
+            this.cardBoxMiddle1.Size = new System.Drawing.Size(113, 146);
+            this.cardBoxMiddle1.Suit = CardLibrary.Suit.Spades;
+            this.cardBoxMiddle1.TabIndex = 28;
+            // 
+            // cardBox1Player
+            // 
+            this.cardBox1Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBox1Player.FaceUp = false;
+            this.cardBox1Player.Location = new System.Drawing.Point(534, 515);
+            this.cardBox1Player.Name = "cardBox1Player";
+            this.cardBox1Player.rank = CardLibrary.Rank.Ace;
+            this.cardBox1Player.Size = new System.Drawing.Size(113, 146);
+            this.cardBox1Player.Suit = CardLibrary.Suit.Spades;
+            this.cardBox1Player.TabIndex = 27;
+            // 
+            // cardBox2Player
+            // 
+            this.cardBox2Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.cardBox2Player.FaceUp = false;
+            this.cardBox2Player.Location = new System.Drawing.Point(655, 515);
+            this.cardBox2Player.Name = "cardBox2Player";
+            this.cardBox2Player.rank = CardLibrary.Rank.Ace;
+            this.cardBox2Player.Size = new System.Drawing.Size(113, 146);
+            this.cardBox2Player.Suit = CardLibrary.Suit.Spades;
+            this.cardBox2Player.TabIndex = 26;
             // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.cardBox2Bot3);
+            this.Controls.Add(this.cardBox1Bot3);
+            this.Controls.Add(this.cardBox2Bot2);
+            this.Controls.Add(this.cardBox1Bot2);
+            this.Controls.Add(this.cardBox2Bot1);
+            this.Controls.Add(this.cardBox1Bot1);
+            this.Controls.Add(this.cardBoxMiddle5);
+            this.Controls.Add(this.cardBoxMiddle4);
+            this.Controls.Add(this.cardBoxMiddle3);
+            this.Controls.Add(this.cardBoxMiddle2);
+            this.Controls.Add(this.cardBoxMiddle1);
+            this.Controls.Add(this.cardBox1Player);
+            this.Controls.Add(this.cardBox2Player);
             this.Controls.Add(this.buttonCheck);
             this.Controls.Add(this.labelPot);
             this.Controls.Add(this.labelPlayerTurn);
             this.Controls.Add(this.textRoundNumber);
             this.Controls.Add(this.labelRound);
-            this.Controls.Add(this.picPlayer4Card1);
-            this.Controls.Add(this.picPlayer4Card2);
-            this.Controls.Add(this.picPlayer2Card2);
-            this.Controls.Add(this.picPlayer2Card1);
-            this.Controls.Add(this.picPlayer3Card2);
-            this.Controls.Add(this.picPlayer3Card1);
-            this.Controls.Add(this.picPlayerCard2);
-            this.Controls.Add(this.picPlayerCard1);
-            this.Controls.Add(this.picCenterCard5);
-            this.Controls.Add(this.picCenterCard4);
-            this.Controls.Add(this.picCenterCard3);
-            this.Controls.Add(this.picCenterCard2);
-            this.Controls.Add(this.picCenterCard1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.buttonCall);
             this.Controls.Add(this.buttonRaise);
             this.Controls.Add(this.textBoxTotalChips);
             this.Controls.Add(this.buttonFold);
             this.Controls.Add(this.picChips);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.picDealer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -371,19 +369,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCenterCard5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer3Card2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer4Card1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer2Card1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,7 +376,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.PictureBox picChips;
         private System.Windows.Forms.PictureBox picDealer;
         private System.Windows.Forms.Button buttonFold;
@@ -399,23 +384,23 @@
         private System.Windows.Forms.Button buttonRaise;
         private System.Windows.Forms.Button buttonCall;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox picCenterCard1;
-        private System.Windows.Forms.PictureBox picCenterCard2;
-        private System.Windows.Forms.PictureBox picCenterCard3;
-        private System.Windows.Forms.PictureBox picCenterCard4;
-        private System.Windows.Forms.PictureBox picCenterCard5;
-        private System.Windows.Forms.PictureBox picPlayerCard1;
-        private System.Windows.Forms.PictureBox picPlayerCard2;
-        private System.Windows.Forms.PictureBox picPlayer3Card1;
-        private System.Windows.Forms.PictureBox picPlayer3Card2;
-        private System.Windows.Forms.PictureBox picPlayer2Card2;
-        private System.Windows.Forms.PictureBox picPlayer4Card2;
-        private System.Windows.Forms.PictureBox picPlayer4Card1;
         private System.Windows.Forms.Label labelRound;
         private System.Windows.Forms.TextBox textRoundNumber;
         private System.Windows.Forms.Label labelPlayerTurn;
         private System.Windows.Forms.Label labelPot;
         private System.Windows.Forms.Button buttonCheck;
-        private System.Windows.Forms.PictureBox picPlayer2Card1;
+        private CardBox.CardBox cardBox2Player;
+        private CardBox.CardBox cardBox1Player;
+        private CardBox.CardBox cardBoxMiddle1;
+        private CardBox.CardBox cardBoxMiddle2;
+        private CardBox.CardBox cardBoxMiddle3;
+        private CardBox.CardBox cardBoxMiddle4;
+        private CardBox.CardBox cardBoxMiddle5;
+        private CardBox.CardBox cardBox1Bot1;
+        private CardBox.CardBox cardBox2Bot1;
+        private CardBox.CardBox cardBox1Bot2;
+        private CardBox.CardBox cardBox2Bot2;
+        private CardBox.CardBox cardBox1Bot3;
+        private CardBox.CardBox cardBox2Bot3;
     }
 }

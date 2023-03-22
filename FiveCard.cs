@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Reflection.Emit;
 
-namespace WindowsFormsApp1
+namespace PokerGame
 {
     public partial class FiveCard : Form
     {

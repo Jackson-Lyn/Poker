@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{41FE7C63-198B-45D9-BFE8-8D74C6ECDB6F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowsFormsApp1</RootNamespace>
-    <AssemblyName>WindowsFormsApp1</AssemblyName>
+    <RootNamespace>PokerGame</RootNamespace>
+    <AssemblyName>PokerGame</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -143,6 +143,16 @@
     <Content Include="Resources\Spades_Ten.PNG" />
     <Content Include="Resources\table.png" />
     <Content Include="Resources\TexasHoldem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="CardBox\CardBox.csproj">
+      <Project>{4306f47b-8244-452c-a30d-52ac33d2c271}</Project>
+      <Name>CardBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="CardLibrary\CardLibrary.csproj">
+      <Project>{d42c67bf-00e7-409c-8707-d7f4c54807ed}</Project>
+      <Name>CardLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
