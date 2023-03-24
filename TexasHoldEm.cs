@@ -24,12 +24,18 @@ namespace PokerGame
         public TexasHoldEm(string difficulty, string chips, string players)
         {
             InitializeComponent();
+            SetPictures();
             Loading(chips);
         }
         #endregion
 
         #region CUSTOM DESIGN METHODS
-
+        public void SetPictures()
+        {
+            pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
+            picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
+            picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
+        }
         public void RoundLabel(System.Windows.Forms.Label label)
         {
             GraphicsPath graphicsPath = _getRoundPath(label.ClientRectangle, 10);

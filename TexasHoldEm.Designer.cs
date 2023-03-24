@@ -35,7 +35,7 @@
             this.textBoxTotalChips = new System.Windows.Forms.TextBox();
             this.buttonRaise = new System.Windows.Forms.Button();
             this.buttonCall = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxTitle = new System.Windows.Forms.PictureBox();
             this.labelRound = new System.Windows.Forms.Label();
             this.textRoundNumber = new System.Windows.Forms.TextBox();
             this.labelPlayerTurn = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             this.cardBox2Player = new CardBox.CardBox();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonHelp
@@ -71,8 +71,7 @@
             // 
             // picChips
             // 
-            this.picChips.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\chips.png";
+            this.picChips.ImageLocation = "";
             this.picChips.Location = new System.Drawing.Point(221, 598);
             this.picChips.Name = "picChips";
             this.picChips.Size = new System.Drawing.Size(107, 74);
@@ -81,8 +80,8 @@
             // 
             // picDealer
             // 
-            this.picDealer.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\dealer.png";
+            this.picDealer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.picDealer.ImageLocation = "";
             this.picDealer.Location = new System.Drawing.Point(1170, 492);
             this.picDealer.Name = "picDealer";
             this.picDealer.Size = new System.Drawing.Size(214, 210);
@@ -124,15 +123,14 @@
             this.buttonCall.Text = "Call";
             this.buttonCall.UseVisualStyleBackColor = true;
             // 
-            // pictureBox2
+            // pictureBoxTitle
             // 
-            this.pictureBox2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\WindowsFormsApp1\\Resourc" +
-    "es\\TexasHoldem.png";
-            this.pictureBox2.Location = new System.Drawing.Point(-2, -2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(165, 116);
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
+            this.pictureBoxTitle.ImageLocation = "";
+            this.pictureBoxTitle.Location = new System.Drawing.Point(-2, -2);
+            this.pictureBoxTitle.Name = "pictureBoxTitle";
+            this.pictureBoxTitle.Size = new System.Drawing.Size(165, 116);
+            this.pictureBoxTitle.TabIndex = 7;
+            this.pictureBoxTitle.TabStop = false;
             // 
             // labelRound
             // 
@@ -351,7 +349,7 @@
             this.Controls.Add(this.labelPlayerTurn);
             this.Controls.Add(this.textRoundNumber);
             this.Controls.Add(this.labelRound);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBoxTitle);
             this.Controls.Add(this.buttonCall);
             this.Controls.Add(this.buttonRaise);
             this.Controls.Add(this.textBoxTotalChips);
@@ -368,7 +366,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TexasHoldEm_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,7 +381,7 @@
         private System.Windows.Forms.TextBox textBoxTotalChips;
         private System.Windows.Forms.Button buttonRaise;
         private System.Windows.Forms.Button buttonCall;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxTitle;
         private System.Windows.Forms.Label labelRound;
         private System.Windows.Forms.TextBox textRoundNumber;
         private System.Windows.Forms.Label labelPlayerTurn;
