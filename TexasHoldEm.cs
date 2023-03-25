@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Reflection.Emit;
+using CardLibrary;
 
 namespace PokerGame
 {
@@ -26,6 +27,9 @@ namespace PokerGame
             InitializeComponent();
             SetPictures();
             Loading(chips);
+
+            Deck deck = new Deck();
+            deck.Shuffle();
         }
         #endregion
 
