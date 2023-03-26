@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardLibrary
 {
-    public enum HandRanking
+    public enum HandRanking : byte
     {
         HighCard = 1,
         OnePair,
