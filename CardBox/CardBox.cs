@@ -48,7 +48,7 @@ namespace CardBox
         /// <summary>
         /// Rank property: sets/gets the Card object's Rank value
         /// </summary>
-        public Rank rank
+        public Rank Rank
         {
             set
             {

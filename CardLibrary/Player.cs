@@ -10,7 +10,6 @@ namespace CardLibrary
     {
         #region FIELD AND PROPERTIES
         private int id { get; set; }
-        private string name { get; set; }
         private List<Card> cards { get; set; }
         private int chips { get; set; }
         private bool isCheck { get; set; }
@@ -20,16 +19,14 @@ namespace CardLibrary
         public Player()
         {
             id = 1;
-            name = "Random person";
             cards = new List<Card>();
             chips = 0;
             isCheck = false;
         }
 
-        public Player(int id, string name, List<Card> cards, int chips)
+        public Player(int id, List<Card> cards, int chips)
         {
             this.id = id;
-            this.name = name;
             this.cards = cards;
             this.chips = chips;
         }
@@ -51,6 +48,21 @@ namespace CardLibrary
             {
                 card.FaceUp = false;
             }
+        }
+
+        public int GetId()
+        {
+            return id;
+        }
+
+        public bool GetCheck()
+        {
+            return isCheck;
+        }
+
+        public void SetCheck(bool check)
+        {
+            isCheck = check;
         }
     }
 }

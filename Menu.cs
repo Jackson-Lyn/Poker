@@ -25,12 +25,28 @@ namespace PokerGame
 
             TexasHoldEm texasWindow = new TexasHoldEm(buttonDiff.Text, buttonChips.Text, buttonPlayers.Text);
             texasWindow.Show();
+            texasWindow.Focus();
+            DisableNewGame();
+
+            texasWindow.FormClosed += new FormClosedEventHandler(TexasWindowClosed);
         }
 
         private void buttonFiveCard_Click(object sender, EventArgs e)
         {
             FiveCard fiveCardWindow = new FiveCard();
             fiveCardWindow.Show();  
+        }
+
+        private void TexasWindowClosed(object sender, EventArgs e)
+        {
+            buttonTexas.Enabled = true;
+            buttonFiveCard.Enabled = true;
+        }
+
+        private void DisableNewGame()
+        {
+            buttonTexas.Enabled = false;
+            buttonFiveCard.Enabled = false;
         }
     }
 }

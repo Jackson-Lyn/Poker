@@ -185,9 +185,16 @@ namespace CardLibrary
             {
                 imageName = "card_back";
             }
+            else if (
+                myRank.ToString().Equals("Ace") || myRank.ToString().Equals("King") ||
+                myRank.ToString().Equals("Queen") || myRank.ToString().Equals("Jack")
+                )
+            {
+                imageName = myRank.ToString() + "_of_" + mySuit.ToString();
+            }
             else
             {
-                imageName = mySuit.ToString() + "_" + myRank.ToString();
+                imageName = "_" + (int)myRank + "_of_" + mySuit.ToString().ToLower();
             }
             cardImage = Properties.Resources.ResourceManager.GetObject(imageName) as Image;
 

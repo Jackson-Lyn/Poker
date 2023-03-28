@@ -10,26 +10,42 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Reflection.Emit;
 using CardLibrary;
+using CardBox;
+using System.Security.AccessControl;
 
 namespace PokerGame
 {
     public partial class TexasHoldEm : Form
     {
+        Game game = new Game();
+        List<Player> allPlayers = new List<Player>();
+        Deck deck = new Deck();
         #region CONSTRUCTORS
         public TexasHoldEm()
         {
             InitializeComponent();
-            Loading();
         }
 
         public TexasHoldEm(string difficulty, string chips, string players)
         {
             InitializeComponent();
             SetPictures();
-            Loading(chips);
+            SetMiddleCards();
+            int numOfPlayers = int.Parse(players);
 
-            Deck deck = new Deck();
-            deck.Shuffle();
+            if (numOfPlayers == 2)
+            {
+                cardBox1Bot1.Visible = false;
+                cardBox2Bot1.Visible = false;
+                cardBox1Bot3.Visible = false;
+                cardBox2Bot3.Visible = false;
+            }
+            else if (numOfPlayers == 3)
+            {
+                cardBox1Bot3.Visible = false;
+                cardBox2Bot3.Visible = false;
+            }
+            Loading(chips, players);
         }
         #endregion
 
@@ -40,101 +56,227 @@ namespace PokerGame
             picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
             picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
         }
-        public void RoundLabel(System.Windows.Forms.Label label)
-        {
-            GraphicsPath graphicsPath = _getRoundPath(label.ClientRectangle, 10);
-
-            label.Region = new Region(graphicsPath);
-
-            label.Invalidate();
-        }
-
-        private static GraphicsPath _getRoundPath(Rectangle rectangle, int radius)
-        {
-            int x = rectangle.X;
-            int y = rectangle.Y;
-            int width = rectangle.Width;
-            int height = rectangle.Height;
-
-            radius = radius << 1;
-
-            GraphicsPath path = new GraphicsPath();
-
-            if (radius > 0)
-            {
-                if (radius > height) radius = height;
-                if (radius > width) radius = width;
-                path.AddArc(x, y, radius, radius, 180, 90);
-                path.AddArc(x + width - radius, y, radius, radius, 270, 90);
-                path.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90);
-                path.AddArc(x, y + height - radius, radius, radius, 90, 90);
-                path.CloseFigure();
-            }
-            else
-            {
-                path.AddRectangle(rectangle);
-            }
-
-            return path;
-        }
-
-        private void _drawRoundedRectangle(Graphics graphics, Pen pen, int x, int y, int width, int height, int radius)
-        {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
-            GraphicsPath path = _generateRoundedRectangle(graphics, rectangle, radius);
-            SmoothingMode old = graphics.SmoothingMode;
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.DrawPath(pen, path);
-            graphics.SmoothingMode = old;
-        }
-        private static GraphicsPath _generateRoundedRectangle(Graphics graphics, RectangleF rectangle, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            float diameter = radius * 2.0F;
-            SizeF sizeF = new SizeF(diameter, diameter);
-            RectangleF arc = new RectangleF(rectangle.Location, sizeF);
-
-            path.AddArc(arc, 180, 90);
-            arc.X = rectangle.Right - diameter;
-            path.AddArc(arc, 270, 90);
-            arc.Y = rectangle.Bottom - diameter;
-            path.AddArc(arc, 0, 90);
-            arc.X = rectangle.Left;
-            path.AddArc(arc, 90, 90);
-            path.CloseFigure();
-
-            return path;
-        }
         #endregion
 
         #region ASYNC METHODS
-        private async void Loading()
-        {
-            await Task.Delay(5000);
-            cardBox1Player.FaceUp = true;
-            cardBox2Player.FaceUp = true;
-            textRoundNumber.Text = "1";
-            labelPot.Text = "Pot: 0 Chips";
-            labelPlayerTurn.Text = "Your Turn";
-        }
 
-        private async void Loading(string chips)
+        private async void Loading(string chips, string players)
         {
-            Loading();
+            EnableOrDisablePlayerControls();
+            await Task.Delay(5000);
+            textRoundNumber.Text = game.GetRoundNumber().ToString();
+            labelPot.Text = string.Format("Pot: {0} Chips", game.GetPot());
+
+            CheckPlayerTurn();
+
             await Task.Delay(1500);
             textBoxTotalChips.Text = chips;
+
+            int numOfPlayers = int.Parse(players);
+
+            for (int i = 1; i <= numOfPlayers; i++)
+            {
+                List<Card> userCards = new List<Card>
+                {
+                    deck.GetCard(),
+                    deck.GetCard()
+                };
+                Player user = new Player(i, userCards, 1000);
+                SetPlayerCards(userCards, user.GetId());
+                allPlayers.Add(user);
+            }
+            game.SetPlayers(allPlayers);
+
+            cardBox1Player.FaceUp = true;
+            cardBox2Player.FaceUp = true;
+            EnableOrDisablePlayerControls();
         }
         #endregion
 
-        #region EVENT HANDLERS
-        private void TexasHoldEm_Paint(object sender, PaintEventArgs e)
+        #region PUBLIC METHODS
+        public void SetPlayerCards(List<Card> cards, int id)
         {
-            using (Pen pen = new Pen(labelPot.BackColor, 6.0f))
+            if (id == 1)
             {
-                _drawRoundedRectangle(e.Graphics, pen, labelPot.Location.X - 1, labelPot.Location.Y - 1, labelPot.ClientRectangle.Width + 1, labelPot.ClientRectangle.Height + 1, 10);
+                SetCardBox(cardBox1Player, cards[0]);
+                SetCardBox(cardBox2Player, cards[1]);
+            }
+            else if (id == 2)
+            {
+                SetCardBox(cardBox1Bot1, cards[0]);
+                SetCardBox(cardBox2Bot1, cards[1]);
+            }
+            else if (id == 3)
+            {
+                SetCardBox(cardBox1Bot2, cards[0]);
+                SetCardBox(cardBox2Bot2, cards[1]);
+            }
+            else if (id == 4)
+            {
+                SetCardBox(cardBox1Bot3, cards[0]);
+                SetCardBox(cardBox2Bot3, cards[1]);
+            }
+
+        }
+        
+        public void SetMiddleCards()
+        {
+            deck.Shuffle();
+            SetCardBox(cardBoxMiddle1, deck.GetCard());
+            SetCardBox(cardBoxMiddle2, deck.GetCard());
+            SetCardBox(cardBoxMiddle3, deck.GetCard());
+            SetCardBox(cardBoxMiddle4, deck.GetCard());
+            SetCardBox(cardBoxMiddle5, deck.GetCard());
+
+        }
+
+        public void CheckPlayerTurn()
+        {
+            if (game.GetPlayerTurn() == 1)
+            {
+                labelPlayerTurn.Text = "Your Turn";
+            }
+            else
+            {
+                labelPlayerTurn.Text = string.Format("Bot {0}'s Turn", game.GetPlayerTurn());
             }
         }
 
+        Timer bot1Timer;
+        Timer bot2Timer;
+        Timer bot3Timer;
+
+        #endregion
+
+        #region PRIVATE METHODS
+        private void Bot1Turn()
+        {
+            if (bot1Timer != null)
+            {
+                bot1Timer.Stop();
+                bot1Timer.Dispose();
+                bot1Timer = null;
+            }
+
+            allPlayers[1].Check();
+            game.NextTurn();
+            CheckPlayerTurn();
+            
+            EnableOrDisablePlayerControls();
+
+            OpenMiddleCard();   
+        }
+
+        private void Bot2Turn()
+        {
+            if (bot2Timer != null)
+            {
+                bot2Timer.Stop();
+                bot2Timer.Dispose();
+                bot2Timer = null;
+            }
+
+            allPlayers[2].Check();
+            game.NextTurn();
+            CheckPlayerTurn();
+
+            EnableOrDisablePlayerControls();
+
+            OpenMiddleCard();
+        }
+
+        private void Bot3Turn()
+        {
+            if (bot3Timer != null)
+            {
+                bot3Timer.Stop();
+                bot3Timer.Dispose();
+                bot3Timer = null;
+            }
+
+            allPlayers[3].Check();
+            game.NextTurn();
+            CheckPlayerTurn();
+
+            EnableOrDisablePlayerControls();
+
+            OpenMiddleCard();
+        }
+
+        private void EnableOrDisablePlayerControls()
+        {
+            buttonCheck.Enabled = !buttonCheck.Enabled;
+            buttonCall.Enabled = !buttonCall.Enabled;
+            buttonFold.Enabled = !buttonFold.Enabled;
+            buttonRaise.Enabled = !buttonRaise.Enabled;
+        }
+
+        private void SetCardBox(UserControl userControl, Card card)
+        {
+            CardBox.CardBox cardBox = userControl as CardBox.CardBox;
+
+            cardBox.Suit = card.Suit;
+            cardBox.Rank = card.Rank;
+        }
+
+        private void OpenMiddleCard()
+        {
+            if (game.RevealCard())
+            {
+                if (!cardBoxMiddle1.FaceUp)
+                {
+                    cardBoxMiddle1.FaceUp = true;
+                    cardBoxMiddle2.FaceUp = true;
+                    cardBoxMiddle3.FaceUp = true;
+                    game.NextRound();
+                    textRoundNumber.Text = game.GetRoundNumber().ToString();
+                }
+                else if (!cardBoxMiddle4.FaceUp)
+                {
+                    cardBoxMiddle4.FaceUp = true;
+                    game.NextRound();
+                    textRoundNumber.Text = game.GetRoundNumber().ToString();
+                }
+                else if (!cardBoxMiddle5.FaceUp)
+                {
+                    cardBoxMiddle5.FaceUp = true;
+                    game.NextRound();
+                    textRoundNumber.Text = game.GetRoundNumber().ToString();
+                }
+                foreach (Player p in allPlayers)
+                {
+                    p.SetCheck(false);
+                }
+            }
+        }
+        #endregion 
+
+        #region EVENT HANDLERS
+
+        private void buttonCheck_Click(object sender, EventArgs e)
+        {
+            allPlayers[0].Check();
+            game.NextTurn();
+            CheckPlayerTurn();
+            EnableOrDisablePlayerControls();
+            bot1Timer = new Timer() { Interval = 5000 };
+
+            bot1Timer.Tick += (s, ea) => Bot1Turn();
+            bot1Timer.Start();
+
+            if (allPlayers.Count >= 3)
+            {
+                bot2Timer = new Timer() { Interval = 10000 };
+                bot2Timer.Tick += (s, ea) => Bot2Turn();
+                bot2Timer.Start();
+                if (allPlayers.Count == 4)
+                {
+                    bot3Timer = new Timer() { Interval = 15000 };
+                    bot3Timer.Tick += (s, ea) => Bot3Turn();
+                    bot3Timer.Start();
+                }
+            }
+        }
         #endregion
     }
 }

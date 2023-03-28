@@ -39,7 +39,13 @@ namespace CardLibrary
                 cards[k] = cards[n];
                 cards[n] = card;
             }
+        }
 
+        public Card GetCard()
+        {
+            Card topCard = cards[0];
+            cards.RemoveAt(0);
+            return topCard;
         }
     }
 }
