@@ -64,5 +64,10 @@ namespace CardLibrary
         {
             isCheck = check;
         }
+
+        public void SetCards(List<Card> cards)
+        {
+            this.cards = cards;
+        }
     }
 }

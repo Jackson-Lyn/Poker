@@ -35,8 +35,8 @@ namespace PokerGame
 
             if (numOfPlayers == 2)
             {
-                cardBox1Bot1.Visible = false;
-                cardBox2Bot1.Visible = false;
+                cardBox1Bot2.Visible = false;
+                cardBox2Bot2.Visible = false;
                 cardBox1Bot3.Visible = false;
                 cardBox2Bot3.Visible = false;
             }
@@ -89,6 +89,63 @@ namespace PokerGame
 
             cardBox1Player.FaceUp = true;
             cardBox2Player.FaceUp = true;
+            EnableOrDisablePlayerControls();
+        }
+
+        private void FaceDownAllCards()
+        {
+            cardBox1Player.FaceUp = false;
+            cardBox2Player.FaceUp = false;
+            cardBox1Bot2.FaceUp = false;
+            cardBox2Bot2.FaceUp = false;
+            cardBox1Bot1.FaceUp = false;
+            cardBox2Bot1.FaceUp = false;
+            cardBox1Bot3.FaceUp = false;
+            cardBox2Bot3.FaceUp = false;
+            cardBoxMiddle1.FaceUp = false;
+            cardBoxMiddle2.FaceUp = false;
+            cardBoxMiddle3.FaceUp = false;
+            cardBoxMiddle4.FaceUp = false;
+            cardBoxMiddle5.FaceUp = false;
+        }
+
+        private void FaceUpAllCards()
+        {
+            cardBox1Bot2.FaceUp = true;
+            cardBox2Bot2.FaceUp = true;
+            cardBox1Bot1.FaceUp = true;
+            cardBox2Bot1.FaceUp = true;
+            cardBox1Bot3.FaceUp = true;
+            cardBox2Bot3.FaceUp = true;
+        }
+
+        private async void EndAndNextRound()
+        {
+            EnableOrDisablePlayerControls();
+            FaceUpAllCards();
+            game.NextRound();
+            labelPlayerTurn.Text = "Loading Next Round";
+            textRoundNumber.Text = game.GetRoundNumber().ToString();
+            await Task.Delay(5000);
+            FaceDownAllCards();
+            deck = new Deck();
+            deck.Shuffle();
+            await Task.Delay(5000);
+
+            for (int i = 1; i <= game.GetPlayers().Count; i++)
+            {
+                List<Card> userCards = new List<Card>
+                {
+                    deck.GetCard(),
+                    deck.GetCard()
+                };
+                allPlayers[i - 1].SetCards(userCards);
+                SetPlayerCards(userCards, allPlayers[i-1].GetId());
+            }
+            SetMiddleCards();
+            cardBox1Player.FaceUp = true;
+            cardBox2Player.FaceUp = true;
+            CheckPlayerTurn();
             EnableOrDisablePlayerControls();
         }
         #endregion
@@ -149,6 +206,7 @@ namespace PokerGame
         #endregion
 
         #region PRIVATE METHODS
+
         private void Bot1Turn()
         {
             if (bot1Timer != null)
@@ -161,8 +219,10 @@ namespace PokerGame
             allPlayers[1].Check();
             game.NextTurn();
             CheckPlayerTurn();
-            
-            EnableOrDisablePlayerControls();
+            if (allPlayers.Count == 2)
+            {
+                EnableOrDisablePlayerControls();
+            }
 
             OpenMiddleCard();   
         }
@@ -179,8 +239,10 @@ namespace PokerGame
             allPlayers[2].Check();
             game.NextTurn();
             CheckPlayerTurn();
-
-            EnableOrDisablePlayerControls();
+            if (allPlayers.Count == 3)
+            {
+                EnableOrDisablePlayerControls();
+            }
 
             OpenMiddleCard();
         }
@@ -197,8 +259,10 @@ namespace PokerGame
             allPlayers[3].Check();
             game.NextTurn();
             CheckPlayerTurn();
-
-            EnableOrDisablePlayerControls();
+            if (allPlayers.Count == 4)
+            {
+                EnableOrDisablePlayerControls();
+            }
 
             OpenMiddleCard();
         }
@@ -228,20 +292,15 @@ namespace PokerGame
                     cardBoxMiddle1.FaceUp = true;
                     cardBoxMiddle2.FaceUp = true;
                     cardBoxMiddle3.FaceUp = true;
-                    game.NextRound();
-                    textRoundNumber.Text = game.GetRoundNumber().ToString();
                 }
                 else if (!cardBoxMiddle4.FaceUp)
                 {
                     cardBoxMiddle4.FaceUp = true;
-                    game.NextRound();
-                    textRoundNumber.Text = game.GetRoundNumber().ToString();
                 }
                 else if (!cardBoxMiddle5.FaceUp)
                 {
                     cardBoxMiddle5.FaceUp = true;
-                    game.NextRound();
-                    textRoundNumber.Text = game.GetRoundNumber().ToString();
+                    EndAndNextRound();
                 }
                 foreach (Player p in allPlayers)
                 {
@@ -262,6 +321,7 @@ namespace PokerGame
             bot1Timer = new Timer() { Interval = 5000 };
 
             bot1Timer.Tick += (s, ea) => Bot1Turn();
+
             bot1Timer.Start();
 
             if (allPlayers.Count >= 3)

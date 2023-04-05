@@ -43,10 +43,10 @@
             this.buttonCheck = new System.Windows.Forms.Button();
             this.cardBox2Bot3 = new CardBox.CardBox();
             this.cardBox1Bot3 = new CardBox.CardBox();
-            this.cardBox2Bot2 = new CardBox.CardBox();
-            this.cardBox1Bot2 = new CardBox.CardBox();
             this.cardBox2Bot1 = new CardBox.CardBox();
             this.cardBox1Bot1 = new CardBox.CardBox();
+            this.cardBox2Bot2 = new CardBox.CardBox();
+            this.cardBox1Bot2 = new CardBox.CardBox();
             this.cardBoxMiddle5 = new CardBox.CardBox();
             this.cardBoxMiddle4 = new CardBox.CardBox();
             this.cardBoxMiddle3 = new CardBox.CardBox();
@@ -206,49 +206,49 @@
             this.cardBox1Bot3.Suit = CardLibrary.Suit.Spades;
             this.cardBox1Bot3.TabIndex = 37;
             // 
-            // cardBox2Bot2
-            // 
-            this.cardBox2Bot2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
-            this.cardBox2Bot2.FaceUp = false;
-            this.cardBox2Bot2.Location = new System.Drawing.Point(655, -32);
-            this.cardBox2Bot2.Name = "cardBox2Bot2";
-            this.cardBox2Bot2.Rank = CardLibrary.Rank.Ace;
-            this.cardBox2Bot2.Size = new System.Drawing.Size(113, 146);
-            this.cardBox2Bot2.Suit = CardLibrary.Suit.Spades;
-            this.cardBox2Bot2.TabIndex = 36;
-            // 
-            // cardBox1Bot2
-            // 
-            this.cardBox1Bot2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
-            this.cardBox1Bot2.FaceUp = false;
-            this.cardBox1Bot2.Location = new System.Drawing.Point(534, -32);
-            this.cardBox1Bot2.Name = "cardBox1Bot2";
-            this.cardBox1Bot2.Rank = CardLibrary.Rank.Ace;
-            this.cardBox1Bot2.Size = new System.Drawing.Size(113, 146);
-            this.cardBox1Bot2.Suit = CardLibrary.Suit.Spades;
-            this.cardBox1Bot2.TabIndex = 35;
-            // 
             // cardBox2Bot1
             // 
-            this.cardBox2Bot1.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox2Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox2Bot1.FaceUp = false;
-            this.cardBox2Bot1.Location = new System.Drawing.Point(-24, 212);
+            this.cardBox2Bot1.Location = new System.Drawing.Point(655, -32);
             this.cardBox2Bot1.Name = "cardBox2Bot1";
             this.cardBox2Bot1.Rank = CardLibrary.Rank.Ace;
-            this.cardBox2Bot1.Size = new System.Drawing.Size(146, 113);
+            this.cardBox2Bot1.Size = new System.Drawing.Size(113, 146);
             this.cardBox2Bot1.Suit = CardLibrary.Suit.Spades;
-            this.cardBox2Bot1.TabIndex = 34;
+            this.cardBox2Bot1.TabIndex = 36;
             // 
             // cardBox1Bot1
             // 
-            this.cardBox1Bot1.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox1Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox1Bot1.FaceUp = false;
-            this.cardBox1Bot1.Location = new System.Drawing.Point(-24, 331);
+            this.cardBox1Bot1.Location = new System.Drawing.Point(534, -32);
             this.cardBox1Bot1.Name = "cardBox1Bot1";
             this.cardBox1Bot1.Rank = CardLibrary.Rank.Ace;
-            this.cardBox1Bot1.Size = new System.Drawing.Size(146, 113);
+            this.cardBox1Bot1.Size = new System.Drawing.Size(113, 146);
             this.cardBox1Bot1.Suit = CardLibrary.Suit.Spades;
-            this.cardBox1Bot1.TabIndex = 33;
+            this.cardBox1Bot1.TabIndex = 35;
+            // 
+            // cardBox2Bot2
+            // 
+            this.cardBox2Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox2Bot2.FaceUp = false;
+            this.cardBox2Bot2.Location = new System.Drawing.Point(-24, 212);
+            this.cardBox2Bot2.Name = "cardBox2Bot2";
+            this.cardBox2Bot2.Rank = CardLibrary.Rank.Ace;
+            this.cardBox2Bot2.Size = new System.Drawing.Size(146, 113);
+            this.cardBox2Bot2.Suit = CardLibrary.Suit.Spades;
+            this.cardBox2Bot2.TabIndex = 34;
+            // 
+            // cardBox1Bot2
+            // 
+            this.cardBox1Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
+            this.cardBox1Bot2.FaceUp = false;
+            this.cardBox1Bot2.Location = new System.Drawing.Point(-24, 331);
+            this.cardBox1Bot2.Name = "cardBox1Bot2";
+            this.cardBox1Bot2.Rank = CardLibrary.Rank.Ace;
+            this.cardBox1Bot2.Size = new System.Drawing.Size(146, 113);
+            this.cardBox1Bot2.Suit = CardLibrary.Suit.Spades;
+            this.cardBox1Bot2.TabIndex = 33;
             // 
             // cardBoxMiddle5
             // 
@@ -334,10 +334,10 @@
             this.ClientSize = new System.Drawing.Size(1331, 673);
             this.Controls.Add(this.cardBox2Bot3);
             this.Controls.Add(this.cardBox1Bot3);
-            this.Controls.Add(this.cardBox2Bot2);
-            this.Controls.Add(this.cardBox1Bot2);
             this.Controls.Add(this.cardBox2Bot1);
             this.Controls.Add(this.cardBox1Bot1);
+            this.Controls.Add(this.cardBox2Bot2);
+            this.Controls.Add(this.cardBox1Bot2);
             this.Controls.Add(this.cardBoxMiddle5);
             this.Controls.Add(this.cardBoxMiddle4);
             this.Controls.Add(this.cardBoxMiddle3);
@@ -394,10 +394,10 @@
         private CardBox.CardBox cardBoxMiddle3;
         private CardBox.CardBox cardBoxMiddle4;
         private CardBox.CardBox cardBoxMiddle5;
-        private CardBox.CardBox cardBox1Bot1;
-        private CardBox.CardBox cardBox2Bot1;
         private CardBox.CardBox cardBox1Bot2;
         private CardBox.CardBox cardBox2Bot2;
+        private CardBox.CardBox cardBox1Bot1;
+        private CardBox.CardBox cardBox2Bot1;
         private CardBox.CardBox cardBox1Bot3;
         private CardBox.CardBox cardBox2Bot3;
     }

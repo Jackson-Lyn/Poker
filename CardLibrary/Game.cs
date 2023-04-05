@@ -52,6 +52,11 @@ namespace CardLibrary
         {
             return this.playerTurn;
         }
+        
+        public List<Player> GetPlayers()
+        {
+            return this.players;    
+        }
 
         public void NextRound()
         {
