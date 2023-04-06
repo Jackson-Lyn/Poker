@@ -13,6 +13,7 @@ namespace CardLibrary
         private List<Player> players { get; set; }
         private int pot { get; set; }
         private int playerTurn { get; set; }
+        private int numberOfPlayers { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -21,7 +22,8 @@ namespace CardLibrary
             this.round = 1;
             this.pot = 0;
             this.players = new List<Player>();
-            this.playerTurn = 1;
+            this.playerTurn = 0;
+            this.numberOfPlayers = players.Count;
         }
 
         public Game(List<Player> players)
@@ -29,7 +31,8 @@ namespace CardLibrary
             this.round = 1;
             this.pot = 0;
             this.players = players;
-            this.playerTurn = 1;
+            this.playerTurn = 0;
+            this.numberOfPlayers = players.Count;
         }
         #endregion
 
@@ -37,6 +40,16 @@ namespace CardLibrary
         {
             this.players = players;
         }
+
+        public void SetNumberOfPlayers(int number)
+        {
+            this.numberOfPlayers = number;
+        }
+        public int GetNumberOfPlayers()
+        {
+            return this.numberOfPlayers;
+        }
+
 
         public int GetRoundNumber()
         {
@@ -65,13 +78,21 @@ namespace CardLibrary
 
         public void NextTurn()
         {
-            if (playerTurn == players.Count)
+            if (playerTurn == players.Count-1)
             {
-                playerTurn = 1;
+                playerTurn = players[0].GetId();
+                if (players[playerTurn].GetFold())
+                {
+                    playerTurn++;
+                }
             }
             else
             {
                 playerTurn++;
+                if (players[playerTurn].GetFold())
+                {
+                    playerTurn++;
+                }
             }
         }
 
@@ -85,9 +106,12 @@ namespace CardLibrary
             bool check = true;
             foreach (Player p in this.players)
             {
-                if (p.GetCheck() == false)
+                if (!p.GetFold())
                 {
-                    check = false;
+                    if (p.GetCheck() == false)
+                    {
+                        check = false;
+                    }
                 }
             }
 

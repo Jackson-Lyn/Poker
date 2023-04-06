@@ -67,14 +67,13 @@ namespace PokerGame
             textRoundNumber.Text = game.GetRoundNumber().ToString();
             labelPot.Text = string.Format("Pot: {0} Chips", game.GetPot());
 
-            CheckPlayerTurn();
-
             await Task.Delay(1500);
             textBoxTotalChips.Text = chips;
 
             int numOfPlayers = int.Parse(players);
+            game.SetNumberOfPlayers(numOfPlayers);
 
-            for (int i = 1; i <= numOfPlayers; i++)
+            for (int i = 0; i < numOfPlayers; i++)
             {
                 List<Card> userCards = new List<Card>
                 {
@@ -86,6 +85,8 @@ namespace PokerGame
                 allPlayers.Add(user);
             }
             game.SetPlayers(allPlayers);
+
+            CheckPlayerTurn();
 
             cardBox1Player.FaceUp = true;
             cardBox2Player.FaceUp = true;
@@ -132,15 +133,15 @@ namespace PokerGame
             deck.Shuffle();
             await Task.Delay(5000);
 
-            for (int i = 1; i <= game.GetPlayers().Count; i++)
+            for (int i = 0; i <= game.GetPlayers().Count; i++)
             {
                 List<Card> userCards = new List<Card>
                 {
                     deck.GetCard(),
                     deck.GetCard()
                 };
-                allPlayers[i - 1].SetCards(userCards);
-                SetPlayerCards(userCards, allPlayers[i-1].GetId());
+                allPlayers[i].SetCards(userCards);
+                SetPlayerCards(userCards, allPlayers[i].GetId());
             }
             SetMiddleCards();
             cardBox1Player.FaceUp = true;
@@ -153,22 +154,22 @@ namespace PokerGame
         #region PUBLIC METHODS
         public void SetPlayerCards(List<Card> cards, int id)
         {
-            if (id == 1)
+            if (id == 0)
             {
                 SetCardBox(cardBox1Player, cards[0]);
                 SetCardBox(cardBox2Player, cards[1]);
             }
-            else if (id == 2)
+            else if (id == 1)
             {
                 SetCardBox(cardBox1Bot1, cards[0]);
                 SetCardBox(cardBox2Bot1, cards[1]);
             }
-            else if (id == 3)
+            else if (id == 2)
             {
                 SetCardBox(cardBox1Bot2, cards[0]);
                 SetCardBox(cardBox2Bot2, cards[1]);
             }
-            else if (id == 4)
+            else if (id == 3)
             {
                 SetCardBox(cardBox1Bot3, cards[0]);
                 SetCardBox(cardBox2Bot3, cards[1]);
@@ -189,13 +190,13 @@ namespace PokerGame
 
         public void CheckPlayerTurn()
         {
-            if (game.GetPlayerTurn() == 1)
+            if (game.GetPlayerTurn() == 0)
             {
                 labelPlayerTurn.Text = "Your Turn";
             }
             else
             {
-                labelPlayerTurn.Text = string.Format("Bot {0}'s Turn", game.GetPlayerTurn());
+                labelPlayerTurn.Text = string.Format("Bot {0}'s Turn", game.GetPlayers()[game.GetPlayerTurn()].GetId());
             }
         }
 
@@ -206,7 +207,27 @@ namespace PokerGame
         #endregion
 
         #region PRIVATE METHODS
+        private void InitiateBot()
+        {
+            bot1Timer = new Timer() { Interval = 5000 };
 
+            bot1Timer.Tick += (s, ea) => Bot1Turn();
+
+            bot1Timer.Start();
+
+            if (game.GetNumberOfPlayers() >= 3)
+            {
+                bot2Timer = new Timer() { Interval = 10000 };
+                bot2Timer.Tick += (s, ea) => Bot2Turn();
+                bot2Timer.Start();
+                if (game.GetNumberOfPlayers() == 4)
+                {
+                    bot3Timer = new Timer() { Interval = 15000 };
+                    bot3Timer.Tick += (s, ea) => Bot3Turn();
+                    bot3Timer.Start();
+                }
+            }
+        }
         private void Bot1Turn()
         {
             if (bot1Timer != null)
@@ -216,15 +237,22 @@ namespace PokerGame
                 bot1Timer = null;
             }
 
-            allPlayers[1].Check();
-            game.NextTurn();
-            CheckPlayerTurn();
-            if (allPlayers.Count == 2)
+            if (allPlayers[1].GetFold())
             {
-                EnableOrDisablePlayerControls();
+                game.NextTurn();
+            }
+            else
+            {
+                allPlayers[1].Check();
+                game.NextTurn();
+                CheckPlayerTurn();
+                if (allPlayers.Count == 2)
+                {
+                    EnableOrDisablePlayerControls();
+                }
+                OpenMiddleCard();
             }
 
-            OpenMiddleCard();   
         }
 
         private void Bot2Turn()
@@ -236,15 +264,22 @@ namespace PokerGame
                 bot2Timer = null;
             }
 
-            allPlayers[2].Check();
-            game.NextTurn();
-            CheckPlayerTurn();
-            if (allPlayers.Count == 3)
+            if (allPlayers[2].GetFold())
             {
-                EnableOrDisablePlayerControls();
+                game.NextTurn();
             }
+            else
+            {
+                allPlayers[2].Check();
+                game.NextTurn();
+                CheckPlayerTurn();
+                if (allPlayers.Count == 3)
+                {
+                    EnableOrDisablePlayerControls();
+                }
 
-            OpenMiddleCard();
+                OpenMiddleCard();
+            }
         }
 
         private void Bot3Turn()
@@ -256,15 +291,25 @@ namespace PokerGame
                 bot3Timer = null;
             }
 
-            allPlayers[3].Check();
-            game.NextTurn();
-            CheckPlayerTurn();
-            if (allPlayers.Count == 4)
+            if (allPlayers[3].GetFold())
             {
-                EnableOrDisablePlayerControls();
+                game.NextTurn();
             }
+            else
+            {
+                allPlayers[3].Check();
+                game.NextTurn();
+                CheckPlayerTurn();
+                if (allPlayers.Count == 4)
+                {
+                    if (!allPlayers[0].GetFold())
+                    {
+                        EnableOrDisablePlayerControls();
+                    }
+                }
 
-            OpenMiddleCard();
+                OpenMiddleCard();
+            }
         }
 
         private void EnableOrDisablePlayerControls()
@@ -318,25 +363,24 @@ namespace PokerGame
             game.NextTurn();
             CheckPlayerTurn();
             EnableOrDisablePlayerControls();
-            bot1Timer = new Timer() { Interval = 5000 };
 
-            bot1Timer.Tick += (s, ea) => Bot1Turn();
+            InitiateBot();
+        }
 
-            bot1Timer.Start();
+        private void buttonFold_Click(object sender, EventArgs e)
+        {
+            allPlayers[0].Fold();
 
-            if (allPlayers.Count >= 3)
-            {
-                bot2Timer = new Timer() { Interval = 10000 };
-                bot2Timer.Tick += (s, ea) => Bot2Turn();
-                bot2Timer.Start();
-                if (allPlayers.Count == 4)
-                {
-                    bot3Timer = new Timer() { Interval = 15000 };
-                    bot3Timer.Tick += (s, ea) => Bot3Turn();
-                    bot3Timer.Start();
-                }
-            }
+            cardBox1Player.FaceUp = false;
+            cardBox2Player.FaceUp = false;
+
+            game.NextTurn();
+            CheckPlayerTurn();
+            EnableOrDisablePlayerControls();
+
+            InitiateBot();
         }
         #endregion
+
     }
 }

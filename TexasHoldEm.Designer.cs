@@ -96,6 +96,7 @@
             this.buttonFold.TabIndex = 3;
             this.buttonFold.Text = "Fold";
             this.buttonFold.UseVisualStyleBackColor = true;
+            this.buttonFold.Click += new System.EventHandler(this.buttonFold_Click);
             // 
             // textBoxTotalChips
             // 

@@ -13,6 +13,7 @@ namespace CardLibrary
         private List<Card> cards { get; set; }
         private int chips { get; set; }
         private bool isCheck { get; set; }
+        private bool isFold { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -22,6 +23,7 @@ namespace CardLibrary
             cards = new List<Card>();
             chips = 0;
             isCheck = false;
+            isFold = false;
         }
 
         public Player(int id, List<Card> cards, int chips)
@@ -29,6 +31,8 @@ namespace CardLibrary
             this.id = id;
             this.cards = cards;
             this.chips = chips;
+            isCheck = false;
+            isFold = false;
         }
         #endregion
 
@@ -44,6 +48,7 @@ namespace CardLibrary
 
         public void Fold()
         {
+            isFold = true;
             foreach (Card card in cards)
             {
                 card.FaceUp = false;
@@ -58,6 +63,11 @@ namespace CardLibrary
         public bool GetCheck()
         {
             return isCheck;
+        }
+
+        public bool GetFold()
+        {
+            return isFold;
         }
 
         public void SetCheck(bool check)
