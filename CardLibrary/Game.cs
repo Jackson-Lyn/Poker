@@ -41,6 +41,11 @@ namespace CardLibrary
             this.players = players;
         }
 
+        public void SetPlayerTurn(int turn)
+        {
+            this.playerTurn = turn;
+        }
+
         public void SetNumberOfPlayers(int number)
         {
             this.numberOfPlayers = number;

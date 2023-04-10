@@ -83,7 +83,10 @@ namespace CardLibrary
             this.cards = cards;
         }
 
-
+        public void SetFold(bool fold)
+        {
+            this.isFold = fold;
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

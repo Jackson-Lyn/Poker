@@ -122,7 +122,10 @@ namespace PokerGame
 
         private async void EndAndNextRound()
         {
-            EnableOrDisablePlayerControls();
+            if (buttonCall.Enabled)
+            {
+                EnableOrDisablePlayerControls();
+            }
             FaceUpAllCards();
             game.NextRound();
             labelPlayerTurn.Text = "Loading Next Round";
@@ -131,9 +134,14 @@ namespace PokerGame
             FaceDownAllCards();
             deck = new Deck();
             deck.Shuffle();
+            foreach (Player p in allPlayers)
+            {
+                p.SetFold(false);
+                p.SetCheck(false);
+            }
             await Task.Delay(5000);
 
-            for (int i = 0; i <= game.GetPlayers().Count; i++)
+            for (int i = 0; i < game.GetPlayers().Count; i++)
             {
                 List<Card> userCards = new List<Card>
                 {
@@ -146,8 +154,12 @@ namespace PokerGame
             SetMiddleCards();
             cardBox1Player.FaceUp = true;
             cardBox2Player.FaceUp = true;
+            game.SetPlayerTurn(0);
             CheckPlayerTurn();
-            EnableOrDisablePlayerControls();
+            if (!buttonCall.Enabled)
+            {
+                EnableOrDisablePlayerControls();
+            }
         }
         #endregion
 
@@ -367,7 +379,7 @@ namespace PokerGame
             InitiateBot();
         }
 
-        private void buttonFold_Click(object sender, EventArgs e)
+        private async void buttonFold_Click(object sender, EventArgs e)
         {
             allPlayers[0].Fold();
 
@@ -378,7 +390,11 @@ namespace PokerGame
             CheckPlayerTurn();
             EnableOrDisablePlayerControls();
 
-            InitiateBot();
+            while (!cardBoxMiddle5.FaceUp)
+            {
+                InitiateBot();
+                await Task.Delay(15000);
+            }
         }
         #endregion
 
