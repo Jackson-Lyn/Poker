@@ -48,5 +48,16 @@ namespace PokerGame
             buttonTexas.Enabled = false;
             buttonFiveCard.Enabled = false;
         }
+
+        /**
+         * Show the help window.
+         * 
+         * <param name="e"></param>
+         * <param name="sender"></param>
+         */
+        private void ShowHelp(object sender, EventArgs e)
+        {
+            new MenuHelp().Show();
+        }
     }
 }
