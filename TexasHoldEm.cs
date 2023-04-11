@@ -12,6 +12,7 @@ using System.Reflection.Emit;
 using CardLibrary;
 using CardBox;
 using System.Security.AccessControl;
+using System.Diagnostics.PerformanceData;
 
 namespace PokerGame
 {
@@ -20,6 +21,13 @@ namespace PokerGame
         Game game = new Game();
         List<Player> allPlayers = new List<Player>();
         Deck deck = new Deck();
+
+        const int TWO_PLAYERS = 2;
+        const int THREE_PLAYERS = 3;
+        const int FOUR_PLAYERS = 4;
+
+        const int ONE_HALF_SECOND = 1500;
+        const int FIVE_SECONDS = 5000;
         #region CONSTRUCTORS
         public TexasHoldEm()
         {
@@ -33,14 +41,14 @@ namespace PokerGame
             SetMiddleCards();
             int numOfPlayers = int.Parse(players);
 
-            if (numOfPlayers == 2)
+            if (numOfPlayers == TWO_PLAYERS)
             {
                 cardBox1Bot2.Visible = false;
                 cardBox2Bot2.Visible = false;
                 cardBox1Bot3.Visible = false;
                 cardBox2Bot3.Visible = false;
             }
-            else if (numOfPlayers == 3)
+            else if (numOfPlayers == THREE_PLAYERS)
             {
                 cardBox1Bot3.Visible = false;
                 cardBox2Bot3.Visible = false;
@@ -62,12 +70,12 @@ namespace PokerGame
 
         private async void Loading(string chips, string players)
         {
-            EnableOrDisablePlayerControls();
-            await Task.Delay(5000);
+            DisablePlayerControls();
+            await Task.Delay(FIVE_SECONDS);
             textRoundNumber.Text = game.GetRoundNumber().ToString();
             labelPot.Text = string.Format("Pot: {0} Chips", game.GetPot());
 
-            await Task.Delay(1500);
+            await Task.Delay(ONE_HALF_SECOND);
             textBoxTotalChips.Text = chips;
 
             int numOfPlayers = int.Parse(players);
@@ -80,7 +88,7 @@ namespace PokerGame
                     deck.GetCard(),
                     deck.GetCard()
                 };
-                Player user = new Player(i, userCards, 1000);
+                Player user = new Player(i, userCards, int.Parse(chips));
                 SetPlayerCards(userCards, user.GetId());
                 allPlayers.Add(user);
             }
@@ -90,7 +98,7 @@ namespace PokerGame
 
             cardBox1Player.FaceUp = true;
             cardBox2Player.FaceUp = true;
-            EnableOrDisablePlayerControls();
+            EnablePlayerControls();
         }
 
         private void FaceDownAllCards()
@@ -122,24 +130,21 @@ namespace PokerGame
 
         private async void EndAndNextRound()
         {
-            if (buttonCall.Enabled)
-            {
-                EnableOrDisablePlayerControls();
-            }
+            DisablePlayerControls();
             FaceUpAllCards();
             game.NextRound();
             labelPlayerTurn.Text = "Loading Next Round";
             textRoundNumber.Text = game.GetRoundNumber().ToString();
-            await Task.Delay(5000);
+            await Task.Delay(FIVE_SECONDS);
             FaceDownAllCards();
             deck = new Deck();
             deck.Shuffle();
             foreach (Player p in allPlayers)
             {
-                p.SetFold(false);
-                p.SetCheck(false);
+                p.UnFold();
+                p.UnCheck();
             }
-            await Task.Delay(5000);
+            await Task.Delay(FIVE_SECONDS);
 
             for (int i = 0; i < game.GetPlayers().Count; i++)
             {
@@ -156,10 +161,8 @@ namespace PokerGame
             cardBox2Player.FaceUp = true;
             game.SetPlayerTurn(0);
             CheckPlayerTurn();
-            if (!buttonCall.Enabled)
-            {
-                EnableOrDisablePlayerControls();
-            }
+
+            EnablePlayerControls();
         }
         #endregion
 
@@ -221,20 +224,20 @@ namespace PokerGame
         #region PRIVATE METHODS
         private void InitiateBot()
         {
-            bot1Timer = new Timer() { Interval = 5000 };
+            bot1Timer = new Timer() { Interval = FIVE_SECONDS };
 
             bot1Timer.Tick += (s, ea) => Bot1Turn();
 
             bot1Timer.Start();
 
-            if (game.GetNumberOfPlayers() >= 3)
+            if (game.GetNumberOfPlayers() >= THREE_PLAYERS)
             {
-                bot2Timer = new Timer() { Interval = 10000 };
+                bot2Timer = new Timer() { Interval = FIVE_SECONDS * 2 };
                 bot2Timer.Tick += (s, ea) => Bot2Turn();
                 bot2Timer.Start();
-                if (game.GetNumberOfPlayers() == 4)
+                if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
                 {
-                    bot3Timer = new Timer() { Interval = 15000 };
+                    bot3Timer = new Timer() { Interval = FIVE_SECONDS * 3 };
                     bot3Timer.Tick += (s, ea) => Bot3Turn();
                     bot3Timer.Start();
                 }
@@ -258,9 +261,9 @@ namespace PokerGame
                 allPlayers[1].Check();
                 game.NextTurn();
                 CheckPlayerTurn();
-                if (allPlayers.Count == 2)
+                if (allPlayers.Count == TWO_PLAYERS)
                 {
-                    EnableOrDisablePlayerControls();
+                    EnablePlayerControls();
                 }
                 OpenMiddleCard();
             }
@@ -285,9 +288,9 @@ namespace PokerGame
                 allPlayers[2].Check();
                 game.NextTurn();
                 CheckPlayerTurn();
-                if (allPlayers.Count == 3)
+                if (allPlayers.Count == THREE_PLAYERS)
                 {
-                    EnableOrDisablePlayerControls();
+                    EnablePlayerControls();
                 }
 
                 OpenMiddleCard();
@@ -312,11 +315,11 @@ namespace PokerGame
                 allPlayers[3].Check();
                 game.NextTurn();
                 CheckPlayerTurn();
-                if (allPlayers.Count == 4)
+                if (allPlayers.Count == FOUR_PLAYERS)
                 {
                     if (!allPlayers[0].GetFold())
                     {
-                        EnableOrDisablePlayerControls();
+                        EnablePlayerControls();
                     }
                 }
 
@@ -324,12 +327,20 @@ namespace PokerGame
             }
         }
 
-        private void EnableOrDisablePlayerControls()
+        private void EnablePlayerControls()
         {
-            buttonCheck.Enabled = !buttonCheck.Enabled;
-            buttonCall.Enabled = !buttonCall.Enabled;
-            buttonFold.Enabled = !buttonFold.Enabled;
-            buttonRaise.Enabled = !buttonRaise.Enabled;
+            buttonCheck.Enabled = true;
+            buttonCall.Enabled = true;
+            buttonFold.Enabled = true;
+            buttonRaise.Enabled = true;
+        }
+
+        private void DisablePlayerControls()
+        {
+            buttonCheck.Enabled = false;
+            buttonCall.Enabled = false;
+            buttonFold.Enabled = false;
+            buttonRaise.Enabled = false;
         }
 
         private void SetCardBox(UserControl userControl, Card card)
@@ -361,7 +372,14 @@ namespace PokerGame
                 }
                 foreach (Player p in allPlayers)
                 {
-                    p.SetCheck(false);
+                    p.UnCheck();
+                }
+            }
+            else if (game.GetPlayerTurn() == 0)
+            {
+                foreach (Player p in allPlayers)
+                {
+                    p.UnCheck();
                 }
             }
         }
@@ -374,27 +392,55 @@ namespace PokerGame
             allPlayers[0].Check();
             game.NextTurn();
             CheckPlayerTurn();
-            EnableOrDisablePlayerControls();
+            DisablePlayerControls();
 
             InitiateBot();
         }
 
         private async void buttonFold_Click(object sender, EventArgs e)
         {
-            allPlayers[0].Fold();
+            if (allPlayers[0].GetIsBet())
+            {
+                allPlayers[0].Fold();
 
-            cardBox1Player.FaceUp = false;
-            cardBox2Player.FaceUp = false;
+                cardBox1Player.FaceUp = false;
+                cardBox2Player.FaceUp = false;
+
+                game.NextTurn();
+                CheckPlayerTurn();
+                DisablePlayerControls();
+
+                while (!cardBoxMiddle5.FaceUp)
+                {
+                    InitiateBot();
+                    await Task.Delay(FIVE_SECONDS * 3);
+                }
+            }
+            else
+            {
+                MessageBox.Show("You are unable to fold unless you submit a bet.", "Illegal Move", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonRaise_Click(object sender, EventArgs e)
+        {
+            allPlayers[0].Bet(1000);
+            textBoxTotalChips.Text = allPlayers[0].GetChips().ToString();
+            game.SetIsBetRaised(true);
+            game.AddPot(1000);
+
+            labelPot.Text = "Pot: " + game.GetPot().ToString() + " Chips";
 
             game.NextTurn();
             CheckPlayerTurn();
-            EnableOrDisablePlayerControls();
+            DisablePlayerControls();
 
-            while (!cardBoxMiddle5.FaceUp)
-            {
-                InitiateBot();
-                await Task.Delay(15000);
-            }
+            InitiateBot();
+        }
+
+        private void buttonCall_Click(object sender, EventArgs e)
+        {
+            allPlayers[0].Bet(1000);
         }
         #endregion
 

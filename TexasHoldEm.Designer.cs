@@ -114,6 +114,7 @@
             this.buttonRaise.TabIndex = 5;
             this.buttonRaise.Text = "Raise";
             this.buttonRaise.UseVisualStyleBackColor = true;
+            this.buttonRaise.Click += new System.EventHandler(this.buttonRaise_Click);
             // 
             // buttonCall
             // 
@@ -123,6 +124,7 @@
             this.buttonCall.TabIndex = 6;
             this.buttonCall.Text = "Call";
             this.buttonCall.UseVisualStyleBackColor = true;
+            this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
             // 
             // pictureBoxTitle
             // 

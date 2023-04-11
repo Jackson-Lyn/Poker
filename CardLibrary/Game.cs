@@ -14,6 +14,7 @@ namespace CardLibrary
         private int pot { get; set; }
         private int playerTurn { get; set; }
         private int numberOfPlayers { get; set; }
+        private bool isBetRaised { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -50,6 +51,12 @@ namespace CardLibrary
         {
             this.numberOfPlayers = number;
         }
+
+        public void SetIsBetRaised(bool isBetRaised)
+        {
+            this.isBetRaised = isBetRaised;
+        }
+
         public int GetNumberOfPlayers()
         {
             return this.numberOfPlayers;
@@ -74,6 +81,11 @@ namespace CardLibrary
         public List<Player> GetPlayers()
         {
             return this.players;    
+        }
+
+        public bool GetIsBetRaised()
+        {
+            return this.isBetRaised;
         }
 
         public void NextRound()

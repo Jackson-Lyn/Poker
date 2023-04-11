@@ -15,6 +15,7 @@ namespace CardLibrary
         private int chips { get; set; }
         private bool isCheck { get; set; }
         private bool isFold { get; set; }
+        private bool isBet { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -41,12 +42,28 @@ namespace CardLibrary
 
         public void Check()
         {
-            isCheck = !isCheck;
+            isCheck = true;
+        }
+
+        public void UnCheck()
+        {
+            isCheck = false;
         }
 
         public void Bet(int chipsBet)
         {
+            isBet = true;
             chips -= chipsBet;
+        }
+
+        public void ResetBet()
+        {
+            isBet = false;
+        }
+
+        public bool GetIsBet()
+        {
+            return this.isBet;
         }
 
         public void Fold()
@@ -56,6 +73,11 @@ namespace CardLibrary
             {
                 card.FaceUp = false;
             }
+        }
+
+        public void UnFold()
+        {
+            isFold = false;
         }
 
         public int GetId()
@@ -73,19 +95,14 @@ namespace CardLibrary
             return isFold;
         }
 
-        public void SetCheck(bool check)
+        public int GetChips()
         {
-            isCheck = check;
+            return chips;
         }
 
         public void SetCards(List<Card> cards)
         {
             this.cards = cards;
-        }
-
-        public void SetFold(bool fold)
-        {
-            this.isFold = fold;
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
