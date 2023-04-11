@@ -398,5 +398,11 @@ namespace PokerGame
         }
         #endregion
 
+        private void buttonRaise_Click(object sender, EventArgs e)
+        {
+            RaiseInput raiseForm = new RaiseInput();
+            raiseForm.Show();
+            raiseForm.Focus();
+        }
     }
 }

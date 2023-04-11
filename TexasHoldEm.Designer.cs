@@ -103,7 +103,7 @@
             this.textBoxTotalChips.Location = new System.Drawing.Point(334, 623);
             this.textBoxTotalChips.Name = "textBoxTotalChips";
             this.textBoxTotalChips.ReadOnly = true;
-            this.textBoxTotalChips.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTotalChips.Size = new System.Drawing.Size(100, 20);
             this.textBoxTotalChips.TabIndex = 4;
             // 
             // buttonRaise
@@ -114,6 +114,7 @@
             this.buttonRaise.TabIndex = 5;
             this.buttonRaise.Text = "Raise";
             this.buttonRaise.UseVisualStyleBackColor = true;
+            this.buttonRaise.Click += new System.EventHandler(this.buttonRaise_Click);
             // 
             // buttonCall
             // 
@@ -140,7 +141,7 @@
             this.labelRound.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.labelRound.Location = new System.Drawing.Point(218, 20);
             this.labelRound.Name = "labelRound";
-            this.labelRound.Size = new System.Drawing.Size(111, 29);
+            this.labelRound.Size = new System.Drawing.Size(89, 25);
             this.labelRound.TabIndex = 21;
             this.labelRound.Text = "ROUND:";
             // 
@@ -150,7 +151,7 @@
             this.textRoundNumber.Location = new System.Drawing.Point(335, 20);
             this.textRoundNumber.Name = "textRoundNumber";
             this.textRoundNumber.ReadOnly = true;
-            this.textRoundNumber.Size = new System.Drawing.Size(27, 30);
+            this.textRoundNumber.Size = new System.Drawing.Size(27, 26);
             this.textRoundNumber.TabIndex = 22;
             // 
             // labelPlayerTurn
@@ -160,7 +161,7 @@
             this.labelPlayerTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.labelPlayerTurn.Location = new System.Drawing.Point(218, 59);
             this.labelPlayerTurn.Name = "labelPlayerTurn";
-            this.labelPlayerTurn.Size = new System.Drawing.Size(230, 29);
+            this.labelPlayerTurn.Size = new System.Drawing.Size(181, 25);
             this.labelPlayerTurn.TabIndex = 23;
             this.labelPlayerTurn.Text = "PLAYER X\'s TURN";
             // 
@@ -190,6 +191,7 @@
             this.cardBox2Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox2Bot3.FaceUp = false;
             this.cardBox2Bot3.Location = new System.Drawing.Point(1207, 331);
+            this.cardBox2Bot3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox2Bot3.Name = "cardBox2Bot3";
             this.cardBox2Bot3.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot3.Size = new System.Drawing.Size(146, 113);
@@ -201,6 +203,7 @@
             this.cardBox1Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox1Bot3.FaceUp = false;
             this.cardBox1Bot3.Location = new System.Drawing.Point(1207, 212);
+            this.cardBox1Bot3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox1Bot3.Name = "cardBox1Bot3";
             this.cardBox1Bot3.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot3.Size = new System.Drawing.Size(146, 113);
@@ -212,6 +215,7 @@
             this.cardBox2Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox2Bot1.FaceUp = false;
             this.cardBox2Bot1.Location = new System.Drawing.Point(655, -32);
+            this.cardBox2Bot1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox2Bot1.Name = "cardBox2Bot1";
             this.cardBox2Bot1.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot1.Size = new System.Drawing.Size(113, 146);
@@ -223,6 +227,7 @@
             this.cardBox1Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox1Bot1.FaceUp = false;
             this.cardBox1Bot1.Location = new System.Drawing.Point(534, -32);
+            this.cardBox1Bot1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox1Bot1.Name = "cardBox1Bot1";
             this.cardBox1Bot1.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot1.Size = new System.Drawing.Size(113, 146);
@@ -234,6 +239,7 @@
             this.cardBox2Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox2Bot2.FaceUp = false;
             this.cardBox2Bot2.Location = new System.Drawing.Point(-24, 212);
+            this.cardBox2Bot2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox2Bot2.Name = "cardBox2Bot2";
             this.cardBox2Bot2.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot2.Size = new System.Drawing.Size(146, 113);
@@ -245,6 +251,7 @@
             this.cardBox1Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox1Bot2.FaceUp = false;
             this.cardBox1Bot2.Location = new System.Drawing.Point(-24, 331);
+            this.cardBox1Bot2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox1Bot2.Name = "cardBox1Bot2";
             this.cardBox1Bot2.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot2.Size = new System.Drawing.Size(146, 113);
@@ -256,6 +263,7 @@
             this.cardBoxMiddle5.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle5.FaceUp = false;
             this.cardBoxMiddle5.Location = new System.Drawing.Point(851, 252);
+            this.cardBoxMiddle5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBoxMiddle5.Name = "cardBoxMiddle5";
             this.cardBoxMiddle5.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle5.Size = new System.Drawing.Size(113, 146);
@@ -267,6 +275,7 @@
             this.cardBoxMiddle4.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle4.FaceUp = false;
             this.cardBoxMiddle4.Location = new System.Drawing.Point(732, 252);
+            this.cardBoxMiddle4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBoxMiddle4.Name = "cardBoxMiddle4";
             this.cardBoxMiddle4.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle4.Size = new System.Drawing.Size(113, 146);
@@ -278,6 +287,7 @@
             this.cardBoxMiddle3.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle3.FaceUp = false;
             this.cardBoxMiddle3.Location = new System.Drawing.Point(613, 252);
+            this.cardBoxMiddle3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBoxMiddle3.Name = "cardBoxMiddle3";
             this.cardBoxMiddle3.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle3.Size = new System.Drawing.Size(113, 146);
@@ -289,6 +299,7 @@
             this.cardBoxMiddle2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle2.FaceUp = false;
             this.cardBoxMiddle2.Location = new System.Drawing.Point(494, 252);
+            this.cardBoxMiddle2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBoxMiddle2.Name = "cardBoxMiddle2";
             this.cardBoxMiddle2.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle2.Size = new System.Drawing.Size(113, 146);
@@ -300,6 +311,7 @@
             this.cardBoxMiddle1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle1.FaceUp = false;
             this.cardBoxMiddle1.Location = new System.Drawing.Point(375, 252);
+            this.cardBoxMiddle1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBoxMiddle1.Name = "cardBoxMiddle1";
             this.cardBoxMiddle1.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle1.Size = new System.Drawing.Size(113, 146);
@@ -311,6 +323,7 @@
             this.cardBox1Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox1Player.FaceUp = false;
             this.cardBox1Player.Location = new System.Drawing.Point(534, 515);
+            this.cardBox1Player.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox1Player.Name = "cardBox1Player";
             this.cardBox1Player.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Player.Size = new System.Drawing.Size(113, 146);
@@ -322,6 +335,7 @@
             this.cardBox2Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox2Player.FaceUp = false;
             this.cardBox2Player.Location = new System.Drawing.Point(655, 515);
+            this.cardBox2Player.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cardBox2Player.Name = "cardBox2Player";
             this.cardBox2Player.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Player.Size = new System.Drawing.Size(113, 146);

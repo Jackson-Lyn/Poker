@@ -9,3 +9,14 @@ C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardBox\obj\D
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardBox\obj\Debug\CardBox.csproj.CopyComplete
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardBox\obj\Debug\CardBox.dll
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\CardBox\obj\Debug\CardBox.pdb
+C:\Users\matth\source\repos\Poker\CardBox\bin\Debug\CardBox.dll
+C:\Users\matth\source\repos\Poker\CardBox\bin\Debug\CardBox.pdb
+C:\Users\matth\source\repos\Poker\CardBox\bin\Debug\CardLibrary.dll
+C:\Users\matth\source\repos\Poker\CardBox\bin\Debug\CardLibrary.pdb
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.AssemblyReference.cache
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.CardBox.resources
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.GenerateResource.cache
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.CoreCompileInputs.cache
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.CopyComplete
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.dll
+C:\Users\matth\source\repos\Poker\CardBox\obj\Debug\CardBox.pdb
