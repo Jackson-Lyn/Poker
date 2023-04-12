@@ -105,6 +105,11 @@ namespace CardLibrary
             this.cards = cards;
         }
 
+        public List<Card> GetCards()
+        {
+            return cards;
+        }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -9,7 +9,7 @@ namespace CardLibrary
     public enum HandRanking : byte
     {
         HighCard = 1,
-        OnePair,
+        Pair,
         TwoPair,
         ThreeOfAKind,
         Straight,
@@ -17,6 +17,6 @@ namespace CardLibrary
         FullHouse,
         FourOfAKind,
         StraightFlush,
-        RoyalFlush,
+        RoyalStraightFlush,
     }
 }

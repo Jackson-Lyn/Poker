@@ -60,6 +60,12 @@
     <Compile Include="FiveCard.Designer.cs">
       <DependentUpon>FiveCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="RaiseInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RaiseInput.Designer.cs">
+      <DependentUpon>RaiseInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="TexasHoldEm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     </Compile>
     <EmbeddedResource Include="FiveCard.resx">
       <DependentUpon>FiveCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RaiseInput.resx">
+      <DependentUpon>RaiseInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TexasHoldEm.resx">
       <DependentUpon>TexasHoldEm.cs</DependentUpon>
@@ -114,6 +123,8 @@
     <Content Include="Resources\Clubs_Six.PNG" />
     <Content Include="Resources\Clubs_Ten.PNG" />
     <Content Include="Resources\dealer.png" />
+    <None Include="Resources\dialog.png" />
+    <None Include="Resources\dialog_reverse.png" />
     <Content Include="Resources\Diamonds_Ace.PNG" />
     <Content Include="Resources\Diamonds_Eight.PNG" />
     <Content Include="Resources\Diamonds_Jack.PNG" />

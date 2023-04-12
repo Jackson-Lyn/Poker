@@ -21,13 +21,17 @@ namespace PokerGame
         Game game = new Game();
         List<Player> allPlayers = new List<Player>();
         Deck deck = new Deck();
+        List<Card> middleCards = new List<Card>();
+        DetectHandRanking detect;
 
         const int TWO_PLAYERS = 2;
         const int THREE_PLAYERS = 3;
         const int FOUR_PLAYERS = 4;
 
+        const int ONE_SECOND = 1000;
         const int ONE_HALF_SECOND = 1500;
         const int FIVE_SECONDS = 5000;
+        const int SIX_SECONDS = 6000;
         #region CONSTRUCTORS
         public TexasHoldEm()
         {
@@ -37,6 +41,9 @@ namespace PokerGame
         public TexasHoldEm(string difficulty, string chips, string players)
         {
             InitializeComponent();
+            pictureBoxDialog2.Visible = false;
+            pictureBoxDialog1.Visible = false;
+            pictureBoxDialog3.Visible = false;
             SetPictures();
             SetMiddleCards();
             int numOfPlayers = int.Parse(players);
@@ -63,6 +70,7 @@ namespace PokerGame
             pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
             picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
             picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
+            pictureBoxDialog2.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
         }
         #endregion
 
@@ -194,12 +202,17 @@ namespace PokerGame
         
         public void SetMiddleCards()
         {
+            middleCards.Clear();
             deck.Shuffle();
-            SetCardBox(cardBoxMiddle1, deck.GetCard());
-            SetCardBox(cardBoxMiddle2, deck.GetCard());
-            SetCardBox(cardBoxMiddle3, deck.GetCard());
-            SetCardBox(cardBoxMiddle4, deck.GetCard());
-            SetCardBox(cardBoxMiddle5, deck.GetCard());
+            for (int i = 0; i < 5; i++)
+            {
+                middleCards.Add(deck.GetCard());
+            }
+            SetCardBox(cardBoxMiddle1, middleCards[0]);
+            SetCardBox(cardBoxMiddle2, middleCards[1]);
+            SetCardBox(cardBoxMiddle3, middleCards[2]);
+            SetCardBox(cardBoxMiddle4, middleCards[3]);
+            SetCardBox(cardBoxMiddle5, middleCards[4]);
 
         }
 
@@ -224,7 +237,7 @@ namespace PokerGame
         #region PRIVATE METHODS
         private void InitiateBot()
         {
-            bot1Timer = new Timer() { Interval = FIVE_SECONDS };
+            bot1Timer = new Timer() { Interval = SIX_SECONDS };
 
             bot1Timer.Tick += (s, ea) => Bot1Turn();
 
@@ -232,18 +245,18 @@ namespace PokerGame
 
             if (game.GetNumberOfPlayers() >= THREE_PLAYERS)
             {
-                bot2Timer = new Timer() { Interval = FIVE_SECONDS * 2 };
+                bot2Timer = new Timer() { Interval = SIX_SECONDS * 2 };
                 bot2Timer.Tick += (s, ea) => Bot2Turn();
                 bot2Timer.Start();
                 if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
                 {
-                    bot3Timer = new Timer() { Interval = FIVE_SECONDS * 3 };
+                    bot3Timer = new Timer() { Interval = SIX_SECONDS * 3 };
                     bot3Timer.Tick += (s, ea) => Bot3Turn();
                     bot3Timer.Start();
                 }
             }
         }
-        private void Bot1Turn()
+        private async void Bot1Turn()
         {
             if (bot1Timer != null)
             {
@@ -259,6 +272,11 @@ namespace PokerGame
             else
             {
                 allPlayers[1].Check();
+                pictureBoxDialog1.Visible = true;
+                labelBot1.Text = "Check!";
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog1.Visible = false;
+                labelBot1.Text = string.Empty;
                 game.NextTurn();
                 CheckPlayerTurn();
                 if (allPlayers.Count == TWO_PLAYERS)
@@ -270,7 +288,7 @@ namespace PokerGame
 
         }
 
-        private void Bot2Turn()
+        private async void Bot2Turn()
         {
             if (bot2Timer != null)
             {
@@ -286,6 +304,11 @@ namespace PokerGame
             else
             {
                 allPlayers[2].Check();
+                pictureBoxDialog2.Visible = true;
+                labelBot2.Text = "Check!";
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog2.Visible = false;
+                labelBot2.Text = string.Empty;
                 game.NextTurn();
                 CheckPlayerTurn();
                 if (allPlayers.Count == THREE_PLAYERS)
@@ -297,7 +320,7 @@ namespace PokerGame
             }
         }
 
-        private void Bot3Turn()
+        private async void Bot3Turn()
         {
             if (bot3Timer != null)
             {
@@ -313,6 +336,11 @@ namespace PokerGame
             else
             {
                 allPlayers[3].Check();
+                pictureBoxDialog3.Visible = true;
+                labelBot3.Text = "Check!";
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog3.Visible = false;
+                labelBot3.Text = string.Empty;
                 game.NextTurn();
                 CheckPlayerTurn();
                 if (allPlayers.Count == FOUR_PLAYERS)
@@ -424,18 +452,24 @@ namespace PokerGame
 
         private void buttonRaise_Click(object sender, EventArgs e)
         {
-            allPlayers[0].Bet(1000);
-            textBoxTotalChips.Text = allPlayers[0].GetChips().ToString();
-            game.SetIsBetRaised(true);
-            game.AddPot(1000);
+            using (RaiseInput raiseForm = new RaiseInput(allPlayers[0].GetChips()))
+            {
+                if (raiseForm.ShowDialog() == DialogResult.OK)
+                {
+                    allPlayers[0].Bet(raiseForm.GetChips());
+                    textBoxTotalChips.Text = allPlayers[0].GetChips().ToString();
+                    game.SetIsBetRaised(true);
+                    game.AddPot(raiseForm.GetChips());
 
-            labelPot.Text = "Pot: " + game.GetPot().ToString() + " Chips";
+                    labelPot.Text = "Pot: " + game.GetPot().ToString() + " Chips";
 
-            game.NextTurn();
-            CheckPlayerTurn();
-            DisablePlayerControls();
+                    game.NextTurn();
+                    CheckPlayerTurn();
+                    DisablePlayerControls();
 
-            InitiateBot();
+                    InitiateBot();
+                }
+            }
         }
 
         private void buttonCall_Click(object sender, EventArgs e)
@@ -443,6 +477,5 @@ namespace PokerGame
             allPlayers[0].Bet(1000);
         }
         #endregion
-
     }
 }

@@ -54,9 +54,18 @@
             this.cardBoxMiddle1 = new CardBox.CardBox();
             this.cardBox1Player = new CardBox.CardBox();
             this.cardBox2Player = new CardBox.CardBox();
+            this.pictureBoxDialog2 = new System.Windows.Forms.PictureBox();
+            this.labelBot2 = new System.Windows.Forms.Label();
+            this.pictureBoxDialog1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDialog3 = new System.Windows.Forms.PictureBox();
+            this.labelBot1 = new System.Windows.Forms.Label();
+            this.labelBot3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog3)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonHelp
@@ -192,6 +201,7 @@
             this.cardBox2Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox2Bot3.FaceUp = false;
             this.cardBox2Bot3.Location = new System.Drawing.Point(1207, 331);
+            this.cardBox2Bot3.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox2Bot3.Name = "cardBox2Bot3";
             this.cardBox2Bot3.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot3.Size = new System.Drawing.Size(146, 113);
@@ -203,6 +213,7 @@
             this.cardBox1Bot3.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox1Bot3.FaceUp = false;
             this.cardBox1Bot3.Location = new System.Drawing.Point(1207, 212);
+            this.cardBox1Bot3.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox1Bot3.Name = "cardBox1Bot3";
             this.cardBox1Bot3.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot3.Size = new System.Drawing.Size(146, 113);
@@ -214,6 +225,7 @@
             this.cardBox2Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox2Bot1.FaceUp = false;
             this.cardBox2Bot1.Location = new System.Drawing.Point(655, -32);
+            this.cardBox2Bot1.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox2Bot1.Name = "cardBox2Bot1";
             this.cardBox2Bot1.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot1.Size = new System.Drawing.Size(113, 146);
@@ -225,6 +237,7 @@
             this.cardBox1Bot1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox1Bot1.FaceUp = false;
             this.cardBox1Bot1.Location = new System.Drawing.Point(534, -32);
+            this.cardBox1Bot1.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox1Bot1.Name = "cardBox1Bot1";
             this.cardBox1Bot1.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot1.Size = new System.Drawing.Size(113, 146);
@@ -236,6 +249,7 @@
             this.cardBox2Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox2Bot2.FaceUp = false;
             this.cardBox2Bot2.Location = new System.Drawing.Point(-24, 212);
+            this.cardBox2Bot2.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox2Bot2.Name = "cardBox2Bot2";
             this.cardBox2Bot2.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Bot2.Size = new System.Drawing.Size(146, 113);
@@ -247,6 +261,7 @@
             this.cardBox1Bot2.CardOrientation = System.Windows.Forms.Orientation.Horizontal;
             this.cardBox1Bot2.FaceUp = false;
             this.cardBox1Bot2.Location = new System.Drawing.Point(-24, 331);
+            this.cardBox1Bot2.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox1Bot2.Name = "cardBox1Bot2";
             this.cardBox1Bot2.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Bot2.Size = new System.Drawing.Size(146, 113);
@@ -258,6 +273,7 @@
             this.cardBoxMiddle5.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle5.FaceUp = false;
             this.cardBoxMiddle5.Location = new System.Drawing.Point(851, 252);
+            this.cardBoxMiddle5.Margin = new System.Windows.Forms.Padding(2);
             this.cardBoxMiddle5.Name = "cardBoxMiddle5";
             this.cardBoxMiddle5.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle5.Size = new System.Drawing.Size(113, 146);
@@ -269,6 +285,7 @@
             this.cardBoxMiddle4.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle4.FaceUp = false;
             this.cardBoxMiddle4.Location = new System.Drawing.Point(732, 252);
+            this.cardBoxMiddle4.Margin = new System.Windows.Forms.Padding(2);
             this.cardBoxMiddle4.Name = "cardBoxMiddle4";
             this.cardBoxMiddle4.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle4.Size = new System.Drawing.Size(113, 146);
@@ -280,6 +297,7 @@
             this.cardBoxMiddle3.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle3.FaceUp = false;
             this.cardBoxMiddle3.Location = new System.Drawing.Point(613, 252);
+            this.cardBoxMiddle3.Margin = new System.Windows.Forms.Padding(2);
             this.cardBoxMiddle3.Name = "cardBoxMiddle3";
             this.cardBoxMiddle3.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle3.Size = new System.Drawing.Size(113, 146);
@@ -291,6 +309,7 @@
             this.cardBoxMiddle2.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle2.FaceUp = false;
             this.cardBoxMiddle2.Location = new System.Drawing.Point(494, 252);
+            this.cardBoxMiddle2.Margin = new System.Windows.Forms.Padding(2);
             this.cardBoxMiddle2.Name = "cardBoxMiddle2";
             this.cardBoxMiddle2.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle2.Size = new System.Drawing.Size(113, 146);
@@ -302,6 +321,7 @@
             this.cardBoxMiddle1.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBoxMiddle1.FaceUp = false;
             this.cardBoxMiddle1.Location = new System.Drawing.Point(375, 252);
+            this.cardBoxMiddle1.Margin = new System.Windows.Forms.Padding(2);
             this.cardBoxMiddle1.Name = "cardBoxMiddle1";
             this.cardBoxMiddle1.Rank = CardLibrary.Rank.Ace;
             this.cardBoxMiddle1.Size = new System.Drawing.Size(113, 146);
@@ -313,6 +333,7 @@
             this.cardBox1Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox1Player.FaceUp = false;
             this.cardBox1Player.Location = new System.Drawing.Point(534, 515);
+            this.cardBox1Player.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox1Player.Name = "cardBox1Player";
             this.cardBox1Player.Rank = CardLibrary.Rank.Ace;
             this.cardBox1Player.Size = new System.Drawing.Size(113, 146);
@@ -324,17 +345,90 @@
             this.cardBox2Player.CardOrientation = System.Windows.Forms.Orientation.Vertical;
             this.cardBox2Player.FaceUp = false;
             this.cardBox2Player.Location = new System.Drawing.Point(655, 515);
+            this.cardBox2Player.Margin = new System.Windows.Forms.Padding(2);
             this.cardBox2Player.Name = "cardBox2Player";
             this.cardBox2Player.Rank = CardLibrary.Rank.Ace;
             this.cardBox2Player.Size = new System.Drawing.Size(113, 146);
             this.cardBox2Player.Suit = CardLibrary.Suit.Spades;
             this.cardBox2Player.TabIndex = 26;
             // 
+            // pictureBoxDialog2
+            // 
+            this.pictureBoxDialog2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og.png";
+            this.pictureBoxDialog2.Location = new System.Drawing.Point(127, 252);
+            this.pictureBoxDialog2.Name = "pictureBoxDialog2";
+            this.pictureBoxDialog2.Size = new System.Drawing.Size(235, 146);
+            this.pictureBoxDialog2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog2.TabIndex = 39;
+            this.pictureBoxDialog2.TabStop = false;
+            // 
+            // labelBot2
+            // 
+            this.labelBot2.AutoSize = true;
+            this.labelBot2.BackColor = System.Drawing.Color.White;
+            this.labelBot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot2.Location = new System.Drawing.Point(195, 307);
+            this.labelBot2.Name = "labelBot2";
+            this.labelBot2.Size = new System.Drawing.Size(0, 29);
+            this.labelBot2.TabIndex = 40;
+            // 
+            // pictureBoxDialog1
+            // 
+            this.pictureBoxDialog1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og.png";
+            this.pictureBoxDialog1.Location = new System.Drawing.Point(773, -19);
+            this.pictureBoxDialog1.Name = "pictureBoxDialog1";
+            this.pictureBoxDialog1.Size = new System.Drawing.Size(236, 155);
+            this.pictureBoxDialog1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog1.TabIndex = 41;
+            this.pictureBoxDialog1.TabStop = false;
+            // 
+            // pictureBoxDialog3
+            // 
+            this.pictureBoxDialog3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog3.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og_reverse.png";
+            this.pictureBoxDialog3.Location = new System.Drawing.Point(1004, 243);
+            this.pictureBoxDialog3.Name = "pictureBoxDialog3";
+            this.pictureBoxDialog3.Size = new System.Drawing.Size(197, 155);
+            this.pictureBoxDialog3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog3.TabIndex = 42;
+            this.pictureBoxDialog3.TabStop = false;
+            // 
+            // labelBot1
+            // 
+            this.labelBot1.AutoSize = true;
+            this.labelBot1.BackColor = System.Drawing.Color.White;
+            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot1.Location = new System.Drawing.Point(841, 40);
+            this.labelBot1.Name = "labelBot1";
+            this.labelBot1.Size = new System.Drawing.Size(0, 29);
+            this.labelBot1.TabIndex = 43;
+            // 
+            // labelBot3
+            // 
+            this.labelBot3.AutoSize = true;
+            this.labelBot3.BackColor = System.Drawing.Color.White;
+            this.labelBot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot3.Location = new System.Drawing.Point(1075, 307);
+            this.labelBot3.Name = "labelBot3";
+            this.labelBot3.Size = new System.Drawing.Size(0, 29);
+            this.labelBot3.TabIndex = 44;
+            // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.labelBot3);
+            this.Controls.Add(this.labelBot1);
+            this.Controls.Add(this.pictureBoxDialog3);
+            this.Controls.Add(this.pictureBoxDialog1);
+            this.Controls.Add(this.labelBot2);
+            this.Controls.Add(this.pictureBoxDialog2);
             this.Controls.Add(this.cardBox2Bot3);
             this.Controls.Add(this.cardBox1Bot3);
             this.Controls.Add(this.cardBox2Bot1);
@@ -370,6 +464,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,5 +500,11 @@
         private CardBox.CardBox cardBox2Bot1;
         private CardBox.CardBox cardBox1Bot3;
         private CardBox.CardBox cardBox2Bot3;
+        private System.Windows.Forms.PictureBox pictureBoxDialog2;
+        private System.Windows.Forms.Label labelBot2;
+        private System.Windows.Forms.PictureBox pictureBoxDialog1;
+        private System.Windows.Forms.PictureBox pictureBoxDialog3;
+        private System.Windows.Forms.Label labelBot1;
+        private System.Windows.Forms.Label labelBot3;
     }
 }

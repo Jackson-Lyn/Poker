@@ -16,3 +16,23 @@ C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\Pok
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.csproj.CopyComplete
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.exe
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.pdb
+C:\Users\matth\source\repos\Poker\bin\Debug\PokerGame.exe.config
+C:\Users\matth\source\repos\Poker\bin\Debug\PokerGame.exe
+C:\Users\matth\source\repos\Poker\bin\Debug\PokerGame.pdb
+C:\Users\matth\source\repos\Poker\bin\Debug\CardBox.dll
+C:\Users\matth\source\repos\Poker\bin\Debug\CardLibrary.dll
+C:\Users\matth\source\repos\Poker\bin\Debug\CardBox.pdb
+C:\Users\matth\source\repos\Poker\bin\Debug\CardLibrary.pdb
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.csproj.AssemblyReference.cache
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.menu.resources
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.Properties.Resources.resources
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.FiveCard.resources
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.RaiseInput.resources
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.TexasHoldEm.resources
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.csproj.GenerateResource.cache
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.csproj.CoreCompileInputs.cache
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.csproj.CopyComplete
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.exe
+C:\Users\matth\source\repos\Poker\obj\Debug\PokerGame.pdb
+C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.RaiseInput.resources
