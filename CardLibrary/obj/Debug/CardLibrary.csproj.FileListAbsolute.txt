@@ -22,3 +22,11 @@ C:\Users\matth\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.Gener
 C:\Users\matth\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
 C:\Users\matth\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.dll
 C:\Users\matth\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.pdb
+C:\Users\abc\source\repos\Poker\CardLibrary\bin\Debug\CardLibrary.dll
+C:\Users\abc\source\repos\Poker\CardLibrary\bin\Debug\CardLibrary.pdb
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.AssemblyReference.cache
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.Properties.Resources.resources
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.GenerateResource.cache
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.dll
+C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.pdb
