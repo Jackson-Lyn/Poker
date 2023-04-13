@@ -607,6 +607,154 @@ namespace PokerGame
             #endregion
 
             #region THREE PLAYERS
+            else if (game.GetNumberOfPlayers() == 3)
+            {
+                if (game.GetPlayers()[1].GetFold() && game.GetPlayers()[2].GetFold())
+                {
+                    game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
+                    textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                    MessageBox.Show("You Win The Round!");
+                }
+                else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[2].GetFold())
+                {
+                    game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                    MessageBox.Show("Bot 1 Wins The Round!");
+                }
+                else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[1].GetFold())
+                {
+                    game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
+                    MessageBox.Show("Bot 2 Wins The Round!");
+                }
+                else
+                {
+                    List<Card> allPlayerCards = new List<Card>();
+                    List<Card> allBot1Cards = new List<Card>();
+                    List<Card> allBot2Cards = new List<Card>();
+
+                    foreach (Card card in middleCards)
+                    {
+                        allPlayerCards.Add(card);
+                        allBot1Cards.Add(card);
+                        allBot2Cards.Add(card);
+                    }
+
+                    if (!game.GetPlayers()[0].GetFold())
+                    {
+                        foreach (Card card in game.GetPlayers()[0].GetCards())
+                        {
+                            allPlayerCards.Add(card);
+                        }
+                    }
+                    else
+                    {
+                        allPlayerCards.Clear();
+                    }
+                    if (!game.GetPlayers()[1].GetFold())
+                    {
+                        foreach (Card card in game.GetPlayers()[1].GetCards())
+                        {
+                            allBot1Cards.Add(card);
+                        }
+                    }
+                    else
+                    {
+                        allBot1Cards.Clear();
+                    }
+                    if (!game.GetPlayers()[2].GetFold())
+                    {
+                        foreach (Card card in game.GetPlayers()[2].GetCards())
+                        {
+                            allBot2Cards.Add(card);
+                        }
+                    }
+                    else
+                    {
+                        allBot2Cards.Clear();
+                    }
+
+                    List<DetectHandRanking> detects = new List<DetectHandRanking>();
+
+                    if (allPlayerCards.Count > 0)
+                    {
+                        DetectHandRanking detect = new DetectHandRanking(allPlayerCards);
+                        detect.DeterminePokerHandType();
+                        detects.Add(detect);
+                    }
+                    if (allBot1Cards.Count > 0)
+                    {
+                        DetectHandRanking detect1 = new DetectHandRanking(allBot1Cards); detect1.DeterminePokerHandType();
+                        detects.Add(detect1);
+                    }
+                    if (allBot2Cards.Count > 0)
+                    {
+                        DetectHandRanking detect2 = new DetectHandRanking(allBot2Cards);
+                        detect2.DeterminePokerHandType();
+                        detects.Add(detect2);
+                    }
+
+                    int roundWinnerID = -1;
+
+                    for (int i = 0; i < detects.Count; i++)
+                    {
+                        for (int j = 0; j < detects.Count; j++)
+                        {
+                            if (i != j)
+                            {
+                                if ((int)detects[i].DeterminePokerHandType() > (int)detects[j].DeterminePokerHandType())
+                                {
+                                    roundWinnerID = i;
+                                }
+                                else if ((int)detects[i].DeterminePokerHandType() < (int)detects[j].DeterminePokerHandType())
+                                {
+                                    j = detects.Count;
+                                }
+                                else
+                                {
+                                    if (detects[i].totalCardValue > detects[j].totalCardValue)
+                                    {
+                                        roundWinnerID = i;
+                                    }
+                                    else if (detects[i].totalCardValue < detects[j].totalCardValue)
+                                    {
+                                        j = detects.Count;
+                                    }
+                                    else
+                                    {
+                                        if (SameHandRankingHelper(detects[i], detects[j]) == 0)
+                                        {
+                                            roundWinnerID = i;
+                                        }
+                                        else if (SameHandRankingHelper(detects[i], detects[j]) == 1)
+                                        {
+                                            j = detects.Count;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (roundWinnerID == game.GetPlayers()[0].GetId())
+                    {
+                        game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
+                        textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                        MessageBox.Show(detects[0].DeterminePokerHandType().ToString());
+                        MessageBox.Show("You Win The Round!");
+                    }
+                    else if (roundWinnerID == game.GetPlayers()[1].GetId())
+                    {
+                        game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                        MessageBox.Show(detects[1].DeterminePokerHandType().ToString());
+                        MessageBox.Show("Bot 1 Wins The Round!");
+                    }
+                    else if (roundWinnerID == game.GetPlayers()[2].GetId())
+                    {
+                        game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
+                        MessageBox.Show(detects[2].DeterminePokerHandType().ToString());
+                        MessageBox.Show("Bot 2 Wins The Round!");
+                    }
+                }
+            }
+
             #endregion
 
             #region FOUR PLAYERS
