@@ -30,6 +30,10 @@ namespace PokerGame
             {
                 MessageBox.Show("You cannot bet more than " + chips + " chips.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else if (numUDRaise.Value == 0)
+            {
+                MessageBox.Show("You cannot bet 0 chips.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 DialogResult = DialogResult.OK;

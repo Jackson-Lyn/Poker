@@ -41,6 +41,15 @@
             this.labelPlayerTurn = new System.Windows.Forms.Label();
             this.labelPot = new System.Windows.Forms.Label();
             this.buttonCheck = new System.Windows.Forms.Button();
+            this.pictureBoxDialog2 = new System.Windows.Forms.PictureBox();
+            this.labelBot2 = new System.Windows.Forms.Label();
+            this.pictureBoxDialog1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDialog3 = new System.Windows.Forms.PictureBox();
+            this.labelBot1 = new System.Windows.Forms.Label();
+            this.labelBot3 = new System.Windows.Forms.Label();
+            this.labelBot1Name = new System.Windows.Forms.Label();
+            this.labelBot2Name = new System.Windows.Forms.Label();
+            this.labelBot3Name = new System.Windows.Forms.Label();
             this.cardBox2Bot3 = new CardBox.CardBox();
             this.cardBox1Bot3 = new CardBox.CardBox();
             this.cardBox2Bot1 = new CardBox.CardBox();
@@ -54,12 +63,6 @@
             this.cardBoxMiddle1 = new CardBox.CardBox();
             this.cardBox1Player = new CardBox.CardBox();
             this.cardBox2Player = new CardBox.CardBox();
-            this.pictureBoxDialog2 = new System.Windows.Forms.PictureBox();
-            this.labelBot2 = new System.Windows.Forms.Label();
-            this.pictureBoxDialog1 = new System.Windows.Forms.PictureBox();
-            this.pictureBoxDialog3 = new System.Windows.Forms.PictureBox();
-            this.labelBot1 = new System.Windows.Forms.Label();
-            this.labelBot3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).BeginInit();
@@ -195,6 +198,105 @@
             this.buttonCheck.Text = "Check";
             this.buttonCheck.UseVisualStyleBackColor = true;
             this.buttonCheck.Click += new System.EventHandler(this.buttonCheck_Click);
+            // 
+            // pictureBoxDialog2
+            // 
+            this.pictureBoxDialog2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og.png";
+            this.pictureBoxDialog2.Location = new System.Drawing.Point(127, 350);
+            this.pictureBoxDialog2.Name = "pictureBoxDialog2";
+            this.pictureBoxDialog2.Size = new System.Drawing.Size(235, 146);
+            this.pictureBoxDialog2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog2.TabIndex = 39;
+            this.pictureBoxDialog2.TabStop = false;
+            // 
+            // labelBot2
+            // 
+            this.labelBot2.AutoSize = true;
+            this.labelBot2.BackColor = System.Drawing.Color.White;
+            this.labelBot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot2.Location = new System.Drawing.Point(200, 401);
+            this.labelBot2.Name = "labelBot2";
+            this.labelBot2.Size = new System.Drawing.Size(0, 29);
+            this.labelBot2.TabIndex = 40;
+            // 
+            // pictureBoxDialog1
+            // 
+            this.pictureBoxDialog1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og.png";
+            this.pictureBoxDialog1.Location = new System.Drawing.Point(823, -16);
+            this.pictureBoxDialog1.Name = "pictureBoxDialog1";
+            this.pictureBoxDialog1.Size = new System.Drawing.Size(236, 155);
+            this.pictureBoxDialog1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog1.TabIndex = 41;
+            this.pictureBoxDialog1.TabStop = false;
+            // 
+            // pictureBoxDialog3
+            // 
+            this.pictureBoxDialog3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBoxDialog3.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og_reverse.png";
+            this.pictureBoxDialog3.Location = new System.Drawing.Point(1008, 331);
+            this.pictureBoxDialog3.Name = "pictureBoxDialog3";
+            this.pictureBoxDialog3.Size = new System.Drawing.Size(197, 155);
+            this.pictureBoxDialog3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxDialog3.TabIndex = 42;
+            this.pictureBoxDialog3.TabStop = false;
+            // 
+            // labelBot1
+            // 
+            this.labelBot1.AutoSize = true;
+            this.labelBot1.BackColor = System.Drawing.Color.White;
+            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot1.Location = new System.Drawing.Point(886, 40);
+            this.labelBot1.Name = "labelBot1";
+            this.labelBot1.Size = new System.Drawing.Size(0, 29);
+            this.labelBot1.TabIndex = 43;
+            // 
+            // labelBot3
+            // 
+            this.labelBot3.AutoSize = true;
+            this.labelBot3.BackColor = System.Drawing.Color.White;
+            this.labelBot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot3.Location = new System.Drawing.Point(1091, 388);
+            this.labelBot3.Name = "labelBot3";
+            this.labelBot3.Size = new System.Drawing.Size(0, 29);
+            this.labelBot3.TabIndex = 44;
+            // 
+            // labelBot1Name
+            // 
+            this.labelBot1Name.AutoSize = true;
+            this.labelBot1Name.BackColor = System.Drawing.Color.White;
+            this.labelBot1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelBot1Name.Location = new System.Drawing.Point(773, 85);
+            this.labelBot1Name.Name = "labelBot1Name";
+            this.labelBot1Name.Size = new System.Drawing.Size(72, 29);
+            this.labelBot1Name.TabIndex = 45;
+            this.labelBot1Name.Text = "Bot 1";
+            // 
+            // labelBot2Name
+            // 
+            this.labelBot2Name.AutoSize = true;
+            this.labelBot2Name.BackColor = System.Drawing.Color.White;
+            this.labelBot2Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelBot2Name.Location = new System.Drawing.Point(50, 446);
+            this.labelBot2Name.Name = "labelBot2Name";
+            this.labelBot2Name.Size = new System.Drawing.Size(72, 29);
+            this.labelBot2Name.TabIndex = 46;
+            this.labelBot2Name.Text = "Bot 2";
+            // 
+            // labelBot3Name
+            // 
+            this.labelBot3Name.AutoSize = true;
+            this.labelBot3Name.BackColor = System.Drawing.Color.White;
+            this.labelBot3Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.labelBot3Name.Location = new System.Drawing.Point(1211, 446);
+            this.labelBot3Name.Name = "labelBot3Name";
+            this.labelBot3Name.Size = new System.Drawing.Size(72, 29);
+            this.labelBot3Name.TabIndex = 47;
+            this.labelBot3Name.Text = "Bot 3";
             // 
             // cardBox2Bot3
             // 
@@ -352,77 +454,14 @@
             this.cardBox2Player.Suit = CardLibrary.Suit.Spades;
             this.cardBox2Player.TabIndex = 26;
             // 
-            // pictureBoxDialog2
-            // 
-            this.pictureBoxDialog2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxDialog2.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
-    "og.png";
-            this.pictureBoxDialog2.Location = new System.Drawing.Point(127, 252);
-            this.pictureBoxDialog2.Name = "pictureBoxDialog2";
-            this.pictureBoxDialog2.Size = new System.Drawing.Size(235, 146);
-            this.pictureBoxDialog2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxDialog2.TabIndex = 39;
-            this.pictureBoxDialog2.TabStop = false;
-            // 
-            // labelBot2
-            // 
-            this.labelBot2.AutoSize = true;
-            this.labelBot2.BackColor = System.Drawing.Color.White;
-            this.labelBot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelBot2.Location = new System.Drawing.Point(195, 307);
-            this.labelBot2.Name = "labelBot2";
-            this.labelBot2.Size = new System.Drawing.Size(0, 29);
-            this.labelBot2.TabIndex = 40;
-            // 
-            // pictureBoxDialog1
-            // 
-            this.pictureBoxDialog1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxDialog1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
-    "og.png";
-            this.pictureBoxDialog1.Location = new System.Drawing.Point(773, -19);
-            this.pictureBoxDialog1.Name = "pictureBoxDialog1";
-            this.pictureBoxDialog1.Size = new System.Drawing.Size(236, 155);
-            this.pictureBoxDialog1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxDialog1.TabIndex = 41;
-            this.pictureBoxDialog1.TabStop = false;
-            // 
-            // pictureBoxDialog3
-            // 
-            this.pictureBoxDialog3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxDialog3.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
-    "og_reverse.png";
-            this.pictureBoxDialog3.Location = new System.Drawing.Point(1004, 243);
-            this.pictureBoxDialog3.Name = "pictureBoxDialog3";
-            this.pictureBoxDialog3.Size = new System.Drawing.Size(197, 155);
-            this.pictureBoxDialog3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxDialog3.TabIndex = 42;
-            this.pictureBoxDialog3.TabStop = false;
-            // 
-            // labelBot1
-            // 
-            this.labelBot1.AutoSize = true;
-            this.labelBot1.BackColor = System.Drawing.Color.White;
-            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelBot1.Location = new System.Drawing.Point(841, 40);
-            this.labelBot1.Name = "labelBot1";
-            this.labelBot1.Size = new System.Drawing.Size(0, 29);
-            this.labelBot1.TabIndex = 43;
-            // 
-            // labelBot3
-            // 
-            this.labelBot3.AutoSize = true;
-            this.labelBot3.BackColor = System.Drawing.Color.White;
-            this.labelBot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelBot3.Location = new System.Drawing.Point(1075, 307);
-            this.labelBot3.Name = "labelBot3";
-            this.labelBot3.Size = new System.Drawing.Size(0, 29);
-            this.labelBot3.TabIndex = 44;
-            // 
             // TexasHoldEm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.labelBot3Name);
+            this.Controls.Add(this.labelBot2Name);
+            this.Controls.Add(this.labelBot1Name);
             this.Controls.Add(this.labelBot3);
             this.Controls.Add(this.labelBot1);
             this.Controls.Add(this.pictureBoxDialog3);
@@ -506,5 +545,8 @@
         private System.Windows.Forms.PictureBox pictureBoxDialog3;
         private System.Windows.Forms.Label labelBot1;
         private System.Windows.Forms.Label labelBot3;
+        private System.Windows.Forms.Label labelBot1Name;
+        private System.Windows.Forms.Label labelBot2Name;
+        private System.Windows.Forms.Label labelBot3Name;
     }
 }

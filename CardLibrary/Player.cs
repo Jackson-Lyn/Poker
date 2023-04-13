@@ -100,6 +100,11 @@ namespace CardLibrary
             return chips;
         }
 
+        public void SetChips(int chips)
+        {
+            this.chips = chips;
+        }
+
         public void SetCards(List<Card> cards)
         {
             this.cards = cards;

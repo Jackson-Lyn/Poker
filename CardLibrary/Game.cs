@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace CardLibrary
         private int playerTurn { get; set; }
         private int numberOfPlayers { get; set; }
         private bool isBetRaised { get; set; }
+        private int currentBet { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -88,6 +90,16 @@ namespace CardLibrary
             return this.isBetRaised;
         }
 
+        public void SetCurrentBet(int bet)
+        {
+            this.currentBet = bet;
+        }
+
+        public int GetCurrentBet()
+        {
+            return this.currentBet;
+        }
+
         public void NextRound()
         {
             this.round++;
@@ -118,6 +130,11 @@ namespace CardLibrary
             pot += chips;
         }
 
+        public void ResetPot()
+        {
+            this.pot = 0;
+        }
+
         public bool RevealCard()
         {
             bool check = true;
@@ -131,7 +148,6 @@ namespace CardLibrary
                     }
                 }
             }
-
             return check;
         }
     }
