@@ -884,7 +884,19 @@ namespace PokerGame
 
         private void buttonCall_Click(object sender, EventArgs e)
         {
-            allPlayers[0].Bet(1000);
+            if (game.GetIsBetRaised())
+            {
+                game.GetPlayers()[0].Bet(game.GetCurrentBet());
+                game.NextTurn();
+                CheckPlayerTurn();
+                DisablePlayerControls();
+
+                InitiateBot();
+            }
+            else
+            {
+                MessageBox.Show("Unable to call when no one raised the bet.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }
