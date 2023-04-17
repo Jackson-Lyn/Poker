@@ -1046,6 +1046,12 @@ namespace PokerGame
                 MessageBox.Show("Unable to call when no one raised the bet.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ShowHelpWindow(object sender, EventArgs e)
+        {
+            new TexasHoldEmHelp().Show();
+        }
+
         #endregion
     }
 }

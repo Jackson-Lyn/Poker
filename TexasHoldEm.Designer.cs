@@ -80,6 +80,7 @@
             this.buttonHelp.TabIndex = 0;
             this.buttonHelp.Text = "Help";
             this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.ShowHelpWindow);
             // 
             // picChips
             // 

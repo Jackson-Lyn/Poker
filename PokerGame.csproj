@@ -78,6 +78,12 @@
     <Compile Include="TexasHoldEm.Designer.cs">
       <DependentUpon>TexasHoldEm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TexasHoldEmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TexasHoldEmHelp.Designer.cs">
+      <DependentUpon>TexasHoldEmHelp.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TexasHoldEm.resx">
       <DependentUpon>TexasHoldEm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TexasHoldEmHelp.resx">
+      <DependentUpon>TexasHoldEmHelp.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
