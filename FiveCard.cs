@@ -107,6 +107,11 @@ namespace PokerGame
         {
 
         }
+
+        private void ShowFiveCardMenu(object sender, EventArgs e)
+        {
+            new FiveCardHelp().Show();
+        }
     }
 }
 // test

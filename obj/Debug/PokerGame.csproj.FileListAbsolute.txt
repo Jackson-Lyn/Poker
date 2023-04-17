@@ -19,3 +19,4 @@ C:\Users\abc\source\repos\Poker\obj\Debug\PokerGame.csproj.CopyComplete
 C:\Users\abc\source\repos\Poker\obj\Debug\PokerGame.exe
 C:\Users\abc\source\repos\Poker\obj\Debug\PokerGame.pdb
 C:\Users\abc\source\repos\Poker\obj\Debug\PokerGame.TexasHoldEmHelp.resources
+C:\Users\abc\source\repos\Poker\obj\Debug\PokerGame.FiveCardHelp.resources
