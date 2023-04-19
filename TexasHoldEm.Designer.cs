@@ -501,6 +501,8 @@
             this.Name = "TexasHoldEm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TexasHoldEm";
+            this.Activated += new System.EventHandler(this.TexasHoldEm_Activated);
+            this.Load += new System.EventHandler(this.TexasHoldEm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitle)).EndInit();

@@ -33,6 +33,11 @@ namespace PokerGame
         const int ONE_HALF_SECOND = 1500;
         const int FIVE_SECONDS = 5000;
         const int SIX_SECONDS = 6000;
+
+        private bool isEliminated = false;
+        private string difficulty;
+        private string chips;
+        private string players;
         #endregion
 
         #region CONSTRUCTORS
@@ -44,6 +49,26 @@ namespace PokerGame
         public TexasHoldEm(string difficulty, string chips, string players)
         {
             InitializeComponent();
+            
+            this.difficulty = difficulty;
+            this.chips      = chips;
+            this.players    = players;
+
+            InitializeGame(difficulty, chips, players);
+        }
+        #endregion
+
+        #region CUSTOM DESIGN METHODS
+        public void SetPictures()
+        {
+            pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
+            picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
+            picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
+            pictureBoxDialog2.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
+        }
+
+        private void InitializeGame(string difficulty, string chips, string players)
+        {
             pictureBoxDialog2.Visible = false;
             pictureBoxDialog1.Visible = false;
             pictureBoxDialog3.Visible = false;
@@ -67,16 +92,6 @@ namespace PokerGame
                 labelBot3Name.Visible = false;
             }
             Loading(chips, players);
-        }
-        #endregion
-
-        #region CUSTOM DESIGN METHODS
-        public void SetPictures()
-        {
-            pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
-            picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
-            picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
-            pictureBoxDialog2.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
         }
         #endregion
 
@@ -142,11 +157,8 @@ namespace PokerGame
             cardBox2Bot3.FaceUp = true;
         }
 
-        private async void EndAndNextRound()
+        private async void ProceedToNextRound()
         {
-            DisablePlayerControls();
-            FaceUpAllCards();
-            DetermineWinner();
             game.NextRound();
             labelPlayerTurn.Text = "Loading Next Round";
             textRoundNumber.Text = game.GetRoundNumber().ToString();
@@ -180,6 +192,61 @@ namespace PokerGame
             CheckPlayerTurn();
 
             EnablePlayerControls();
+        }
+
+        private async Task<DialogResult> ShowEndDialog(string message)
+        {
+            DialogResult result = MessageBox.Show(message, "Confirmation",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2,
+                                   MessageBoxOptions.DefaultDesktopOnly);
+            return result;
+        }
+
+        private async void EndAndNextRound()
+        {
+            DisablePlayerControls();
+            FaceUpAllCards();
+            DetermineWinner();
+
+            bool hasChipsLeft = game.GetPlayers()[0].GetChips() > 0;
+            // If human player lost in the current round
+            if (! hasChipsLeft)
+            {
+                DialogResult result = await ShowEndDialog("Would you like to restart the game?"); 
+                if (result == DialogResult.No)
+                {
+                    // Close this Form
+                    this.Close();
+                    this.Dispose();
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    // Restart the game
+                    TexasHoldEm texasHoldEm = new TexasHoldEm(this.difficulty, this.chips, this.players);
+                    texasHoldEm.Show();
+                    this.Dispose();
+                }
+            }
+            // If the human player won in the current round
+            else
+            {
+                DialogResult result = await ShowEndDialog("Would you like to continue to the next round?");
+                if (result == DialogResult.No)
+                {
+                    // Close this Form
+                    this.Close();
+                    this.Dispose();
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    this.Activate();
+                    this.Focus();
+
+                    // Proceed to the next round
+                    ProceedToNextRound();
+                }
+            }
         }
         #endregion
 
@@ -529,11 +596,13 @@ namespace PokerGame
                 if (game.GetPlayers()[0].GetFold())
                 {
                     game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 1 Wins The Round!");
                 }
                 else if (game.GetPlayers()[1].GetFold())
                 {
                     game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
+                    this.isEliminated = false;
                     MessageBox.Show("You Win The Round!");
                 }
                 else
@@ -562,11 +631,13 @@ namespace PokerGame
                     {
                         game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                         textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                        this.isEliminated = false;
                         MessageBox.Show("You Win The Round!");
                     }
                     else if ((int)detect.DeterminePokerHandType() < (int)detect1.DeterminePokerHandType())
                     {
                         game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 1 Wins The Round!");
                     }
                     else
@@ -575,6 +646,7 @@ namespace PokerGame
                         {
                             game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                             textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                            this.isEliminated = false;
                             MessageBox.Show("You Win The Round!");
                         }
                         else if (detect.totalCardValue == detect1.totalCardValue)
@@ -583,22 +655,26 @@ namespace PokerGame
                             {
                                 game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                                 textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                                this.isEliminated = false;
                                 MessageBox.Show("You Win The Round!");
                             }
                             else if (SameHandRankingHelper(detect, detect1) == 1)
                             {
 
                                 game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                                this.isEliminated = true;
                                 MessageBox.Show("Bot 1 Wins The Round!");
                             }
                             else
                             {
+                                this.isEliminated = false;
                                 MessageBox.Show("Draw!");
                             }
                         }
                         else
                         {
                             game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                            this.isEliminated = true;
                             MessageBox.Show("Bot 1 Wins The Round!");
                         }
                     }
@@ -607,22 +683,25 @@ namespace PokerGame
             #endregion
 
             #region THREE PLAYERS
-            else if (game.GetNumberOfPlayers() == 3)
+            else if (game.GetNumberOfPlayers() == THREE_PLAYERS)
             {
                 if (game.GetPlayers()[1].GetFold() && game.GetPlayers()[2].GetFold())
                 {
                     game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                     textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                    this.isEliminated = false;
                     MessageBox.Show("You Win The Round!");
                 }
                 else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[2].GetFold())
                 {
                     game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 1 Wins The Round!");
                 }
                 else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[1].GetFold())
                 {
                     game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 2 Wins The Round!");
                 }
                 else
@@ -738,18 +817,21 @@ namespace PokerGame
                         game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                         textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
                         MessageBox.Show(detects[0].DeterminePokerHandType().ToString());
+                        this.isEliminated = false;
                         MessageBox.Show("You Win The Round!");
                     }
                     else if (roundWinnerID == game.GetPlayers()[1].GetId())
                     {
                         game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
                         MessageBox.Show(detects[1].DeterminePokerHandType().ToString());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 1 Wins The Round!");
                     }
                     else if (roundWinnerID == game.GetPlayers()[2].GetId())
                     {
                         game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
                         MessageBox.Show(detects[2].DeterminePokerHandType().ToString());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 2 Wins The Round!");
                     }
                 }
@@ -758,27 +840,31 @@ namespace PokerGame
             #endregion
 
             #region FOUR PLAYERS
-            else if (game.GetNumberOfPlayers() == 4)
+            else if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
             {
                 if (game.GetPlayers()[1].GetFold() && game.GetPlayers()[2].GetFold() && game.GetPlayers()[3].GetFold())
                 {
                     game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                     textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                    this.isEliminated = false;
                     MessageBox.Show("You Win The Round!");
                 }
                 else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[2].GetFold() && game.GetPlayers()[3].GetFold())
                 {
                     game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 1 Wins The Round!");
                 }
                 else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[1].GetFold() && game.GetPlayers()[3].GetFold())
                 {
                     game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 2 Wins The Round!");
                 }
                 else if (game.GetPlayers()[0].GetFold() && game.GetPlayers()[2].GetFold() && game.GetPlayers()[2].GetFold())
                 {
                     game.GetPlayers()[3].SetChips(game.GetPot() + game.GetPlayers()[3].GetChips());
+                    this.isEliminated = true;
                     MessageBox.Show("Bot 3 Wins The Round!");
                 }
                 else
@@ -914,24 +1000,28 @@ namespace PokerGame
                         game.GetPlayers()[0].SetChips(game.GetPot() + game.GetPlayers()[0].GetChips());
                         textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
                         MessageBox.Show(detects[0].DeterminePokerHandType().ToString());
+                        this.isEliminated = false;
                         MessageBox.Show("You Win The Round!");
                     }
                     else if (roundWinnerID == game.GetPlayers()[1].GetId())
                     {
                         game.GetPlayers()[1].SetChips(game.GetPot() + game.GetPlayers()[1].GetChips());
                         MessageBox.Show(detects[1].DeterminePokerHandType().ToString());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 1 Wins The Round!");
                     }
                     else if (roundWinnerID == game.GetPlayers()[2].GetId())
                     {
                         game.GetPlayers()[2].SetChips(game.GetPot() + game.GetPlayers()[2].GetChips());
                         MessageBox.Show(detects[2].DeterminePokerHandType().ToString());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 2 Wins The Round!");
                     }
                     else if (roundWinnerID == game.GetPlayers()[3].GetId())
                     {
                         game.GetPlayers()[3].SetChips(game.GetPot() + game.GetPlayers()[3].GetChips());
                         MessageBox.Show(detects[3].DeterminePokerHandType().ToString());
+                        this.isEliminated = true;
                         MessageBox.Show("Bot 3 Wins The Round!");
                     }
                 }
@@ -1050,6 +1140,18 @@ namespace PokerGame
         private void ShowHelpWindow(object sender, EventArgs e)
         {
             new TexasHoldEmHelp().Show();
+        }
+
+        private void TexasHoldEm_Load(object sender, EventArgs e)
+        {
+            // Set the TopMost property of the form to true
+            this.TopMost = true;
+        }
+
+        private void TexasHoldEm_Activated(object sender, EventArgs e)
+        {
+            // Set the TopMost property of the form back to false
+            this.TopMost = false;
         }
 
         #endregion

@@ -41,6 +41,10 @@ namespace PokerGame
         {
             buttonTexas.Enabled = true;
             buttonFiveCard.Enabled = true;
+
+            // Focus on this form
+            this.Activate();
+            this.Focus();
         }
 
         private void DisableNewGame()
