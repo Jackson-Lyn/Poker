@@ -16,6 +16,7 @@ namespace CardLibrary
         private bool isCheck { get; set; }
         private bool isFold { get; set; }
         private bool isBet { get; set; }
+        private int previousBet { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -54,6 +55,7 @@ namespace CardLibrary
         {
             isBet = true;
             chips -= chipsBet;
+            previousBet = chipsBet;
         }
 
         public void ResetBet()
@@ -64,6 +66,11 @@ namespace CardLibrary
         public bool GetIsBet()
         {
             return this.isBet;
+        }
+
+        public int GetPreviousBet()
+        {
+            return this.previousBet;
         }
 
         public void Fold()

@@ -1125,7 +1125,7 @@ namespace PokerGame
         {
             if (game.GetIsBetRaised())
             {
-                game.GetPlayers()[0].Bet(game.GetCurrentBet());
+                game.GetPlayers()[0].Bet(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
                 game.NextTurn();
                 CheckPlayerTurn();
                 DisablePlayerControls();
