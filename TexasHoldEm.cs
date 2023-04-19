@@ -958,6 +958,7 @@ namespace PokerGame
             if (game.GetPlayers()[0].GetIsBet())
             {
                 game.GetPlayers()[0].Fold();
+                game.SetIsBetRaised(false);
 
                 cardBox1Player.FaceUp = false;
                 cardBox2Player.FaceUp = false;
