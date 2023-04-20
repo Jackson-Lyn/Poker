@@ -417,11 +417,11 @@ namespace PokerGame
             }
             else if (diff == "Medium")
             {
-                Player.mediumDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), game, game.GetPlayers()[1], diff);
+                Player.mediumDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), ref game, game.GetPlayers()[1], diff);
             }
             else if (diff == "Hard")
             {
-                Player.hardDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), game, game.GetPlayers()[1], diff);
+                Player.hardDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), ref game, game.GetPlayers()[1], diff);
             }
 
             if (game.GetPlayers()[1].GetPlayerAction().Equals("Check"))
@@ -436,7 +436,7 @@ namespace PokerGame
                 }
                 OpenMiddleCard();
             }
-            else if (game.GetPlayers()[1].GetPlayerAction().Equals("Raise"))
+            else if (game.GetPlayers()[1].GetPlayerAction().Equals("Raise") || game.GetPlayers()[1].GetPlayerAction().Equals("All In"))
             {
                 game.NextTurn();
                 CheckPlayerTurn();
@@ -453,9 +453,9 @@ namespace PokerGame
                 game.NextTurn();
                 CheckPlayerTurn();
                 UpdatePotLabel();
-                game.SetIsBetRaised(false);
                 if (game.GetNumberOfPlayers() == TWO_PLAYERS)
                 {
+                    game.SetIsBetRaised(false);
                     EnablePlayerControls();
                 }
             }
@@ -488,68 +488,70 @@ namespace PokerGame
                 bot2Timer = null;
             }
 
-            if (allPlayers[2].GetFold())
+            if (diff == "Easy")
+            {
+                Player.easyDiff(game.GetPlayers()[2].GetChips(), game.GetPlayers()[2].GetCards(), ref game, game.GetPlayers()[2], diff);
+            }
+            else if (diff == "Medium")
+            {
+                Player.mediumDiff(game.GetPlayers()[2].GetChips(), game.GetPlayers()[2].GetCards(), ref game, game.GetPlayers()[2], diff);
+            }
+            else if (diff == "Hard")
+            {
+                Player.hardDiff(game.GetPlayers()[2].GetChips(), game.GetPlayers()[2].GetCards(), ref game, game.GetPlayers()[2], diff);
+            }
+
+            if (game.GetPlayers()[2].GetPlayerAction().Equals("Check"))
+            {
+                game.GetPlayers()[2].Check();
+                game.NextTurn();
+                CheckPlayerTurn();
+
+                if (game.GetNumberOfPlayers() == THREE_PLAYERS)
+                {
+                    EnablePlayerControls();
+                }
+                OpenMiddleCard();
+            }
+            else if (game.GetPlayers()[2].GetPlayerAction().Equals("Raise") || game.GetPlayers()[2].GetPlayerAction().Equals("All In"))
             {
                 game.NextTurn();
+                CheckPlayerTurn();
+                UpdatePotLabel();
+                game.SetIsBetRaised(true);
+
+                if (game.GetNumberOfPlayers() == THREE_PLAYERS)
+                {
+                    EnablePlayerControls();
+                }
+            }
+            else if (game.GetPlayers()[2].GetPlayerAction().Equals("Call"))
+            {
+                game.NextTurn();
+                CheckPlayerTurn();
+                UpdatePotLabel();
+                if (game.GetNumberOfPlayers() == THREE_PLAYERS)
+                {
+                    game.SetIsBetRaised(false);
+                    EnablePlayerControls();
+                }
+            }
+            if (game.GetPlayers()[2].GetPlayerAction().Equals("Fold"))
+            {
+                pictureBoxDialog2.Visible = true;
+                labelBot2.Text = game.GetPlayers()[2].GetPlayerAction();
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog2.Visible = false;
+                labelBot2.Text = string.Empty;
+                EndAndNextRound();
             }
             else
             {
-                if (game.GetPlayers()[0].GetCheck())
-                {
-                    if (diff == "Easy")
-                    {
-                        Player.easyDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref game, allPlayers[2], diff);
-                    }
-                    else if (diff == "Medium")
-                    {
-                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
-                    }
-                    else if (diff == "Hard")
-                    {
-                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
-                    }
-                    pictureBoxDialog2.Visible = true;
-                    labelBot2.Text = game.GetPlayers()[1].GetPlayerAction();
-                    await Task.Delay(ONE_SECOND);
-                    pictureBoxDialog2.Visible = false;
-                    labelBot2.Text = string.Empty;
-                    game.NextTurn();
-                    CheckPlayerTurn();
-                    if (allPlayers.Count == THREE_PLAYERS)
-                    {
-                        EnablePlayerControls();
-                    }
-                    OpenMiddleCard();
-                }
-                else if (game.GetIsBetRaised())
-                {
-                    if (diff == "Easy")
-                    {
-                        Player.easyDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref game, allPlayers[2], diff);
-                    }
-                    else if (diff == "Medium")
-                    {
-                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
-                    }
-                    else if (diff == "Hard")
-                    {
-                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
-                    }
-                    pictureBoxDialog2.Visible = true;
-                    labelBot2.Text = game.GetPlayers()[1].GetPlayerAction();
-                    await Task.Delay(ONE_SECOND);
-                    pictureBoxDialog2.Visible = false;
-                    labelBot2.Text = string.Empty;
-                    //game.AddPot(game.GetCurrentBet());
-                    UpdatePotLabel();
-                    game.NextTurn();
-                    CheckPlayerTurn();
-                    if (game.GetNumberOfPlayers() == THREE_PLAYERS)
-                    {
-                        EnablePlayerControls();
-                    }
-                    OpenMiddleCard();
-                }
+                pictureBoxDialog2.Visible = true;
+                labelBot2.Text = game.GetPlayers()[2].GetPlayerAction();
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog2.Visible = false;
+                labelBot2.Text = string.Empty;
             }
         }
 
@@ -576,11 +578,11 @@ namespace PokerGame
                     }
                     else if (diff == "Medium")
                     {
-                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
+                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref game, allPlayers[2], diff);
                     }
                     else if (diff == "Hard")
                     {
-                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
+                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref game, allPlayers[2], diff);
                     }
                     pictureBoxDialog3.Visible = true;
                     labelBot3.Text = game.GetPlayers()[1].GetPlayerAction();
@@ -603,11 +605,11 @@ namespace PokerGame
                     }
                     else if (diff == "Medium")
                     {
-                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
+                        Player.mediumDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref   game, allPlayers[2], diff);
                     }
                     else if (diff == "Hard")
                     {
-                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), game, allPlayers[2], diff);
+                        Player.hardDiff(allPlayers[2].GetChips(), allPlayers[2].GetCards(), ref game, allPlayers[2], diff);
                     }
                     pictureBoxDialog3.Visible = true;
                     labelBot3.Text = game.GetPlayers()[1].GetPlayerAction();
@@ -675,13 +677,13 @@ namespace PokerGame
                     p.UnCheck();
                 }
             }
-            else if (game.GetPlayerTurn() == 0)
+            /*else if (game.GetPlayerTurn() == 0)
             {
                 foreach (Player p in allPlayers)
                 {
                     p.UnCheck();
                 }
-            }
+            }*/
         }
 
         private int SameHandRankingHelper(DetectHandRanking detect, DetectHandRanking detect1)
@@ -1155,11 +1157,8 @@ namespace PokerGame
                 CheckPlayerTurn();
                 DisablePlayerControls();
 
-                if (game.RevealCard())
-                {
-                    OpenMiddleCard();
-                }
-                else
+                OpenMiddleCard();
+                if (!cardBoxMiddle5.FaceUp)
                 {
                     InitiateBot();
                 }
@@ -1254,7 +1253,7 @@ namespace PokerGame
             {
                 game.AddPot(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
                 game.GetPlayers()[0].Bet(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
-                textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString() + " " + game.GetPlayers()[1].GetChips().ToString();
+                textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
 
                 UpdatePotLabel();
 

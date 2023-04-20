@@ -100,6 +100,7 @@
             // 
             this.radioButtonThree.AutoSize = true;
             this.radioButtonThree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.radioButtonThree.Enabled = false;
             this.radioButtonThree.Location = new System.Drawing.Point(79, 20);
             this.radioButtonThree.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonThree.Name = "radioButtonThree";
@@ -112,6 +113,7 @@
             // 
             this.radioButtonFour.AutoSize = true;
             this.radioButtonFour.BackColor = System.Drawing.Color.Red;
+            this.radioButtonFour.Enabled = false;
             this.radioButtonFour.Location = new System.Drawing.Point(151, 20);
             this.radioButtonFour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonFour.Name = "radioButtonFour";

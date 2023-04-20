@@ -23,8 +23,13 @@ namespace PokerGame
         List<Player> allPlayers = new List<Player>();
         Deck deck = new Deck();
 
+        String diff = "";
         bool isSwap = false;
         bool isSwap2 = false;
+
+        private string difficulty;
+        private string chips;
+        private string players;
 
         const int TWO_PLAYERS = 2;
         const int THREE_PLAYERS = 3;
@@ -42,23 +47,12 @@ namespace PokerGame
             InitializeComponent();
         }
 
-        private List<CardBox.CardBox> CardBoxes;
-        public FiveCard(string difficulty, string chips, string players)
+        private void InitializeGame(string difficulty, string chips, string players)
         {
-            InitializeComponent();
-            cardBox1Player.Click += CardBox_Click;
-            cardBox2Player.Click += CardBox_Click;
-            cardBox3Player.Click += CardBox_Click;
-            cardBox4Player.Click += CardBox_Click;
-            cardBox5Player.Click += CardBox_Click;
-            deck.Shuffle();
-           CardBoxes = new List<CardBox.CardBox>
-            {
-                cardBox1Player, cardBox2Player, cardBox3Player, cardBox4Player, cardBox5Player
-            };
-            pictureBoxDialog.Visible = false;
+            pictureBoxDialog1.Visible = false;
             SetPictures();
             int numOfPlayers = int.Parse(players);
+            diff = difficulty;
 
             if (numOfPlayers == TWO_PLAYERS)
             {
@@ -77,11 +71,32 @@ namespace PokerGame
             {
                 cardBox1Bot3.Visible = false;
                 cardBox2Bot3.Visible = false;
-                cardBox3Bot3.Visible = false;
-                cardBox4Bot3.Visible = false;
-                cardBox5Bot3.Visible = false;
             }
+
+            cardBox1Player.Click += CardBox_Click;
+            cardBox2Player.Click += CardBox_Click;
+            cardBox3Player.Click += CardBox_Click;
+            cardBox4Player.Click += CardBox_Click;
+            cardBox5Player.Click += CardBox_Click;
+            diff = difficulty;
+            deck.Shuffle();
+            CardBoxes = new List<CardBox.CardBox>
+            {
+                cardBox1Player, cardBox2Player, cardBox3Player, cardBox4Player, cardBox5Player
+            };
             Loading(chips, players);
+        }
+
+        private List<CardBox.CardBox> CardBoxes;
+        public FiveCard(string difficulty, string chips, string players)
+        {
+            InitializeComponent();
+
+            this.difficulty = difficulty;
+            this.chips = chips;
+            this.players = players;
+
+            InitializeGame(difficulty, chips, players);
         }
 
   
@@ -92,7 +107,7 @@ namespace PokerGame
         {
             picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
             picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
-            pictureBoxDialog.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
+            pictureBoxDialog1.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
         }
         #endregion
 
@@ -111,7 +126,7 @@ namespace PokerGame
             int numOfPlayers = int.Parse(players);
             game.SetNumberOfPlayers(numOfPlayers);
 
-            for (int i = 0; i < numOfPlayers; i++)
+            for (int i = 0; i < 2; i++)
             {
                 List<Card> userCards = new List<Card>
                 {
@@ -190,6 +205,54 @@ namespace PokerGame
             DisablePlayerControls();
             FaceUpAllCards();
             DetermineWinner();
+
+            bool hasChipsLeft = game.GetPlayers()[0].GetChips() > 0;
+            // If human player lost in the current round
+            if (!hasChipsLeft)
+            {
+                DialogResult result = await ShowEndDialog("Would you like to restart the game?");
+                if (result == DialogResult.No)
+                {
+                    // Close this Form
+                    this.Close();
+                    this.Dispose();
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    // Restart the game
+                    FiveCard texasHoldEm = new FiveCard(this.difficulty, this.chips, this.players);
+                    texasHoldEm.Show();
+                    this.Dispose();
+                }
+            }
+
+            int numOfPlayers = TWO_PLAYERS;
+            if (numOfPlayers == TWO_PLAYERS)
+            {
+                if (game.GetPlayers()[1].GetChips() == 0)
+                {
+                    DialogResult result = await ShowEndDialog("You won! Play again?");
+                    if (result == DialogResult.No)
+                    {
+                        // Close this Form
+                        this.Close();
+                        this.Dispose();
+                    }
+                    else if (result == DialogResult.Yes)
+                    {
+                        // Restart the game
+                        TexasHoldEm texasHoldEm = new TexasHoldEm(this.difficulty, this.chips, this.players);
+                        texasHoldEm.Show();
+                        this.Dispose();
+                    }
+                }
+            }
+
+            ProceedToNextRound();
+        }
+
+        private async void ProceedToNextRound()
+        {
             game.NextRound();
             labelPlayerTurn.Text = "Loading Next Round";
             textRoundNumber.Text = game.GetRoundNumber().ToString();
@@ -199,13 +262,14 @@ namespace PokerGame
             FaceDownAllCards();
             deck = new Deck();
             deck.Shuffle();
-            isSwap = false;
-            isSwap2 = false;
             foreach (Player p in allPlayers)
             {
                 p.UnFold();
                 p.UnCheck();
+                p.ResetBet();
+                p.ResetPreviousBet();
             }
+            game.SetIsBetRaised(false);
             await Task.Delay(FIVE_SECONDS);
 
             for (int i = 0; i < game.GetPlayers().Count; i++)
@@ -221,7 +285,6 @@ namespace PokerGame
                 game.GetPlayers()[i].SetCards(userCards);
                 SetPlayerCards(userCards, game.GetPlayers()[i].GetId());
             }
-            
             cardBox1Player.FaceUp = true;
             cardBox2Player.FaceUp = true;
             cardBox3Player.FaceUp = true;
@@ -235,7 +298,7 @@ namespace PokerGame
         #endregion
 
         #region PUBLIC METHODS
-      
+
 
         public void CheckPlayerTurn()
         {
@@ -307,87 +370,93 @@ namespace PokerGame
                 bot1Timer = null;
             }
 
-            DisablePlayerControls();
-
-            if (game.GetPlayers()[1].GetFold())
+            if (diff == "Easy")
             {
-                if (game.GetNumberOfPlayers() == TWO_PLAYERS)
+                Player.easyDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), ref game, game.GetPlayers()[1], diff);
+            }
+            else if (diff == "Medium")
+            {
+                Player.mediumDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), ref game, game.GetPlayers()[1], diff);
+            }
+            else if (diff == "Hard")
+            {
+                Player.hardDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), ref game, game.GetPlayers()[1], diff);
+            }
+
+            if (game.GetPlayers()[1].GetPlayerAction().Equals("Fold"))
+            {
+                pictureBoxDialog1.Visible = true;
+                labelBot1.Text = game.GetPlayers()[1].GetPlayerAction();
+                await Task.Delay(ONE_SECOND);
+                pictureBoxDialog1.Visible = false;
+                labelBot1.Text = string.Empty;
+                EndAndNextRound();
+            }
+            else
+            {
+                if (isSwap && !isSwap2)
+                {
+                    Random random = new Random();
+                    pictureBoxDialog1.Visible = true;
+                    labelBot1.Text = "Discarding " + random.Next(5).ToString() + "\nof my cards";
+                    await Task.Delay(ONE_SECOND);
+                    pictureBoxDialog1.Visible = false;
+                    labelBot1.Text = string.Empty;
+                }
+                else
+                {
+                    pictureBoxDialog1.Visible = true;
+                    labelBot1.Text = game.GetPlayers()[1].GetPlayerAction();
+                    await Task.Delay(ONE_SECOND);
+                    pictureBoxDialog1.Visible = false;
+                    labelBot1.Text = string.Empty;
+                }
+            }
+            if (game.GetPlayers()[1].GetPlayerAction().Equals("Check"))
+            {
+                if (!isSwap && !isSwap2)
+                {
+                    game.GetPlayers()[1].Check();
+                    game.NextTurn();
+                    CheckPlayerTurn();
+                    EnableSwapCards();
+                }
+                else if (isSwap && isSwap2)
                 {
                     EndAndNextRound();
                 }
                 else
                 {
                     game.NextTurn();
-                    if (game.GetNumberOfPlayers() == THREE_PLAYERS)
-                    {
-                        if (game.GetPlayers()[0].GetFold() || game.GetPlayers()[2].GetFold())
-                        {
-                            EndAndNextRound();
-                        }
-                    }
-                    else if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
-                    {
-                        if ((game.GetPlayers()[0].GetFold() && game.GetPlayers()[2].GetFold()) || (game.GetPlayers()[0].GetFold() && game.GetPlayers()[3].GetFold()) || (game.GetPlayers()[2].GetFold() && game.GetPlayers()[3].GetFold()))
-                        {
-                            EndAndNextRound();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (game.GetPlayers()[0].GetCheck())
-                {
-                    if (!isSwap && !isSwap2)
-                    {
-                        game.GetPlayers()[1].Check();
-                        pictureBoxDialog.Visible = true;
-                        labelBot1.Text = "Check!";
-                        await Task.Delay(ONE_SECOND);
-                        pictureBoxDialog.Visible = false;
-                        labelBot1.Text = string.Empty;
-                        game.NextTurn();
-                        CheckPlayerTurn();
-                        EnableSwapCards();
-                    }
-                    else if (isSwap && isSwap2)
-                    {
-                        EndAndNextRound();
-                    }
-                    else
-                    {
-                        Random random = new Random();
-
-                        pictureBoxDialog.Visible = true;
-                        labelBot1.Text = "Discarding " + random.Next(5).ToString() + "\nof my cards";
-                        await Task.Delay(ONE_SECOND);
-                        pictureBoxDialog.Visible = false;
-                        labelBot1.Text = string.Empty;
-                        game.NextTurn();
-                        CheckPlayerTurn();
-                        isSwap2 = true;
-                        if (game.GetNumberOfPlayers() == TWO_PLAYERS)
-                        {
-                            EnablePlayerControls();
-                        }
-                    }
-                }
-                else if (game.GetIsBetRaised())
-                {
-                    game.GetPlayers()[1].Bet(game.GetCurrentBet());
-                    pictureBoxDialog.Visible = true;
-                    labelBot1.Text = "Call!";
-                    await Task.Delay(ONE_SECOND);
-                    pictureBoxDialog.Visible = false;
-                    labelBot1.Text = string.Empty;
-                    game.AddPot(game.GetCurrentBet());
-                    UpdatePotLabel();
-                    game.NextTurn();
                     CheckPlayerTurn();
+                    isSwap2 = true;
                     if (game.GetNumberOfPlayers() == TWO_PLAYERS)
                     {
                         EnablePlayerControls();
                     }
+                }
+            }
+            else if (game.GetPlayers()[1].GetPlayerAction().Equals("Raise") || game.GetPlayers()[1].GetPlayerAction().Equals("All In"))
+            {
+                game.NextTurn();
+                CheckPlayerTurn();
+                UpdatePotLabel();
+                game.SetIsBetRaised(true);
+
+                if (game.GetNumberOfPlayers() == TWO_PLAYERS)
+                {
+                    EnablePlayerControls();
+                }
+            }
+            else if (game.GetPlayers()[1].GetPlayerAction().Equals("Call"))
+            {
+                game.NextTurn();
+                CheckPlayerTurn();
+                UpdatePotLabel();
+                if (game.GetNumberOfPlayers() == TWO_PLAYERS)
+                {
+                    game.SetIsBetRaised(false);
+                    EnablePlayerControls();
                 }
             }
 
@@ -992,12 +1061,26 @@ namespace PokerGame
 
         private void buttonCheck_Click(object sender, EventArgs e)
         {
-            game.GetPlayers()[0].Check();
-            game.NextTurn();
-            CheckPlayerTurn();
-            DisablePlayerControls();
+            if (!game.GetIsBetRaised())
+            {
+                game.GetPlayers()[0].Check();
+                game.NextTurn();
+                CheckPlayerTurn();
+                DisablePlayerControls();
 
-            InitiateBot();
+                if (!isSwap2)
+                {
+                    InitiateBot();
+                }
+                else
+                {
+                    EndAndNextRound();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You are unable to check unless you call the raise.", "Illegal Move", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void buttonFold_Click(object sender, EventArgs e)
@@ -1005,6 +1088,7 @@ namespace PokerGame
             if (game.GetPlayers()[0].GetIsBet())
             {
                 game.GetPlayers()[0].Fold();
+                game.SetIsBetRaised(false);
 
                 cardBox1Player.FaceUp = false;
                 cardBox2Player.FaceUp = false;
@@ -1025,8 +1109,11 @@ namespace PokerGame
                     }
                     else
                     {
-                        InitiateBot();
-                        await Task.Delay(SIX_SECONDS * 2);
+                        while (!isSwap && !isSwap2)
+                        {
+                            InitiateBot();
+                            await Task.Delay(SIX_SECONDS * 2);
+                        }
                     }
                 }
                 else if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
@@ -1037,7 +1124,11 @@ namespace PokerGame
                     }
                     else
                     {
-                 
+                        while (!isSwap && !isSwap2)
+                        {
+                            InitiateBot();
+                            await Task.Delay(SIX_SECONDS * 3);
+                        }
                     }
                 }
             }
@@ -1074,7 +1165,13 @@ namespace PokerGame
         {
             if (game.GetIsBetRaised())
             {
-                game.GetPlayers()[0].Bet(game.GetCurrentBet());
+                game.AddPot(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
+                game.GetPlayers()[0].Bet(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
+                textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+
+                UpdatePotLabel();
+
+                game.SetIsBetRaised(false);
                 game.NextTurn();
                 CheckPlayerTurn();
                 DisablePlayerControls();

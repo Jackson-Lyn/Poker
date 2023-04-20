@@ -49,6 +49,7 @@ namespace CardLibrary
         public void Check()
         {
             isCheck = true;
+            SetPlayerAction("Check");
         }
 
         public void UnCheck()
@@ -95,6 +96,7 @@ namespace CardLibrary
             {
                 card.FaceUp = false;
             }
+            SetPlayerAction("Fold");
         }
 
         public void UnFold()
@@ -149,20 +151,9 @@ namespace CardLibrary
                 }
                 else
                 {
-                    if (previousBet == 0)
-                    {
-                        game.AddPot(chipsBet); // modified method name
-                        game.SetCurrentBet(chipsBet);
-                        Bet(chipsBet);
-                        SetPlayerAction("Call");
-                    }
-                    else
-                    {
-                        game.AddPot(chipsBet - previousBet);
-                        game.SetCurrentBet(chipsBet);
-                        Bet(chipsBet - previousBet);
-                        SetPlayerAction("Call");
-                    }
+                    game.AddPot(chipsBet); // modified method name
+                    Bet(chipsBet);
+                    SetPlayerAction("Call");
                 }
             }
             else
@@ -205,10 +196,10 @@ namespace CardLibrary
             }
             else
             {
-                this.chips -= totalBetAmount;
                 game.AddPot(totalBetAmount);
                 game.SetCurrentBet(totalBetAmount);
-
+                Bet(totalBetAmount);
+                SetPlayerAction("All In");
             }
 
         }
@@ -401,7 +392,7 @@ namespace CardLibrary
         }
 
 
-        public static void mediumDiff(int chips, List<Card> cards, Game game, Player player, String diff)
+        public static void mediumDiff(int chips, List<Card> cards, ref Game game, Player player, String diff)
         {
             DetectHandRanking detectHandRanking = new DetectHandRanking(cards);
             // players hand strength
@@ -434,59 +425,91 @@ namespace CardLibrary
             if (adjustedHand < 9 && adjustedChips > bigBlind * 5)
             {
                 player.Fold();
-                player.SetPlayerAction("Fold");
             }
             else if (adjustedHand >= 9 && adjustedHand < 15 && adjustedChips >= bigBlind * 5)
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Call(minBet, ref game);
-                    player.SetPlayerAction("Call");
                 }
                 else
                 {
-                    player.Check();
-                    player.SetPlayerAction("Check");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
             }
             else if (adjustedHand >= 15 && adjustedHand < 20 && adjustedChips >= bigBlind * 10)
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 2, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (minBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(minBet * 2, ref game);
+                    }
                 }
                 else
                 {
-                    player.Check();
-                    player.SetPlayerAction("Check");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
             }
             else if (adjustedHand >= 20 && adjustedChips >= bigBlind * 20)
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 3, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (minBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(minBet * 3, ref game);
+                    }
                 }
                 else
                 {
                     player.AllIn(player.chips, ref game);
-                    player.SetPlayerAction("All in");
                 }
             }
             else
             {
-                // If none of the above conditions are met, the AI can choose to check or fold
-                if (player.SetCheck())
+                if (game.GetIsBetRaised())
                 {
-                    player.Check();
-                    player.SetPlayerAction("Check");
+                    player.Call(minBet, ref game);
                 }
                 else
                 {
-                    player.Fold();
-                    player.SetPlayerAction("Fold");
+                    player.Check();
                 }
             }
         }
@@ -499,7 +522,7 @@ namespace CardLibrary
             * @param chips the number of chips the player has
             * @param hand the strength of the player's hand (0-100)
          */
-        public static void hardDiff(int chips, List<Card> cards, Game game, Player player, String diff)
+        public static void hardDiff(int chips, List<Card> cards, ref Game game, Player player, String diff)
         {
             DetectHandRanking detectHandRanking = new DetectHandRanking(cards);
             // players hand strength
@@ -533,13 +556,18 @@ namespace CardLibrary
 
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, ref game);
-                    player.SetPlayerAction("Call");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
                 else
                 {
                     player.Fold();
-                    player.SetPlayerAction("Fold");
                 }
             }
             // decent hand, more than 20 big blinds
@@ -550,18 +578,43 @@ namespace CardLibrary
                 // Otherwise, call
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, ref game);
-                    player.SetPlayerAction("Call");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
                 else if (minBet <= maxBet && (hand >= 12 || pot > 0))
                 {
-                    player.Raise(minBet, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (minBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(minBet, ref game);
+                    }
                 }
                 else
                 {
-                    player.Call(minBet, ref game);
-                    player.SetPlayerAction("Call");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
             }
             else if (hand >= 15 && hand < 20 && chips >= bigBlind * 30) // strong hand, more than 30 big blinds
@@ -571,18 +624,50 @@ namespace CardLibrary
                 // Otherwise, call
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 2, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (minBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(minBet * 2, ref game);
+                    }
                 }
                 else if (minBet <= maxBet && (hand >= 18 || pot > 0))
                 {
-                    player.Raise(minBet, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (minBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(minBet * 2, ref game);
+                    }
                 }
                 else
                 {
-                    player.Call(minBet, ref game);
-                    player.SetPlayerAction("Call");
+                    if (game.GetIsBetRaised())
+                    {
+                        player.Call(minBet, ref game);
+                    }
+                    else
+                    {
+                        player.Check();
+                    }
                 }
             }
             else if (hand >= 20 && chips >= bigBlind * 40) // very strong hand, more than 40 big blinds
@@ -591,13 +676,25 @@ namespace CardLibrary
                 // Otherwise, raise by the maximum allowed amount
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(maxBet, ref game);
-                    player.SetPlayerAction("Raise");
+                    if (maxBet == 0)
+                    {
+                        if (game.GetIsBetRaised())
+                        {
+                            player.Call(minBet, ref game);
+                        }
+                        else
+                        {
+                            player.Check();
+                        }
+                    }
+                    else
+                    {
+                        player.Raise(maxBet, ref game);
+                    }
                 }
                 else
                 {
                     player.AllIn(player.chips, ref game);
-                    player.SetPlayerAction("All In");
                 }
             }
             else // weak hand or not enough chips for any other action
@@ -605,16 +702,15 @@ namespace CardLibrary
                 // If none of the above conditions are met, the AI can choose to check or fold
                 // If the AI can check and the pot is still empty, check
                 // Otherwise, fold
-                if (player.SetCheck() && pot == 0)
+                /*if (player.SetCheck() && pot == 0)
                 {
                     player.Check();
-                    player.SetPlayerAction("Check");
                 }
                 else
                 {
                     player.Fold();
-                    player.SetPlayerAction("Fold");
-                }
+                }*/
+                player.Check();
             }
         }
 

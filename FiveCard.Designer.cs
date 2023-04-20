@@ -41,7 +41,7 @@
             this.picChips = new System.Windows.Forms.PictureBox();
             this.picDealer = new System.Windows.Forms.PictureBox();
             this.buttonSwap = new System.Windows.Forms.Button();
-            this.pictureBoxDialog = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDialog1 = new System.Windows.Forms.PictureBox();
             this.labelBot1 = new System.Windows.Forms.Label();
             this.cardBox5Bot3 = new CardBox.CardBox();
             this.cardBox2Bot3 = new CardBox.CardBox();
@@ -65,7 +65,7 @@
             this.cardBox1Player = new CardBox.CardBox();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -198,24 +198,24 @@
             this.buttonSwap.UseVisualStyleBackColor = true;
             this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
             // 
-            // pictureBoxDialog
+            // pictureBoxDialog1
             // 
-            this.pictureBoxDialog.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+            this.pictureBoxDialog1.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
     "og.png";
-            this.pictureBoxDialog.Location = new System.Drawing.Point(1016, -5);
-            this.pictureBoxDialog.Name = "pictureBoxDialog";
-            this.pictureBoxDialog.Size = new System.Drawing.Size(162, 162);
-            this.pictureBoxDialog.TabIndex = 83;
-            this.pictureBoxDialog.TabStop = false;
+            this.pictureBoxDialog1.Location = new System.Drawing.Point(1016, -5);
+            this.pictureBoxDialog1.Name = "pictureBoxDialog1";
+            this.pictureBoxDialog1.Size = new System.Drawing.Size(162, 162);
+            this.pictureBoxDialog1.TabIndex = 83;
+            this.pictureBoxDialog1.TabStop = false;
             // 
             // labelBot1
             // 
             this.labelBot1.AutoSize = true;
             this.labelBot1.BackColor = System.Drawing.Color.White;
-            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.labelBot1.Location = new System.Drawing.Point(1055, 69);
             this.labelBot1.Name = "labelBot1";
-            this.labelBot1.Size = new System.Drawing.Size(0, 29);
+            this.labelBot1.Size = new System.Drawing.Size(0, 25);
             this.labelBot1.TabIndex = 84;
             // 
             // cardBox5Bot3
@@ -464,7 +464,7 @@
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
             this.Controls.Add(this.labelBot1);
-            this.Controls.Add(this.pictureBoxDialog);
+            this.Controls.Add(this.pictureBoxDialog1);
             this.Controls.Add(this.buttonSwap);
             this.Controls.Add(this.cardBox5Bot3);
             this.Controls.Add(this.cardBox2Bot3);
@@ -506,7 +506,7 @@
             this.Text = "FiveCard";
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,7 +547,7 @@
         private CardBox.CardBox cardBox1Bot3;
         private CardBox.CardBox cardBox5Bot3;
         private System.Windows.Forms.Button buttonSwap;
-        private System.Windows.Forms.PictureBox pictureBoxDialog;
+        private System.Windows.Forms.PictureBox pictureBoxDialog1;
         private System.Windows.Forms.Label labelBot1;
     }
 }
