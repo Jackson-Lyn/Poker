@@ -404,16 +404,19 @@ namespace CardLibrary
             if (adjustedHand < 9 && adjustedChips > bigBlind * 5)
             {
                 player.Fold();
+                player.SetPlayerAction("Fold");
             }
             else if (adjustedHand >= 9 && adjustedHand < 15 && adjustedChips >= bigBlind * 5)
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Call(minBet, game);
+                    player.SetPlayerAction("Call");
                 }
                 else
                 {
                     player.Check();
+                    player.SetPlayerAction("Check");
                 }
             }
             else if (adjustedHand >= 15 && adjustedHand < 20 && adjustedChips >= bigBlind * 10)
@@ -421,10 +424,12 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Raise(minBet * 2, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else
                 {
                     player.Check();
+                    player.SetPlayerAction("Check");
                 }
             }
             else if (adjustedHand >= 20 && adjustedChips >= bigBlind * 20)
@@ -432,10 +437,12 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Raise(minBet * 3, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else
                 {
                     player.AllIn(player.chips, game);
+                    player.SetPlayerAction("All in");
                 }
             }
             else
@@ -444,10 +451,12 @@ namespace CardLibrary
                 if (player.SetCheck())
                 {
                     player.Check();
+                    player.SetPlayerAction("Check");
                 }
                 else
                 {
                     player.Fold();
+                    player.SetPlayerAction("Fold");
                 }
             }
         }
@@ -495,10 +504,12 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Call(minBet, game);
+                    player.SetPlayerAction("Call");
                 }
                 else
                 {
                     player.Fold();
+                    player.SetPlayerAction("Fold");
                 }
             }
             // decent hand, more than 20 big blinds
@@ -510,14 +521,17 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Call(minBet, game);
+                    player.SetPlayerAction("Call");
                 }
                 else if (minBet <= maxBet && (hand >= 12 || pot > 0))
                 {
                     player.Raise(minBet, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else
                 {
                     player.Call(minBet, game);
+                    player.SetPlayerAction("Call");
                 }
             }
             else if (hand >= 15 && hand < 20 && chips >= bigBlind * 30) // strong hand, more than 30 big blinds
@@ -528,14 +542,17 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Raise(minBet * 2, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else if (minBet <= maxBet && (hand >= 18 || pot > 0))
                 {
                     player.Raise(minBet, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else
                 {
                     player.Call(minBet, game);
+                    player.SetPlayerAction("Call");
                 }
             }
             else if (hand >= 20 && chips >= bigBlind * 40) // very strong hand, more than 40 big blinds
@@ -545,10 +562,12 @@ namespace CardLibrary
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
                     player.Raise(maxBet, game);
+                    player.SetPlayerAction("Raise");
                 }
                 else
                 {
                     player.AllIn(player.chips, game);
+                    player.SetPlayerAction("All In");
                 }
             }
             else // weak hand or not enough chips for any other action
@@ -559,10 +578,12 @@ namespace CardLibrary
                 if (player.SetCheck() && pot == 0)
                 {
                     player.Check();
+                    player.SetPlayerAction("Check");
                 }
                 else
                 {
                     player.Fold();
+                    player.SetPlayerAction("Fold");
                 }
             }
         }

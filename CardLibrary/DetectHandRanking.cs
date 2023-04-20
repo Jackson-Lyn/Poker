@@ -55,8 +55,6 @@ namespace CardLibrary
                 }
             }
         }
-
-
         public int TotalCardValue()
         {
             totalCardValue = 0;

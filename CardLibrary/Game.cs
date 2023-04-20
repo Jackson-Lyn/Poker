@@ -20,7 +20,7 @@ namespace CardLibrary
         #endregion
 
         #region CONSTRUCTORS
-        public Game() 
+        public Game()
         {
             this.round = 1;
             this.pot = 0;
@@ -79,10 +79,10 @@ namespace CardLibrary
         {
             return this.playerTurn;
         }
-        
+
         public List<Player> GetPlayers()
         {
-            return this.players;    
+            return this.players;
         }
 
         public bool GetIsBetRaised()

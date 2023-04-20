@@ -399,8 +399,6 @@ namespace PokerGame
                         Player.hardDiff(game.GetPlayers()[1].GetChips(), game.GetPlayers()[1].GetCards(), game, game.GetPlayers()[1], diff);
                     }
 
-
-                    //allPlayers[1].easyDiff(allPlayers[1].GetChips(), allPlayers[1].GetCards());
                     pictureBoxDialog1.Visible = true;
                     labelBot1.Text = game.GetPlayers()[1].GetPlayerAction();
                     await Task.Delay(ONE_SECOND);
