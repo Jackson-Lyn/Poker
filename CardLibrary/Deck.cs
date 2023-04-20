@@ -47,5 +47,11 @@ namespace CardLibrary
             cards.RemoveAt(0);
             return topCard;
         }
+
+        public void InsertCard(Card card)
+        {
+            cards.Add(card);
+            Shuffle();
+        }
     }
 }

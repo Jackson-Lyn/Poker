@@ -456,7 +456,7 @@ namespace PokerGame
                     labelBot1.Text = game.GetPlayers()[1].GetPlayerAction();
                     await Task.Delay(ONE_SECOND);
                     pictureBoxDialog1.Visible = false;
-                    labelBot1.Text = game.GetPlayers()[1].GetPlayerAction();
+                    labelBot1.Text = string.Empty;
                     game.NextTurn();
                     CheckPlayerTurn();
                     if (allPlayers.Count == TWO_PLAYERS)
@@ -484,7 +484,6 @@ namespace PokerGame
                     await Task.Delay(ONE_SECOND);
                     pictureBoxDialog1.Visible = false;
                     labelBot1.Text = string.Empty;
-                    //game.AddPot(game.GetCurrentBet());
                     UpdatePotLabel();
                     game.NextTurn();
                     CheckPlayerTurn();

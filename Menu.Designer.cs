@@ -209,8 +209,7 @@
             // 
             // pictureBoxBackground
             // 
-            this.pictureBoxBackground.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\back" +
-    "ground.png";
+            this.pictureBoxBackground.ImageLocation = "";
             this.pictureBoxBackground.Location = new System.Drawing.Point(-66, -5);
             this.pictureBoxBackground.Name = "pictureBoxBackground";
             this.pictureBoxBackground.Size = new System.Drawing.Size(793, 368);

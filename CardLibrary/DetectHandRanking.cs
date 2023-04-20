@@ -236,7 +236,15 @@ namespace CardLibrary
 
             if (Pair()) { return HandRanking.Pair; }
 
-            totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+            if (cards.Count == 7)
+            {
+                totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+            }
+            else if (cards.Count == 5)
+            {
+                totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+            }
+
             return HandRanking.HighCard;
         }
 

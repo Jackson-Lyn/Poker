@@ -22,7 +22,9 @@ namespace PokerGame
         Game game = new Game();
         List<Player> allPlayers = new List<Player>();
         Deck deck = new Deck();
-     
+
+        bool isSwap = false;
+        bool isSwap2 = false;
 
         const int TWO_PLAYERS = 2;
         const int THREE_PLAYERS = 3;
@@ -78,7 +80,6 @@ namespace PokerGame
                 cardBox3Bot3.Visible = false;
                 cardBox4Bot3.Visible = false;
                 cardBox5Bot3.Visible = false;
-                //labelBot3Name.Visible = false;
             }
             Loading(chips, players);
         }
@@ -198,6 +199,8 @@ namespace PokerGame
             FaceDownAllCards();
             deck = new Deck();
             deck.Shuffle();
+            isSwap = false;
+            isSwap2 = false;
             foreach (Player p in allPlayers)
             {
                 p.UnFold();
@@ -209,6 +212,9 @@ namespace PokerGame
             {
                 List<Card> userCards = new List<Card>
                 {
+                    deck.GetCard(),
+                    deck.GetCard(),
+                    deck.GetCard(),
                     deck.GetCard(),
                     deck.GetCard()
                 };
@@ -254,6 +260,7 @@ namespace PokerGame
             {
                 if (cardBox.BorderStyle == BorderStyle.Fixed3D)
                 {
+                    deck.InsertCard(cardBox.Card);
                     Card newCard = deck.GetCard();
                     cardBox.Card = newCard;
                     cardBox.BorderStyle = BorderStyle.None;
@@ -300,6 +307,8 @@ namespace PokerGame
                 bot1Timer = null;
             }
 
+            DisablePlayerControls();
+
             if (game.GetPlayers()[1].GetFold())
             {
                 if (game.GetNumberOfPlayers() == TWO_PLAYERS)
@@ -329,17 +338,38 @@ namespace PokerGame
             {
                 if (game.GetPlayers()[0].GetCheck())
                 {
-                    game.GetPlayers()[1].Check();
-                    pictureBoxDialog.Visible = true;
-                    labelBot1.Text = "Check!";
-                    await Task.Delay(ONE_SECOND);
-                    pictureBoxDialog.Visible = false;
-                    labelBot1.Text = string.Empty;
-                    game.NextTurn();
-                    CheckPlayerTurn();
-                    if (allPlayers.Count == TWO_PLAYERS)
+                    if (!isSwap && !isSwap2)
                     {
-                        EnablePlayerControls();
+                        game.GetPlayers()[1].Check();
+                        pictureBoxDialog.Visible = true;
+                        labelBot1.Text = "Check!";
+                        await Task.Delay(ONE_SECOND);
+                        pictureBoxDialog.Visible = false;
+                        labelBot1.Text = string.Empty;
+                        game.NextTurn();
+                        CheckPlayerTurn();
+                        EnableSwapCards();
+                    }
+                    else if (isSwap && isSwap2)
+                    {
+                        EndAndNextRound();
+                    }
+                    else
+                    {
+                        Random random = new Random();
+
+                        pictureBoxDialog.Visible = true;
+                        labelBot1.Text = "Discarding " + random.Next(5).ToString() + "\nof my cards";
+                        await Task.Delay(ONE_SECOND);
+                        pictureBoxDialog.Visible = false;
+                        labelBot1.Text = string.Empty;
+                        game.NextTurn();
+                        CheckPlayerTurn();
+                        isSwap2 = true;
+                        if (game.GetNumberOfPlayers() == TWO_PLAYERS)
+                        {
+                            EnablePlayerControls();
+                        }
                     }
                 }
                 else if (game.GetIsBetRaised())
@@ -464,6 +494,36 @@ namespace PokerGame
             }
         }
 
+        private async Task<DialogResult> ShowEndDialog(string message)
+        {
+            DialogResult result = MessageBox.Show(message, "Confirmation",
+                                   MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                                   MessageBoxDefaultButton.Button2,
+                                   MessageBoxOptions.DefaultDesktopOnly);
+            return result;
+        }
+
+        private void EnableSwapCards()
+        {
+            DisablePlayerControls();
+            if (MessageBox.Show("Would you like to swap your cards?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                MessageBox.Show("Swap your cards by clicking on the cards that you would like to swap, then click the swap button.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                buttonSwap.Enabled = true;
+                labelPlayerTurn.Text = "Please swap your cards.";
+            }
+            else
+            {
+                isSwap = true;
+                SwapCards();
+                buttonSwap.Enabled = false;
+                game.NextTurn();
+                CheckPlayerTurn();
+
+                InitiateBot();
+            }
+        }
+
         private void EnablePlayerControls()
         {
             buttonCheck.Enabled = true;
@@ -478,6 +538,7 @@ namespace PokerGame
             buttonCall.Enabled = false;
             buttonFold.Enabled = false;
             buttonRaise.Enabled = false;
+            buttonSwap.Enabled = false;
         }
 
         private void SetCardBox(UserControl userControl, Card card)
@@ -492,15 +553,32 @@ namespace PokerGame
 
         private int SameHandRankingHelper(DetectHandRanking detect, DetectHandRanking detect1)
         {
-            for (int i = 5; i > 0; i--)
+            if (detect.cards.Count == 7)
             {
-                if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) > ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+                for (int i = 5; i > 0; i--)
                 {
-                    return 0;
+                    if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) > ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+                    {
+                        return 0;
+                    }
+                    else if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) < ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+                    {
+                        return 1;
+                    }
                 }
-                else if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) < ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+            }
+            else if (detect.cards.Count == 5)
+            {
+                for (int i = 4; i >= 0; i--)
                 {
-                    return 1;
+                    if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) > ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+                    {
+                        return 0;
+                    }
+                    else if (((int)detect.cards[i].CardValue * 10 + (int)detect.cards[i].Suit) < ((int)detect1.cards[i].CardValue * 10 + (int)detect1.cards[i].Suit))
+                    {
+                        return 1;
+                    }
                 }
             }
             return -1;
@@ -526,7 +604,14 @@ namespace PokerGame
                     List<Card> allPlayerCards = new List<Card>();
                     List<Card> allBot1Cards = new List<Card>();
 
-                   
+                    foreach (Card card in allPlayers[0].GetCards())
+                    {
+                        allPlayerCards.Add(card);
+                    }
+                    foreach (Card card in allPlayers[1].GetCards())
+                    {
+                        allBot1Cards.Add(card);
+                    }
 
                     DetectHandRanking detect = new DetectHandRanking(allPlayerCards);
                     DetectHandRanking detect1 = new DetectHandRanking(allBot1Cards);
@@ -1004,7 +1089,14 @@ namespace PokerGame
 
         private void buttonSwap_Click(object sender, EventArgs e)
         {
+            isSwap = true;
             SwapCards();
+            buttonSwap.Enabled = false;
+            DisablePlayerControls();
+            game.NextTurn();
+            CheckPlayerTurn();
+
+            InitiateBot();
         }
 
 
@@ -1031,7 +1123,7 @@ namespace PokerGame
 
         public void SetPlayerCards(List<Card> cards, int id)
         {
-            if (id == 1)
+            if (id == 0)
             {
                 SetCardBox(cardBox1Player, cards[0]);
                 SetCardBox(cardBox2Player, cards[1]);
@@ -1039,7 +1131,7 @@ namespace PokerGame
                 SetCardBox(cardBox4Player, cards[3]);
                 SetCardBox(cardBox5Player, cards[4]);
             }
-            else if (id == 2)
+            else if (id == 1)
             {
                 SetCardBox(cardBox1Bot1, cards[0]);
                 SetCardBox(cardBox2Bot1, cards[1]);
@@ -1047,7 +1139,7 @@ namespace PokerGame
                 SetCardBox(cardBox4Bot1, cards[3]);
                 SetCardBox(cardBox5Bot1, cards[4]);
             }
-            else if (id == 3)
+            else if (id == 2)
             {
                 SetCardBox(cardBox1Bot2, cards[0]);
                 SetCardBox(cardBox2Bot2, cards[1]);
@@ -1055,7 +1147,7 @@ namespace PokerGame
                 SetCardBox(cardBox4Bot2, cards[3]);
                 SetCardBox(cardBox5Bot2, cards[4]);
             }
-            else if (id == 4)
+            else if (id == 3)
             {
                 SetCardBox(cardBox1Bot3, cards[0]);
                 SetCardBox(cardBox2Bot3, cards[1]);
@@ -1066,88 +1158,10 @@ namespace PokerGame
 
         }
 
-        public void RoundLabel(System.Windows.Forms.Label label)
-        {
-            GraphicsPath graphicsPath = _getRoundPath(label.ClientRectangle, 10);
-
-            label.Region = new Region(graphicsPath);
-
-            label.Invalidate();
-        }
-
-        private static GraphicsPath _getRoundPath(Rectangle rectangle, int radius)
-        {
-            int x = rectangle.X;
-            int y = rectangle.Y;
-            int width = rectangle.Width;
-            int height = rectangle.Height;
-
-            radius = radius << 1;
-
-            GraphicsPath path = new GraphicsPath();
-
-            if (radius > 0)
-            {
-                if (radius > height) radius = height;
-                if (radius > width) radius = width;
-                path.AddArc(x, y, radius, radius, 180, 90);
-                path.AddArc(x + width - radius, y, radius, radius, 270, 90);
-                path.AddArc(x + width - radius, y + height - radius, radius, radius, 0, 90);
-                path.AddArc(x, y + height - radius, radius, radius, 90, 90);
-                path.CloseFigure();
-            }
-            else
-            {
-                path.AddRectangle(rectangle);
-            }
-
-            return path;
-        }
-
-        private void _drawRoundedRectangle(Graphics graphics, Pen pen, int x, int y, int width, int height, int radius)
-        {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
-            GraphicsPath path = _generateRoundedRectangle(graphics, rectangle, radius);
-            SmoothingMode old = graphics.SmoothingMode;
-            graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            graphics.DrawPath(pen, path);
-            graphics.SmoothingMode = old;
-        }
-        private static GraphicsPath _generateRoundedRectangle(Graphics graphics, RectangleF rectangle, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            float diameter = radius * 2.0F;
-            SizeF sizeF = new SizeF(diameter, diameter);
-            RectangleF arc = new RectangleF(rectangle.Location, sizeF);
-
-            path.AddArc(arc, 180, 90);
-            arc.X = rectangle.Right - diameter;
-            path.AddArc(arc, 270, 90);
-            arc.Y = rectangle.Bottom - diameter;
-            path.AddArc(arc, 0, 90);
-            arc.X = rectangle.Left;
-            path.AddArc(arc, 90, 90);
-            path.CloseFigure();
-
-            return path;
-        }
-
-        private void FiveCard_Paint(object sender, PaintEventArgs e)
-        {
-            using (Pen pen = new Pen(labelPot.BackColor, 6.0f))
-            {
-                _drawRoundedRectangle(e.Graphics, pen, labelPot.Location.X-1, labelPot.Location.Y-1, labelPot.ClientRectangle.Width+1, labelPot.ClientRectangle.Height+1, 10);
-            }
-        }
-
-
         private void ShowFiveCardMenu(object sender, EventArgs e)
         {
             new FiveCardHelp().Show();
         }
-      
-
-      
     }
 }
 // test
