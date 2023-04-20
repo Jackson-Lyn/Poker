@@ -60,12 +60,17 @@ namespace CardLibrary
         {
             isBet = true;
             chips -= chipsBet;
-            previousBet = chipsBet;
+            previousBet += chipsBet;
         }
 
         public void ResetBet()
         {
             isBet = false;
+        }
+
+        public void ResetPreviousBet()
+        {
+            previousBet = 0;
         }
 
         public bool GetIsBet()
@@ -132,24 +137,42 @@ namespace CardLibrary
             return cards;
         }
 
-        public void Call(int chipsBet, Game game)
+        public void Call(int chipsBet, ref Game game)
         {
-            int callAmount = this.chips - chipsBet;
-            if (callAmount >= this.chips) // modified comparison operator
+            if (game.GetIsBetRaised())
             {
-                // fold player
-                Fold();
-
+                if (chipsBet > this.chips) // modified comparison operator
+                {
+                    // fold player
+                    Fold();
+                    SetPlayerAction("Fold");
+                }
+                else
+                {
+                    if (previousBet == 0)
+                    {
+                        game.AddPot(chipsBet); // modified method name
+                        game.SetCurrentBet(chipsBet);
+                        Bet(chipsBet);
+                        SetPlayerAction("Call");
+                    }
+                    else
+                    {
+                        game.AddPot(chipsBet - previousBet);
+                        game.SetCurrentBet(chipsBet);
+                        Bet(chipsBet - previousBet);
+                        SetPlayerAction("Call");
+                    }
+                }
             }
             else
             {
-                this.chips -= callAmount;
-                game.AddPot(chipsBet); // modified method name
-                game.SetCurrentBet(callAmount);
+                Check();
+                SetPlayerAction("Check");
             }
         }
 
-        public void Raise(int chipsBet, Game game)
+        public void Raise(int chipsBet, ref Game game)
         {
 
             int totalBetAmount = chipsBet;
@@ -158,17 +181,18 @@ namespace CardLibrary
             {
                 // The player does not have enough chips to make the raise and must fold
                 Fold();
+                SetPlayerAction("Fold");
             }
             else
             {
-                this.chips -= totalBetAmount;
                 game.AddPot(totalBetAmount);
-                game.SetCurrentBet(totalBetAmount);
-
+                game.SetCurrentBet(totalBetAmount + this.previousBet);
+                Bet(totalBetAmount);
+                SetPlayerAction("Raise");
             }
         }
 
-        public void AllIn(int chipsBet, Game game)
+        public void AllIn(int chipsBet, ref Game game)
         {
 
             int totalBetAmount = chipsBet;
@@ -177,6 +201,7 @@ namespace CardLibrary
             {
                 // The player does not have enough chips to make the raise and must fold
                 Fold();
+                SetPlayerAction("Fold");
             }
             else
             {
@@ -265,7 +290,7 @@ namespace CardLibrary
             return powerLevel;
         }
 
-        public static void easyDiff(int chips, List<Card> cards, Game game, Player player, String diff)
+        public static void easyDiff(int chips, List<Card> cards, ref Game game, Player player, String diff)
         {
             // print the amount of chips the player has
             Console.WriteLine("Player " + player.GetId() + " has " + player.GetChips() + " chips");
@@ -303,9 +328,8 @@ namespace CardLibrary
                 // If the pot is large enough relative to the minimum bet, call Otherwise, fold
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     Console.WriteLine("Player " + player.GetId() + " called");
-                    player.SetPlayerAction("Call");
 
 
                 }
@@ -323,9 +347,8 @@ namespace CardLibrary
                 // Otherwise, check
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(game.getMinimumBet(game.GetPlayers()), game);
+                    player.Call(minBet, ref game);
                     Console.WriteLine("Next IF Player " + player.GetId() + " called");
-                    player.SetPlayerAction("Call");
                 }
                 else
                 {
@@ -341,9 +364,16 @@ namespace CardLibrary
                 // Otherwise, check
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 2, game);
-                    Console.WriteLine("Player " + player.GetId() + " raised");
-                    player.SetPlayerAction("Raise");
+                    if (minBet * 2 <= chips)
+                    {
+                        player.Raise(minBet * 2, ref game);
+                        Console.WriteLine("Player " + player.GetId() + " raised");
+                        player.SetPlayerAction("Raise");
+                    }
+                    else
+                    {
+                        player.Call(minBet, ref game);
+                    }
                 }
                 else
                 {
@@ -410,7 +440,7 @@ namespace CardLibrary
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     player.SetPlayerAction("Call");
                 }
                 else
@@ -423,7 +453,7 @@ namespace CardLibrary
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 2, game);
+                    player.Raise(minBet * 2, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else
@@ -436,12 +466,12 @@ namespace CardLibrary
             {
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 3, game);
+                    player.Raise(minBet * 3, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else
                 {
-                    player.AllIn(player.chips, game);
+                    player.AllIn(player.chips, ref game);
                     player.SetPlayerAction("All in");
                 }
             }
@@ -503,7 +533,7 @@ namespace CardLibrary
 
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     player.SetPlayerAction("Call");
                 }
                 else
@@ -520,17 +550,17 @@ namespace CardLibrary
                 // Otherwise, call
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     player.SetPlayerAction("Call");
                 }
                 else if (minBet <= maxBet && (hand >= 12 || pot > 0))
                 {
-                    player.Raise(minBet, game);
+                    player.Raise(minBet, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     player.SetPlayerAction("Call");
                 }
             }
@@ -541,17 +571,17 @@ namespace CardLibrary
                 // Otherwise, call
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(minBet * 2, game);
+                    player.Raise(minBet * 2, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else if (minBet <= maxBet && (hand >= 18 || pot > 0))
                 {
-                    player.Raise(minBet, game);
+                    player.Raise(minBet, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else
                 {
-                    player.Call(minBet, game);
+                    player.Call(minBet, ref game);
                     player.SetPlayerAction("Call");
                 }
             }
@@ -561,12 +591,12 @@ namespace CardLibrary
                 // Otherwise, raise by the maximum allowed amount
                 if (pot > 0 && (pot / minBet) >= aggressionFactor)
                 {
-                    player.Raise(maxBet, game);
+                    player.Raise(maxBet, ref game);
                     player.SetPlayerAction("Raise");
                 }
                 else
                 {
-                    player.AllIn(player.chips, game);
+                    player.AllIn(player.chips, ref game);
                     player.SetPlayerAction("All In");
                 }
             }
