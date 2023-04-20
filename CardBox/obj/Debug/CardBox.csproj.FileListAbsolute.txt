@@ -31,3 +31,14 @@ C:\Users\abc\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.CoreCompileInpu
 C:\Users\abc\source\repos\Poker\CardBox\obj\Debug\CardBox.csproj.CopyComplete
 C:\Users\abc\source\repos\Poker\CardBox\obj\Debug\CardBox.dll
 C:\Users\abc\source\repos\Poker\CardBox\obj\Debug\CardBox.pdb
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\bin\Debug\CardBox.dll
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\bin\Debug\CardBox.pdb
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\bin\Debug\CardLibrary.dll
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\bin\Debug\CardLibrary.pdb
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csproj.AssemblyReference.cache
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.CardBox.resources
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csproj.GenerateResource.cache
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csproj.CopyComplete
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.dll
+C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.pdb

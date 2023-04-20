@@ -33,8 +33,16 @@ namespace PokerGame
 
         private void buttonFiveCard_Click(object sender, EventArgs e)
         {
-            FiveCard fiveCardWindow = new FiveCard();
-            fiveCardWindow.Show();  
+            var buttonDiff = groupBoxDifficulty.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(n => n.Checked);
+            var buttonChips = groupBoxChips.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(n => n.Checked);
+            var buttonPlayers = groupBoxPlayers.Controls.OfType<System.Windows.Forms.RadioButton>().FirstOrDefault(n => n.Checked);
+
+            FiveCard FiveCardWindow = new FiveCard(buttonDiff.Text, buttonChips.Text, buttonPlayers.Text);
+            FiveCardWindow.Show();
+            FiveCardWindow.Focus();
+            DisableNewGame();
+
+            FiveCardWindow.FormClosed += new FormClosedEventHandler(FiveCardWindowClosed);
         }
 
         private void TexasWindowClosed(object sender, EventArgs e)
@@ -63,5 +71,12 @@ namespace PokerGame
         {
             new MenuHelp().Show();
         }
+
+        private void FiveCardWindowClosed(object sender, EventArgs e)
+        {
+            buttonTexas.Enabled = true;
+            buttonFiveCard.Enabled = true;
+        }
+
     }
 }

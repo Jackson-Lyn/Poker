@@ -60,6 +60,7 @@
             this.cardBox2Bot3 = new CardBox.CardBox();
             this.cardBox1Bot3 = new CardBox.CardBox();
             this.cardBox5Bot3 = new CardBox.CardBox();
+            this.buttonSwap = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.buttonFold.TabIndex = 3;
             this.buttonFold.Text = "Fold";
             this.buttonFold.UseVisualStyleBackColor = true;
+            this.buttonFold.Click += new System.EventHandler(this.buttonFold_Click);
             // 
             // textBoxTotalChips
             // 
@@ -100,6 +102,7 @@
             this.buttonRaise.TabIndex = 5;
             this.buttonRaise.Text = "Raise";
             this.buttonRaise.UseVisualStyleBackColor = true;
+            this.buttonRaise.Click += new System.EventHandler(this.buttonRaise_Click);
             // 
             // buttonCall
             // 
@@ -109,6 +112,7 @@
             this.buttonCall.TabIndex = 6;
             this.buttonCall.Text = "Call";
             this.buttonCall.UseVisualStyleBackColor = true;
+            this.buttonCall.Click += new System.EventHandler(this.buttonCall_Click);
             // 
             // labelRound
             // 
@@ -151,7 +155,6 @@
             this.labelPot.TabIndex = 37;
             this.labelPot.Text = "POT: X Chips";
             this.labelPot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPot.Click += new System.EventHandler(this.labelPot_Click);
             // 
             // buttonCheck
             // 
@@ -161,6 +164,7 @@
             this.buttonCheck.TabIndex = 59;
             this.buttonCheck.Text = "Check";
             this.buttonCheck.UseVisualStyleBackColor = true;
+            this.buttonCheck.Click += new System.EventHandler(this.buttonCheck_Click);
             // 
             // cardBox5Player
             // 
@@ -421,11 +425,22 @@
             this.cardBox5Bot3.Suit = CardLibrary.Suit.Spades;
             this.cardBox5Bot3.TabIndex = 81;
             // 
+            // buttonSwap
+            // 
+            this.buttonSwap.Location = new System.Drawing.Point(860, 473);
+            this.buttonSwap.Name = "buttonSwap";
+            this.buttonSwap.Size = new System.Drawing.Size(67, 27);
+            this.buttonSwap.TabIndex = 82;
+            this.buttonSwap.Text = "Swap";
+            this.buttonSwap.UseVisualStyleBackColor = true;
+            this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
+            // 
             // FiveCard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.buttonSwap);
             this.Controls.Add(this.cardBox5Bot3);
             this.Controls.Add(this.cardBox2Bot3);
             this.Controls.Add(this.cardBox1Bot3);
@@ -506,5 +521,6 @@
         private CardBox.CardBox cardBox2Bot3;
         private CardBox.CardBox cardBox1Bot3;
         private CardBox.CardBox cardBox5Bot3;
+        private System.Windows.Forms.Button buttonSwap;
     }
 }
