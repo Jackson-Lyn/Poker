@@ -215,29 +215,9 @@ namespace PokerGame
             DetermineWinner();
 
             bool hasChipsLeft = game.GetPlayers()[0].GetChips() > 0;
-            bool botHasChipsLeft = game.GetPlayers()[1].GetChips() > 0;
             // If human player lost in the current round
-            if (! hasChipsLeft)
+            if (!hasChipsLeft)
             {
-                MessageBox.Show("You have lost the game!");
-                DialogResult result = await ShowEndDialog("Would you like to restart the game?"); 
-                if (result == DialogResult.No)
-                {
-                    // Close this Form
-                    this.Close();
-                    this.Dispose();
-                }
-                else if (result == DialogResult.Yes)
-                {
-                    // Restart the game
-                    TexasHoldEm texasHoldEm = new TexasHoldEm(this.difficulty, this.chips, this.players);
-                    texasHoldEm.Show();
-                    this.Dispose();
-                }
-            }
-            else if (!botHasChipsLeft)
-            {
-                MessageBox.Show("You have won the game!");
                 DialogResult result = await ShowEndDialog("Would you like to restart the game?");
                 if (result == DialogResult.No)
                 {
@@ -253,11 +233,84 @@ namespace PokerGame
                     this.Dispose();
                 }
             }
-            // If the human player won in the current round
-            else
+
+            int numOfPlayers = int.Parse(this.players);
+            if (numOfPlayers == TWO_PLAYERS)
             {
-                ProceedToNextRound();
+                if (game.GetPlayers()[1].GetChips() == 0)
+                {
+                    DialogResult result = await ShowEndDialog("You won! Play again?");
+                    if (result == DialogResult.No)
+                    {
+                        // Close this Form
+                        this.Close();
+                        this.Dispose();
+                    }
+                    else if (result == DialogResult.Yes)
+                    {
+                        // Restart the game
+                        TexasHoldEm texasHoldEm = new TexasHoldEm(this.difficulty, this.chips, this.players);
+                        texasHoldEm.Show();
+                        this.Dispose();
+                    }
+                }
             }
+            else if (numOfPlayers == THREE_PLAYERS)
+            {
+                if (game.GetPlayers()[1].GetChips() == 0)
+                {
+                    allPlayers.RemoveAt(1);
+                    cardBox1Bot1.Visible = false;
+                    cardBox2Bot1.Visible = false;
+                    labelBot1Name.Visible = false;
+                    this.players = "2";
+                }
+                if (game.GetPlayers()[2].GetChips() == 0)
+                {
+                    allPlayers.RemoveAt(2);
+                    cardBox1Bot2.Visible = false;
+                    cardBox2Bot2.Visible = false;
+                    labelBot2Name.Visible = false;
+                    this.players = "1";
+                }
+
+                game.SetPlayers(allPlayers);
+                game.SetNumberOfPlayers(allPlayers.Count);
+
+            }
+            else if (numOfPlayers == FOUR_PLAYERS)
+            {
+                if (game.GetPlayers()[1].GetChips() == 0)
+                {
+                    allPlayers.Remove(game.GetPlayers()[1]);
+                    cardBox1Bot1.Visible = false;
+                    cardBox2Bot1.Visible = false;
+                    labelBot1Name.Visible = false;
+                    this.players = "3";
+                }
+                if (game.GetPlayers()[2].GetChips() == 0)
+                {
+                    allPlayers.Remove(game.GetPlayers()[2]);
+                    cardBox1Bot2.Visible = false;
+                    cardBox2Bot2.Visible = false;
+                    labelBot2Name.Visible = false;
+                    this.players = "2";
+                }
+
+                if (game.GetPlayers()[3].GetChips() == 0)
+                {
+                    allPlayers.Remove(game.GetPlayers()[3]);
+                    cardBox1Bot3.Visible = false;
+                    cardBox2Bot3.Visible = false;
+                    labelBot3Name.Visible = false;
+                    this.players = "1";
+                }
+
+                game.SetPlayers(allPlayers);
+                game.SetNumberOfPlayers(allPlayers.Count);
+            }
+
+            ProceedToNextRound();
         }
         #endregion
 
