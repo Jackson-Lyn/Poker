@@ -42,3 +42,14 @@ C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csp
 C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.csproj.CopyComplete
 C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.dll
 C:\Users\Daniel\Downloads\Poker-main(3)\Poker-main\CardBox\obj\Debug\CardBox.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\bin\Debug\CardBox.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\bin\Debug\CardBox.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\bin\Debug\CardLibrary.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\bin\Debug\CardLibrary.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.csproj.AssemblyReference.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.CardBox.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.csproj.GenerateResource.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.csproj.CoreCompileInputs.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.csproj.CopyComplete
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardBox\obj\Debug\CardBox.pdb

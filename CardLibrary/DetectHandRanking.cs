@@ -56,6 +56,17 @@ namespace CardLibrary
             }
         }
 
+
+        public int TotalCardValue()
+        {
+            totalCardValue = 0;
+            foreach (Card card in cards)
+            {
+                totalCardValue += (int)card.Rank;
+            }
+            return totalCardValue;
+        }
+
         public bool Straight()
         {
             //Sort ascending
