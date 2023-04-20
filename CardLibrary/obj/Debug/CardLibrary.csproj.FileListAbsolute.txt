@@ -30,3 +30,11 @@ C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.Generat
 C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
 C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.dll
 C:\Users\abc\source\repos\Poker\CardLibrary\obj\Debug\CardLibrary.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\bin\Debug\CardLibrary.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\bin\Debug\CardLibrary.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.csproj.AssemblyReference.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.Properties.Resources.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.csproj.GenerateResource.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.csproj.CoreCompileInputs.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\CardLibrary\obj\Debug\CardLibrary.pdb

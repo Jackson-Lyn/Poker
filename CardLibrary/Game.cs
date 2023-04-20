@@ -107,7 +107,7 @@ namespace CardLibrary
 
         public void NextTurn()
         {
-            if (playerTurn == players.Count-1)
+            if (playerTurn == players.Count - 1)
             {
                 playerTurn = players[0].GetId();
                 if (players[playerTurn].GetFold())
@@ -120,6 +120,16 @@ namespace CardLibrary
                 playerTurn++;
                 if (players[playerTurn].GetFold())
                 {
+                    // reset to 0
+                    if (playerTurn == players.Count - 1)
+                    {
+                        playerTurn = players[0].GetId();
+                    }
+                    else
+                    {
+                        playerTurn++;
+                    }
+
                     playerTurn++;
                 }
             }
@@ -149,6 +159,34 @@ namespace CardLibrary
                 }
             }
             return check;
+        }
+
+        public int getMinimumBet(List<Player> players)
+        {
+            int minimumBet = 0;
+            foreach (Player p in players)
+            {
+                if (p.GetCurrentBet() > minimumBet)
+                {
+                    minimumBet = p.GetCurrentBet();
+                }
+            }
+
+            return minimumBet;
+        }
+
+        public int getMaxBet(List<Player> players)
+        {
+            int maxBet = 0;
+            foreach (Player p in players)
+            {
+                if (p.GetCurrentBet() > maxBet)
+                {
+                    maxBet = p.GetCurrentBet();
+                }
+            }
+
+            return maxBet;
         }
     }
 }

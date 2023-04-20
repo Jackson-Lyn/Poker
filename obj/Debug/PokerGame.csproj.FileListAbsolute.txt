@@ -42,3 +42,25 @@ C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\Pok
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.csproj.CopyComplete
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.exe
 C:\Users\vense\Documents\Durham College\Semester 4\oop 3\PokerGame\obj\Debug\PokerGame.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\PokerGame.exe.config
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\PokerGame.exe
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\PokerGame.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\CardBox.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\CardLibrary.dll
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\CardBox.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\bin\Debug\CardLibrary.pdb
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.csproj.AssemblyReference.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.csproj.SuggestedBindingRedirects.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.FiveCardHelp.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.menu.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.MenuHelp.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.Properties.Resources.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.FiveCard.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.RaiseInput.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.TexasHoldEm.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.TexasHoldEmHelp.resources
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.csproj.GenerateResource.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.csproj.CoreCompileInputs.cache
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.csproj.CopyComplete
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.exe
+C:\DurhamProgram\Semester4\OOP\Poker-3\obj\Debug\PokerGame.pdb
