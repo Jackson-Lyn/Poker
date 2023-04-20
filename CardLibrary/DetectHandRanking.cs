@@ -153,6 +153,17 @@ namespace CardLibrary
                     return true;
                 }
             }
+            else if (cards.Count == 5)
+            {
+                if (cards[0].Rank == cards[1].Rank - 1 &&
+                    cards[1].Rank == cards[2].Rank - 1 &&
+                    cards[2].Rank == cards[3].Rank - 1 &&
+                    cards[3].Rank == cards[4].Rank - 1)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+            } 
             return false;
         }
 
@@ -163,14 +174,30 @@ namespace CardLibrary
             bool straight = Straight();
 
             //Move Aces to the end if:
-            if (!straight || //Not a straight
-                cards[6].Rank == Rank.King)//Straight with a king at the end
+            if (cards.Count == 7)
             {
-                //Move all Aces To the End
-                while (cards[0].Rank == Rank.Ace)
+                if (!straight || //Not a straight
+                    cards[6].Rank == Rank.King)//Straight with a king at the end
                 {
-                    cards.Add(cards[0]);
-                    cards.RemoveAt(0);
+                    //Move all Aces To the End
+                    while (cards[0].Rank == Rank.Ace)
+                    {
+                        cards.Add(cards[0]);
+                        cards.RemoveAt(0);
+                    }
+                }
+            }
+            else if (cards.Count == 5)
+            {
+                if (!straight || //Not a straight
+                    cards[4].Rank == Rank.King)//Straight with a king at the end
+                {
+                    //Move all Aces To the End
+                    while (cards[0].Rank == Rank.Ace)
+                    {
+                        cards.Add(cards[0]);
+                        cards.RemoveAt(0);
+                    }
                 }
             }
             return cards;
@@ -209,35 +236,46 @@ namespace CardLibrary
         {
             if (StraightFlush())
             {
-                if (cards[0].Rank == Rank.Ten && cards[1].Rank == Rank.Jack && cards[2].Rank == Rank.Queen && cards[3].Rank == Rank.King && cards[4].Rank == Rank.Ace)
+                if (cards.Count == 7)
                 {
-                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                    return true;
+                    if (cards[0].Rank == Rank.Ten && cards[1].Rank == Rank.Jack && cards[2].Rank == Rank.Queen && cards[3].Rank == Rank.King && cards[4].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                        return true;
+                    }
+                    else if (cards[0].Rank == Rank.Ten && cards[2].Rank == Rank.Jack && cards[3].Rank == Rank.Queen && cards[4].Rank == Rank.King && cards[5].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                        return true;
+                    }
+                    else if (cards[0].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                        return true;
+                    }
+                    else if (cards[1].Rank == Rank.Ten && cards[2].Rank == Rank.Jack && cards[3].Rank == Rank.Queen && cards[4].Rank == Rank.King && cards[5].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                        return true;
+                    }
+                    else if (cards[1].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                        return true;
+                    }
+                    else if (cards[2].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                        return true;
+                    }
                 }
-                else if (cards[0].Rank == Rank.Ten && cards[2].Rank == Rank.Jack && cards[3].Rank == Rank.Queen && cards[4].Rank == Rank.King && cards[5].Rank == Rank.Ace)
+                else if (cards.Count == 5)
                 {
-                    totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                    return true;
-                }
-                else if (cards[0].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
-                {
-                    totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                    return true;
-                }
-                else if (cards[1].Rank == Rank.Ten && cards[2].Rank == Rank.Jack && cards[3].Rank == Rank.Queen && cards[4].Rank == Rank.King && cards[5].Rank == Rank.Ace)
-                {
-                    totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                    return true;
-                }
-                else if (cards[1].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
-                {
-                    totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                    return true;
-                }
-                else if (cards[2].Rank == Rank.Ten && cards[3].Rank == Rank.Jack && cards[4].Rank == Rank.Queen && cards[5].Rank == Rank.King && cards[6].Rank == Rank.Ace)
-                {
-                    totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                    return true;
+                    if (cards[0].Rank == Rank.Ten && cards[1].Rank == Rank.Jack && cards[2].Rank == Rank.Queen && cards[3].Rank == Rank.King && cards[4].Rank == Rank.Ace)
+                    {
+                        totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                        return true;
+                    }
                 }
             }
             return false;
@@ -255,158 +293,280 @@ namespace CardLibrary
 
         private bool FourOfAKind()
         {
-            if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[0].Rank == cards[3].Rank)
+            if (cards.Count == 7)
             {
-                totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[0].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank && cards[1].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank && cards[2].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank && cards[3].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
             }
-            else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank && cards[1].Rank == cards[4].Rank)
+            else if (cards.Count == 5)
             {
-                totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                return true;
-            }
-            else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank && cards[2].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank && cards[3].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[0].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank && cards[1].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
             }
             return false;
         }
 
         private bool FullHouse()
         {
-            if ((cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank) || (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank) || (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank && cards[5].Rank == cards[6].Rank))
+            if (cards.Count == 7)
             {
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = ((int)cards[0].CardValue * 10 + (int)cards[0].Suit) + ((int)cards[1].CardValue * 10 + (int)cards[1].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank)
+                {
+                    totalCardValue = ((int)cards[3].CardValue * 10 + (int)cards[3].Suit) + ((int)cards[1].CardValue * 10 + (int)cards[1].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank && cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = ((int)cards[3].CardValue * 10 + (int)cards[3].Suit) + ((int)cards[4].CardValue * 10 + (int)cards[4].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank)
+                {
+                    totalCardValue = ((int)cards[3].CardValue * 10 + (int)cards[3].Suit) + ((int)cards[4].CardValue * 10 + (int)cards[4].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank)
+                {
+                    totalCardValue = ((int)cards[3].CardValue * 10 + (int)cards[3].Suit) + ((int)cards[4].CardValue * 10 + (int)cards[4].Suit) + ((int)cards[5].CardValue * 10 + (int)cards[5].Suit);
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank && cards[4].Rank == cards[6].Rank)
+                {
+                    totalCardValue = ((int)cards[5].CardValue * 10 + (int)cards[5].Suit) + ((int)cards[4].CardValue * 10 + (int)cards[4].Suit) + ((int)cards[6].CardValue * 10 + (int)cards[6].Suit);
+                    return true;
+                }
             }
-            else if ((cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank) || (cards[1].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank) || (cards[2].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank && cards[4].Rank == cards[6].Rank))
+            else if (cards.Count == 5)
             {
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = ((int)cards[0].CardValue * 10 + (int)cards[0].Suit) + ((int)cards[1].CardValue * 10 + (int)cards[1].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank)
+                {
+                    totalCardValue = ((int)cards[3].CardValue * 10 + (int)cards[3].Suit) + ((int)cards[4].CardValue * 10 + (int)cards[4].Suit) + ((int)cards[2].CardValue * 10 + (int)cards[2].Suit);
+                    return true;
+                }
             }
             return false;
         }
 
         private bool ThreeOfAKind()
         {
-            if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank)
+            if (cards.Count == 7)
             {
-                totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[4].Rank == cards[5].Rank && cards[4].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
             }
-            else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank)
+            else if (cards.Count == 5)
             {
-                totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
-                return true;
-            }
-            else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank)
-            {
-                totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                return true;
-            }
-            else if (cards[3].Rank == cards[4].Rank && cards[3].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[4].Rank == cards[5].Rank && cards[4].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[0].Rank == cards[2].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[1].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[2].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
             }
             return false;
         }
 
         private bool TwoPair()
         {
-            if (cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank)
+            if (cards.Count == 7)
             {
-                totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[4].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[4].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank && cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
+                else if (cards[3].Rank == cards[4].Rank && cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
             }
-            else if (cards[0].Rank == cards[1].Rank && cards[3].Rank == cards[4].Rank)
+            else if (cards.Count == 5)
             {
-                totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                return true;
-            }
-            else if (cards[0].Rank == cards[1].Rank && cards[4].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[0].Rank == cards[1].Rank && cards[5].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
-            }
-            else if (cards[1].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank)
-            {
-                totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                return true;
-            }
-            else if (cards[1].Rank == cards[2].Rank && cards[4].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[1].Rank == cards[2].Rank && cards[5].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
-            }
-            else if (cards[2].Rank == cards[3].Rank && cards[4].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[2].Rank == cards[3].Rank && cards[5].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
-            }
-            else if (cards[3].Rank == cards[4].Rank && cards[5].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank && cards[2].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[0].Rank == cards[1].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank && cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
             }
             return false;
         }
 
         private bool Pair()
         {
-            if (cards[0].Rank == cards[1].Rank)
+            if (cards.Count == 7)
             {
-                totalCardValue = (int)cards[0].CardValue * 10 + (int)cards[0].Suit + (int)cards[1].CardValue * 10 + (int)cards[1].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank)
+                {
+                    totalCardValue = (int)cards[0].CardValue * 10 + (int)cards[0].Suit + (int)cards[1].CardValue * 10 + (int)cards[1].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
+                else if (cards[4].Rank == cards[5].Rank)
+                {
+                    totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
+                    return true;
+                }
+                else if (cards[5].Rank == cards[6].Rank)
+                {
+                    totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
+                    return true;
+                }
             }
-            else if (cards[1].Rank == cards[2].Rank)
+            else if (cards.Count == 5)
             {
-                totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
-                return true;
-            }
-            else if (cards[2].Rank == cards[3].Rank)
-            {
-                totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
-                return true;
-            }
-            else if (cards[3].Rank == cards[4].Rank)
-            {
-                totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
-                return true;
-            }
-            else if (cards[4].Rank == cards[5].Rank)
-            {
-                totalCardValue = (int)cards[4].CardValue * 10 + (int)cards[4].Suit + (int)cards[5].CardValue * 10 + (int)cards[5].Suit;
-                return true;
-            }
-            else if (cards[5].Rank == cards[6].Rank)
-            {
-                totalCardValue = (int)cards[5].CardValue * 10 + (int)cards[5].Suit + (int)cards[6].CardValue * 10 + (int)cards[6].Suit;
-                return true;
+                if (cards[0].Rank == cards[1].Rank)
+                {
+                    totalCardValue = (int)cards[0].CardValue * 10 + (int)cards[0].Suit + (int)cards[1].CardValue * 10 + (int)cards[1].Suit;
+                    return true;
+                }
+                else if (cards[1].Rank == cards[2].Rank)
+                {
+                    totalCardValue = (int)cards[1].CardValue * 10 + (int)cards[1].Suit + (int)cards[2].CardValue * 10 + (int)cards[2].Suit;
+                    return true;
+                }
+                else if (cards[2].Rank == cards[3].Rank)
+                {
+                    totalCardValue = (int)cards[2].CardValue * 10 + (int)cards[2].Suit + (int)cards[3].CardValue * 10 + (int)cards[3].Suit;
+                    return true;
+                }
+                else if (cards[3].Rank == cards[4].Rank)
+                {
+                    totalCardValue = (int)cards[3].CardValue * 10 + (int)cards[3].Suit + (int)cards[4].CardValue * 10 + (int)cards[4].Suit;
+                    return true;
+                }
             }
             return false;
         }
