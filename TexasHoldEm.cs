@@ -172,7 +172,9 @@ namespace PokerGame
             {
                 p.UnFold();
                 p.UnCheck();
+                p.ResetBet();
             }
+            game.SetIsBetRaised(false);
             await Task.Delay(FIVE_SECONDS);
 
             for (int i = 0; i < game.GetPlayers().Count; i++)
@@ -391,7 +393,15 @@ namespace PokerGame
                 }
                 else if (game.GetIsBetRaised())
                 {
-                    game.GetPlayers()[1].Bet(game.GetCurrentBet());
+                    if (game.GetPlayers()[1].GetPreviousBet() != 0)
+                    {
+                        game.GetPlayers()[1].Bet(game.GetPlayers()[1].GetPreviousBet() - game.GetCurrentBet());
+                    }
+                    else
+                    {
+                        game.GetPlayers()[1].Bet(game.GetCurrentBet());
+                    }
+                    game.GetPlayers()[1].SetIsCall(true);
                     pictureBoxDialog1.Visible = true;
                     labelBot1.Text = "Call!";
                     await Task.Delay(ONE_SECOND);
@@ -403,6 +413,14 @@ namespace PokerGame
                     CheckPlayerTurn();
                     if (game.GetNumberOfPlayers() == TWO_PLAYERS)
                     {
+                        if (game.GetIsBetRaised() && game.GetPlayers()[1].GetIsCall())
+                        {
+                            game.SetIsBetRaised(false);
+                            foreach (Player p in game.GetPlayers())
+                            {
+                                p.SetIsCall(false);
+                            }
+                        }
                         EnablePlayerControls();
                     }
                     OpenMiddleCard();
@@ -444,7 +462,15 @@ namespace PokerGame
                 }
                 else if (game.GetIsBetRaised())
                 {
-                    game.GetPlayers()[2].Bet(game.GetCurrentBet());
+                    if (game.GetPlayers()[2].GetPreviousBet() != 0)
+                    {
+                        game.GetPlayers()[2].Bet(game.GetPlayers()[2].GetPreviousBet() - game.GetCurrentBet());
+                    }
+                    else
+                    {
+                        game.GetPlayers()[2].Bet(game.GetCurrentBet());
+                    }
+                    game.GetPlayers()[2].SetIsCall(true);
                     pictureBoxDialog2.Visible = true;
                     labelBot2.Text = "Call!";
                     await Task.Delay(ONE_SECOND);
@@ -456,6 +482,14 @@ namespace PokerGame
                     CheckPlayerTurn();
                     if (game.GetNumberOfPlayers() == THREE_PLAYERS)
                     {
+                        if (game.GetIsBetRaised() && game.GetPlayers()[1].GetIsCall() && game.GetPlayers()[2].GetIsCall())
+                        {
+                            game.SetIsBetRaised(false);
+                            foreach(Player p in game.GetPlayers())
+                            {
+                                p.SetIsCall(false);
+                            }
+                        }
                         EnablePlayerControls();
                     }
                     OpenMiddleCard();
@@ -496,7 +530,15 @@ namespace PokerGame
                 }
                 else if (game.GetIsBetRaised())
                 {
-                    game.GetPlayers()[3].Bet(game.GetCurrentBet());
+                    if (game.GetPlayers()[3].GetPreviousBet() != 0)
+                    {
+                        game.GetPlayers()[3].Bet(game.GetPlayers()[3].GetPreviousBet() - game.GetCurrentBet());
+                    }
+                    else
+                    {
+                        game.GetPlayers()[3].Bet(game.GetCurrentBet());
+                    }
+                    game.GetPlayers()[3].SetIsCall(true);
                     pictureBoxDialog3.Visible = true;
                     labelBot3.Text = "Call!";
                     await Task.Delay(ONE_SECOND);
@@ -508,6 +550,14 @@ namespace PokerGame
                     CheckPlayerTurn();
                     if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
                     {
+                        if (game.GetIsBetRaised() && game.GetPlayers()[1].GetIsCall() && game.GetPlayers()[2].GetIsCall() && game.GetPlayers()[3].GetIsCall())
+                        {
+                            game.SetIsBetRaised(false);
+                            foreach (Player p in game.GetPlayers())
+                            {
+                                p.SetIsCall(false);
+                            }
+                        }
                         EnablePlayerControls();
                     }
                     OpenMiddleCard();
@@ -1110,7 +1160,7 @@ namespace PokerGame
                     game.SetCurrentBet(raiseForm.GetChips());
                     game.AddPot(raiseForm.GetChips());
 
-                    labelPot.Text = "Pot: " + game.GetPot().ToString() + " Chips";
+                    UpdatePotLabel();
 
                     game.NextTurn();
                     CheckPlayerTurn();
@@ -1126,6 +1176,12 @@ namespace PokerGame
             if (game.GetIsBetRaised())
             {
                 game.GetPlayers()[0].Bet(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
+                textBoxTotalChips.Text = game.GetPlayers()[0].GetChips().ToString();
+                game.AddPot(game.GetCurrentBet() - game.GetPlayers()[0].GetPreviousBet());
+
+                UpdatePotLabel();
+
+                game.GetPlayers()[0].SetIsCall(true);
                 game.NextTurn();
                 CheckPlayerTurn();
                 DisablePlayerControls();

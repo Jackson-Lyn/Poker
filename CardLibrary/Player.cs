@@ -17,6 +17,7 @@ namespace CardLibrary
         private bool isFold { get; set; }
         private bool isBet { get; set; }
         private int previousBet { get; set; }
+        private bool isCall { get; set; }
         #endregion
 
         #region CONSTRUCTORS
@@ -71,6 +72,16 @@ namespace CardLibrary
         public int GetPreviousBet()
         {
             return this.previousBet;
+        }
+
+        public void SetIsCall(bool isCall)
+        {
+            this.isCall = isCall;
+        }
+
+        public bool GetIsCall()
+        {
+            return this.isCall;
         }
 
         public void Fold()
