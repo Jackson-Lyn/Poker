@@ -61,13 +61,16 @@
             this.cardBox1Bot3 = new CardBox.CardBox();
             this.cardBox5Bot3 = new CardBox.CardBox();
             this.buttonSwap = new System.Windows.Forms.Button();
+            this.pictureBoxDialog = new System.Windows.Forms.PictureBox();
+            this.labelBot1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1128, 647);
+            this.button1.Location = new System.Drawing.Point(1252, 644);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 25);
@@ -239,7 +242,7 @@
             // 
             this.picDealer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.picDealer.ImageLocation = "";
-            this.picDealer.Location = new System.Drawing.Point(955, 421);
+            this.picDealer.Location = new System.Drawing.Point(955, 459);
             this.picDealer.Name = "picDealer";
             this.picDealer.Size = new System.Drawing.Size(214, 210);
             this.picDealer.TabIndex = 66;
@@ -435,11 +438,33 @@
             this.buttonSwap.UseVisualStyleBackColor = true;
             this.buttonSwap.Click += new System.EventHandler(this.buttonSwap_Click);
             // 
+            // pictureBoxDialog
+            // 
+            this.pictureBoxDialog.ImageLocation = "C:\\Users\\vense\\Documents\\Durham College\\Semester 4\\oop 3\\PokerGame\\Resources\\dial" +
+    "og.png";
+            this.pictureBoxDialog.Location = new System.Drawing.Point(1016, -5);
+            this.pictureBoxDialog.Name = "pictureBoxDialog";
+            this.pictureBoxDialog.Size = new System.Drawing.Size(162, 162);
+            this.pictureBoxDialog.TabIndex = 83;
+            this.pictureBoxDialog.TabStop = false;
+            // 
+            // labelBot1
+            // 
+            this.labelBot1.AutoSize = true;
+            this.labelBot1.BackColor = System.Drawing.Color.White;
+            this.labelBot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBot1.Location = new System.Drawing.Point(1071, 78);
+            this.labelBot1.Name = "labelBot1";
+            this.labelBot1.Size = new System.Drawing.Size(0, 29);
+            this.labelBot1.TabIndex = 84;
+            // 
             // FiveCard
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1331, 673);
+            this.Controls.Add(this.labelBot1);
+            this.Controls.Add(this.pictureBoxDialog);
             this.Controls.Add(this.buttonSwap);
             this.Controls.Add(this.cardBox5Bot3);
             this.Controls.Add(this.cardBox2Bot3);
@@ -482,6 +507,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FiveCard_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.picChips)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDealer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDialog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -522,5 +548,7 @@
         private CardBox.CardBox cardBox1Bot3;
         private CardBox.CardBox cardBox5Bot3;
         private System.Windows.Forms.Button buttonSwap;
+        private System.Windows.Forms.PictureBox pictureBoxDialog;
+        private System.Windows.Forms.Label labelBot1;
     }
 }

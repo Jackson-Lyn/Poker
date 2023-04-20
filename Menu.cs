@@ -15,6 +15,7 @@ namespace PokerGame
         public menu()
         {
             InitializeComponent();
+            pictureBoxBackground.Image = Properties.Resources.ResourceManager.GetObject("background") as Image;
         }
 
         private void buttonTexas_Click(object sender, EventArgs e)

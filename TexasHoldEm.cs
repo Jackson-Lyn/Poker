@@ -64,7 +64,9 @@ namespace PokerGame
             pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
             picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
             picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
+            pictureBoxDialog1.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
             pictureBoxDialog2.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
+            pictureBoxDialog3.Image = Properties.Resources.ResourceManager.GetObject("dialog_reverse") as Image;
         }
 
         private void InitializeGame(string difficulty, string chips, string players)
@@ -212,10 +214,30 @@ namespace PokerGame
             DetermineWinner();
 
             bool hasChipsLeft = game.GetPlayers()[0].GetChips() > 0;
+            bool botHasChipsLeft = game.GetPlayers()[1].GetChips() > 0;
             // If human player lost in the current round
             if (! hasChipsLeft)
             {
+                MessageBox.Show("You have lost the game!");
                 DialogResult result = await ShowEndDialog("Would you like to restart the game?"); 
+                if (result == DialogResult.No)
+                {
+                    // Close this Form
+                    this.Close();
+                    this.Dispose();
+                }
+                else if (result == DialogResult.Yes)
+                {
+                    // Restart the game
+                    TexasHoldEm texasHoldEm = new TexasHoldEm(this.difficulty, this.chips, this.players);
+                    texasHoldEm.Show();
+                    this.Dispose();
+                }
+            }
+            else if (!botHasChipsLeft)
+            {
+                MessageBox.Show("You have won the game!");
+                DialogResult result = await ShowEndDialog("Would you like to restart the game?");
                 if (result == DialogResult.No)
                 {
                     // Close this Form
@@ -233,21 +255,7 @@ namespace PokerGame
             // If the human player won in the current round
             else
             {
-                DialogResult result = await ShowEndDialog("Would you like to continue to the next round?");
-                if (result == DialogResult.No)
-                {
-                    // Close this Form
-                    this.Close();
-                    this.Dispose();
-                }
-                else if (result == DialogResult.Yes)
-                {
-                    this.Activate();
-                    this.Focus();
-
-                    // Proceed to the next round
-                    ProceedToNextRound();
-                }
+                ProceedToNextRound();
             }
         }
         #endregion

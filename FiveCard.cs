@@ -54,6 +54,7 @@ namespace PokerGame
             {
                 cardBox1Player, cardBox2Player, cardBox3Player, cardBox4Player, cardBox5Player
             };
+            pictureBoxDialog.Visible = false;
             SetPictures();
             int numOfPlayers = int.Parse(players);
 
@@ -88,10 +89,9 @@ namespace PokerGame
         #region CUSTOM DESIGN METHODS
         public void SetPictures()
         {
-           // pictureBoxTitle.Image = Properties.Resources.ResourceManager.GetObject("TexasHoldem") as Image;
             picDealer.Image = Properties.Resources.ResourceManager.GetObject("dealer") as Image;
             picChips.Image = Properties.Resources.ResourceManager.GetObject("chips") as Image;
-          //  pictureBoxDialog2.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
+            pictureBoxDialog.Image = Properties.Resources.ResourceManager.GetObject("dialog") as Image;
         }
         #endregion
 
@@ -255,16 +255,12 @@ namespace PokerGame
                 if (cardBox.BorderStyle == BorderStyle.Fixed3D)
                 {
                     Card newCard = deck.GetCard();
-                    if (newCard != null)
-                    {
-                        cardBox.Card = newCard;
-                        cardBox.BorderStyle = BorderStyle.None;
-                    }
-                    }
+                    cardBox.Card = newCard;
+                    cardBox.BorderStyle = BorderStyle.None;
+                    cardBox.FaceUp = true;
+                }
             }
         }
-
-
 
         #endregion
 
@@ -334,27 +330,26 @@ namespace PokerGame
                 if (game.GetPlayers()[0].GetCheck())
                 {
                     game.GetPlayers()[1].Check();
-                    //pictureBoxDialog1.Visible = true;
-                    //labelBot1.Text = "Check!";
+                    pictureBoxDialog.Visible = true;
+                    labelBot1.Text = "Check!";
                     await Task.Delay(ONE_SECOND);
-                    //pictureBoxDialog1.Visible = false;
-                    //labelBot1.Text = string.Empty;
+                    pictureBoxDialog.Visible = false;
+                    labelBot1.Text = string.Empty;
                     game.NextTurn();
                     CheckPlayerTurn();
                     if (allPlayers.Count == TWO_PLAYERS)
                     {
                         EnablePlayerControls();
                     }
-                    //OpenMiddleCard();
                 }
                 else if (game.GetIsBetRaised())
                 {
                     game.GetPlayers()[1].Bet(game.GetCurrentBet());
-                    //pictureBoxDialog1.Visible = true;
-                    //labelBot1.Text = "Call!";
+                    pictureBoxDialog.Visible = true;
+                    labelBot1.Text = "Call!";
                     await Task.Delay(ONE_SECOND);
-                    //pictureBoxDialog1.Visible = false;
-                    //labelBot1.Text = string.Empty;
+                    pictureBoxDialog.Visible = false;
+                    labelBot1.Text = string.Empty;
                     game.AddPot(game.GetCurrentBet());
                     UpdatePotLabel();
                     game.NextTurn();
@@ -363,7 +358,6 @@ namespace PokerGame
                     {
                         EnablePlayerControls();
                     }
-                    //OpenMiddleCard();
                 }
             }
 
@@ -946,10 +940,8 @@ namespace PokerGame
                     }
                     else
                     {
-                     
-                            InitiateBot();
-                            await Task.Delay(SIX_SECONDS * 2);
-                        
+                        InitiateBot();
+                        await Task.Delay(SIX_SECONDS * 2);
                     }
                 }
                 else if (game.GetNumberOfPlayers() == FOUR_PLAYERS)
